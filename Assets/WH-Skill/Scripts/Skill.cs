@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiManager : MonoBehaviour
+public class Skill : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject SkillSelect;
+
+
+    [SerializeField] private Image[] images;
+
     private List<Button> Buttons = new List<Button>();
-    
     void Start()
     {
-      for (int i = 0;i < SkillSelect.transform.childCount;i++) 
+        for (int i = 0; i < transform.childCount; i++)
         {
-            Buttons.Add(SkillSelect.transform.GetChild(i).GetComponent<Button>());
+            Buttons.Add(transform.GetChild(i).GetComponent<Button>());
         }
     }
 
@@ -22,4 +24,16 @@ public class UiManager : MonoBehaviour
     {
         
     }
+
+
+    public void Skip(Skill skill)
+    {
+        skill.gameObject.SetActive(false);
+    }
+
+    //
+
+
+
+
 }
