@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6682014450686238938}
   - component: {fileID: 8628023392107540616}
   m_Layer: 0
-  m_Name: E_Knife_EquipWeapon
+  m_Name: E_Ogre_Fist_EquipWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,8 @@ MonoBehaviour:
   delay: 1
   weaponSize: 0.8
   power: 1
-  speed: 1
-  attackRange: 1.2
+  speed: 2
+  attackRange: 12
   target:
     serializedVersion: 2
     m_Bits: 8
@@ -131,7 +131,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 27dc4f9ac6a138c4ab3920f8aa1a0d35, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_Size: {x: 0.375, y: 0.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2177118597016228417

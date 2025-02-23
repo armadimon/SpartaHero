@@ -18,6 +18,9 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField]
     private List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들
+    
+    [SerializeField]
+    private List<BossController> activeBoss = new List<BossController>(); // 현재 활성화된 적들
 
     private bool enemySpawnComplete;
     
@@ -104,6 +107,13 @@ public class EnemyManager : MonoBehaviour
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
         activeEnemies.Remove(enemy);
+        if (enemySpawnComplete &&  activeEnemies.Count == 0)
+            gameManager.EndOfWave();
+    }
+    
+    public void RemoveBossOnDeath(BossController boss)
+    {
+        activeBoss.Remove(boss);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
     }

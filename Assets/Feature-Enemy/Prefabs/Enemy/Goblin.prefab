@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5827777134004221308}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2715738323541904515}
   - component: {fileID: 6281154086302780983}
   - component: {fileID: 7632087122894656039}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ Animator:
   m_GameObject: {fileID: 4972010745367375012}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 03e79c13b1c66ca4aa381bd844b53919, type: 2}
+  m_Controller: {fileID: 22100000, guid: 66ee7f8608b6ed846a5d147ed7543faa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4607315258669645231}
   - component: {fileID: 8427438608088754302}
   - component: {fileID: -9167493269135480875}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

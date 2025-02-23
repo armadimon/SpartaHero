@@ -52,7 +52,8 @@ public class EnemyController : BaseController
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,
                     weaponHandler.AttackRange * 1.5f,
                     (1 << LayerMask.NameToLayer("Level")) | layerMaskTarget);
-
+                    // Ray를 Scene 뷰에서 시각화
+                    Debug.DrawRay(transform.position, direction);    
                 if (hit.collider != null && layerMaskTarget == (layerMaskTarget | (1 << hit.collider.gameObject.layer)))
                 {
                     isAttacking = true;

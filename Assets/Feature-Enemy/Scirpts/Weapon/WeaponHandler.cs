@@ -46,10 +46,12 @@ public class WeaponHandler : MonoBehaviour
 
     protected void Awake()
     {
-        Controller = GetComponentInParent<BaseController>();
+        Controller = GetComponentInParent<BaseController>();    
         animator = GetComponentInChildren<Animator>();
         weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
+        Debug.Log(target);
+        Debug.Log(target.value);
         animator.speed = 1.0f / delay;
         transform.localScale = Vector3.one * weaponSize;
     }

@@ -190,7 +190,7 @@ MonoBehaviour:
   attackRange: 10
   target:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   isOnKnockBack: 1
   knockBackPower: 0.1
   knockBackTime: 0.5
