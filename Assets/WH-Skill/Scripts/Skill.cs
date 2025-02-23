@@ -59,7 +59,28 @@ public class Skill : MonoBehaviour
 
     private void SkillSelcet()
     {
+        List<SkillSet> skills = new List<SkillSet> ();
+        System.Random random = new System.Random();
+
+        foreach (SkillSet skill in Skills)
+        {
+            //내부에서 파악
+            //if(skill.SkillType == SkillType.Melee && Player.? == null)
+            //continue;
+            //if(skill.SkillType == SkillType.Melee && Player.? == null)
+            //continue;
+            skills.Add(skill);
+        }
+
+        //내부에서 버튼의 갯수가 어떻게 될 때마다 체력 회복으로 전부 탈바꿈 하는 것도 필요할 듯
+        //if(skills.count < 3) ->
         
+
+
+        for (int i = 0; i< Buttons.Count; i++)
+        {
+           // Buttons[i].onClick.AddListener()
+        }
        
     }
 
@@ -80,6 +101,7 @@ public class Skill : MonoBehaviour
     {
         foreach (SkillSet skill in Skills) 
         {
+            
             if(skill.Level >= 3)
             {
                 Skills.Remove(skill);
