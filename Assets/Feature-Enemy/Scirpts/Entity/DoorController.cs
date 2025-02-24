@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    // Door¿¡ ´Þ¾ÆÁÙ ½ºÅ©¸³Æ®
-    // 1. Ã³À½¿£ closeddoor¸¸ È°¼ºÈ­
-    // 2. ÀûÀÌ ´Ù Á×¾úÀ» ¶§ closeddoor ºñÈ°¼ºÈ­, opendoor È°¼ºÈ­
-    // 3. opendoor¿¡¸¸ ÄÝ¶óÀÌ´õ Ãß°¡
+    // Doorï¿½ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®
+    // 1. Ã³ï¿½ï¿½ï¿½ï¿½ closeddoorï¿½ï¿½ È°ï¿½ï¿½È­
+    // 2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¾ï¿½ï¿½ï¿½ ï¿½ï¿½ closeddoor ï¿½ï¿½È°ï¿½ï¿½È­, opendoor È°ï¿½ï¿½È­
+    // 3. opendoorï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ß°ï¿½
 
     StageManager stageManager;
 
@@ -26,21 +26,20 @@ public class DoorController : MonoBehaviour
     }
 
 
-
-
-    public void OpenDoor()    // ¹® È°¼ºÈ­
+    
+    public void OpenDoor()    // ï¿½ï¿½ È°ï¿½ï¿½È­
     {
         closedDoor.SetActive(false);
         openedDoor.SetActive(true);
     }
 
-    public void CloseDoor()    // ¹® ºñÈ°¼ºÈ­
+    public void CloseDoor()    // ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
     {
         closedDoor.SetActive(true);
         openedDoor.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)     // ´ÙÀ½ ½ºÅ×ÀÌÁö. ¿ÀÇÂ ¹® Collider + ºÎ¸ð ¿ÉÁ§¿¡ Rigidbody
+    private void OnCollisionEnter2D(Collision2D collision)     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Collider + ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Rigidbody
     {
         if (stageManager == null)
             Debug.Log("stageManager null");

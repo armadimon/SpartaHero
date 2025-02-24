@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
+    [SerializeField] private static int Difficulty = 0;
 
     public PlayerController player { get; private set; }
     private ResourceController _playerResourceController;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            
         }
         
         player = FindObjectOfType<PlayerController>();
@@ -32,13 +34,14 @@ public class GameManager : MonoBehaviour
 
         stageManager = GetComponentInChildren<StageManager>();
         stageManager.Init(this);
+
+        DontDestroyOnLoad(this);
     }
 
 
     private void Start()
     {
         StartGame();
-        Debug.Log(currentWaveIndex);
     }
 
     public void StartGame()
@@ -48,8 +51,9 @@ public class GameManager : MonoBehaviour
 
     void StartNextWave()
     {
-        currentWaveIndex++;
-        enemyManager.StartWave(1 + currentWaveIndex / 5);
+        Difficulty++;
+        Debug.Log("diff " + Difficulty);
+        enemyManager.StartWave(Difficulty);
     }
 
     public void EndOfWave()

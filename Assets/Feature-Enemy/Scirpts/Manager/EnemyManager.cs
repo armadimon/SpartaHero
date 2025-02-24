@@ -9,6 +9,8 @@ public class EnemyManager : MonoBehaviour
         
     [SerializeField]
     private List<GameObject> enemyPrefabs; // 생성할 적 프리팹 리스트
+    [SerializeField]
+    private List<GameObject> BossPrefabs; // 생성할 보스 프리팹 리스트
 
     [SerializeField]
     private List<Rect> spawnAreas; // 적을 생성할 영역 리스트
@@ -35,16 +37,43 @@ public class EnemyManager : MonoBehaviour
     }
     public void StartWave(int waveCount)
     {
+        Debug.Log("Starting wave " + waveCount);
         if (waveCount <= 0)
         {
             gameManager.EndOfWave();
             return;
         }
-        if(waveRoutine != null)
-            StopCoroutine(waveRoutine);
-        waveRoutine =  StartCoroutine(SpawnWave(waveCount));
+
+        if (waveCount != 5)
+        {
+            if(waveRoutine != null)
+                StopCoroutine(waveRoutine);
+            waveRoutine =  StartCoroutine(SpawnWave(waveCount));
+            
+        }
+        else
+        {
+            StartBossStage();
+        }
     }
 
+    public void StartBossStage()
+    {
+        Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+
+        // Rect 영역 내부의 랜덤 위치 계산
+        Vector2 randomPosition = new Vector2(
+            Random.Range(randomArea.xMin, randomArea.xMax),
+            Random.Range(randomArea.yMin, randomArea.yMax)
+        );
+        
+        GameObject randomBoss = BossPrefabs[Random.Range(0, BossPrefabs.Count)];
+        GameObject spawnedBoss = Instantiate(randomBoss, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
+        BossController bossController = spawnedBoss.GetComponent<BossController>();
+        bossController.Init(this, gameManager.player.transform);
+        activeBoss.Add(bossController);
+    }
+    
     public void StopWave()
     {
         StopAllCoroutines();

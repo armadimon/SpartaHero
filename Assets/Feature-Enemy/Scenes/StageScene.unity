@@ -261,8 +261,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 5556635830619994414, guid: 29469de5456f47a4f945206d39379392, type: 3}
-  - {fileID: 3030543911287065252, guid: fff38dfaf55bdc24999e77f3af0c1ffa, type: 3}
   - {fileID: 5556635830619994414, guid: b94055a8019c16c4f8fdf4cce95ea8b1, type: 3}
+  - {fileID: 3030543911287065252, guid: fff38dfaf55bdc24999e77f3af0c1ffa, type: 3}
+  BossPrefabs:
+  - {fileID: 218478205502235027, guid: b766ca056ed45c944b2f758406ffc015, type: 3}
   spawnAreas:
   - serializedVersion: 2
     x: -7.5
@@ -276,6 +278,7 @@ MonoBehaviour:
     height: 8
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.3}
   activeEnemies: []
+  activeBoss: []
   timeBetweenSpawns: 0.2
   timeBetweenWaves: 1
 --- !u!1 &216103186
@@ -993,7 +996,7 @@ GameObject:
   - component: {fileID: 418362744}
   - component: {fileID: 418362743}
   - component: {fileID: 418362742}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1188,7 +1191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550774826}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7047,7 +7050,7 @@ GameObject:
   - component: {fileID: 1245359957}
   - component: {fileID: 1245359955}
   - component: {fileID: 1245359956}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: DustParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14017,7 +14020,7 @@ GameObject:
   - component: {fileID: 1583120445}
   - component: {fileID: 1583120444}
   - component: {fileID: 1583120443}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

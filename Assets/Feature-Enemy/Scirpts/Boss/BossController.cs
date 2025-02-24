@@ -68,6 +68,7 @@ public class BossController : BaseController
 
             if (distance < weaponHandler.AttackRange)
             {
+                Debug.Log("check");
                 // layerMask를 통한 충돌 구분
                 int layerMaskTarget = weaponHandler.target;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,
@@ -78,6 +79,7 @@ public class BossController : BaseController
                     isAttacking = true;
                     if (!isCharge)
                     {
+                        Debug.Log("charging");
                         isCharge = true;
                         StartJumpAttack();
                     }
@@ -176,25 +178,25 @@ public class BossController : BaseController
     // 기즈모
     public Color gizmosColor = Color.green; // Gizmos 색상
     
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = gizmosColor; // Gizmos 색상 설정
-
-        Vector2 direction = (target.position - transform.position);
-
-        float distance = direction.magnitude;
-        // 1. 시작 지점 (transform.position) 에 반지름 크기의 원 그리기
-        Gizmos.DrawWireSphere(transform.position, 1);
-
-        // 2. 방향 벡터 (direction) 와 최대 거리 (distance) 를 나타내는 선 그리기
-        Vector3 castDirection = transform.TransformDirection(direction.normalized);
-        Gizmos.DrawRay(transform.position, castDirection * distance);
-
-        // 3.  최대 거리 끝 지점에 반지름 크기의 원 그리기 (CircleCast의 최종 범위)
-        Vector3 endPoint = transform.position + castDirection * distance;
-        Gizmos.DrawWireSphere(endPoint, 1);
-
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.color = gizmosColor; // Gizmos 색상 설정
+    //
+    //     Vector2 direction = (target.position - transform.position);
+    //
+    //     float distance = direction.magnitude;
+    //     // 1. 시작 지점 (transform.position) 에 반지름 크기의 원 그리기
+    //     Gizmos.DrawWireSphere(transform.position, 1);
+    //
+    //     // 2. 방향 벡터 (direction) 와 최대 거리 (distance) 를 나타내는 선 그리기
+    //     Vector3 castDirection = transform.TransformDirection(direction.normalized);
+    //     Gizmos.DrawRay(transform.position, castDirection * distance);
+    //
+    //     // 3.  최대 거리 끝 지점에 반지름 크기의 원 그리기 (CircleCast의 최종 범위)
+    //     Vector3 endPoint = transform.position + castDirection * distance;
+    //     Gizmos.DrawWireSphere(endPoint, 1);
+    //
+    // }
     
     public override void Death()
     {
