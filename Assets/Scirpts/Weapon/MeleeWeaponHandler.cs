@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MeleeWeaponHandler : WeaponHandler
@@ -18,7 +19,7 @@ public class MeleeWeaponHandler : WeaponHandler
     public override void Attack()
     {
         base.Attack();
-        
+
         RaycastHit2D hit = Physics2D.BoxCast(
             transform.position + (Vector3)Controller.LookDirection * collideBoxSize.x,
             collideBoxSize, 0, Vector2.zero, 0, target);
@@ -43,6 +44,7 @@ public class MeleeWeaponHandler : WeaponHandler
 
     public override void Rotate(bool isLeft)
     {
+        base.Rotate(isLeft);
         if (isLeft)
             transform.eulerAngles = new Vector3(0, 180, 0);
         else

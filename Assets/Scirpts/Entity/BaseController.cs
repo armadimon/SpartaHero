@@ -41,6 +41,7 @@ public class BaseController : MonoBehaviour
         statHandler = GetComponent<StatHandler>();
 
         weaponHandler = Instantiate(Bow, weaponPivot);
+
     }
 
     // 무기 장착
@@ -63,7 +64,7 @@ public class BaseController : MonoBehaviour
     public void ChoiceStaff()
     {
         if (weaponHandler != null)
-            Destroy(weaponHandler);
+            Destroy(weaponHandler.gameObject);
 
         weaponHandler = Instantiate(Staff, weaponPivot);
     }
@@ -71,7 +72,7 @@ public class BaseController : MonoBehaviour
     public void ChoiceSpear()
     {
         if (weaponHandler != null)
-            Destroy(weaponHandler);
+            Destroy(weaponHandler.gameObject);
 
         weaponHandler = Instantiate(Spear, weaponPivot);
     }

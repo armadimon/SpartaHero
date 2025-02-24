@@ -6,7 +6,7 @@ public class AnimationHandler : MonoBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int IsDamage = Animator.StringToHash("IsDamage");
-    
+
     protected Animator animator;
 
     protected virtual void Awake()

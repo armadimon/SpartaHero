@@ -188,6 +188,7 @@ MonoBehaviour:
   power: 5
   speed: 10
   attackRange: 10
+  Id: 0
   target:
     serializedVersion: 2
     m_Bits: 128
@@ -201,4 +202,4 @@ MonoBehaviour:
   spread: 1
   numberOfProjectilesPerShot: 3
   multipleProjectilesAngle: 3
-  projectileColor: {r: 1, g: 1, b: 1, a: 0}
+  projectileColor: {r: 1, g: 1, b: 1, a: 1}

@@ -18,6 +18,8 @@ public class WeaponHandler : MonoBehaviour
     
     [SerializeField] private float attackRange = 1f;
 
+    [SerializeField] private int Id = 0;
+
     public float AttackRange
     {
         get => attackRange;
@@ -65,10 +67,12 @@ public class WeaponHandler : MonoBehaviour
     public virtual void AttackAnimation()
     {
         animator.SetTrigger(IsAttack);
+
     }
 
     public virtual void Rotate(bool isLeft)
     {
         weaponRenderer.flipY = isLeft;
+        
     }
 }

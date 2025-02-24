@@ -40,10 +40,4 @@ public class PlayerController : BaseController
         base.Death();
         _gameManager.GameOver();
     }
-
-    public void WeaponSelect()
-    {
-     
-
-    }
 }

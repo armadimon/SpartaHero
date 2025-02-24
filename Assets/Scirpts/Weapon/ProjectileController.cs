@@ -90,7 +90,7 @@ public class ProjectileController : MonoBehaviour
     }
 
     private void DestroyProjectile(Vector3 position, bool createFx)
-    {
+    { 
         if (createFx)
         {
             projectileManager.CreateImpactParticlesAtPosition(position, rangeWeaponHandler);
