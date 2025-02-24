@@ -29,6 +29,7 @@ public class RangeWeaponHandler : WeaponHandler
     
     private ProjectileManager projectileManager;
     
+    // 스킬에 대해서 가지고 있음.
     protected override void Start()
     {
         base.Start();
