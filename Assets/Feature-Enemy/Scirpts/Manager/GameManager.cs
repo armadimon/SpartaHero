@@ -11,9 +11,11 @@ public class GameManager : MonoBehaviour
     public PlayerController player { get; private set; }
     private ResourceController _playerResourceController;
 
-    [SerializeField] private int currentWaveIndex = 0;
+    [SerializeField] private static int currentWaveIndex = 0;
 
     private EnemyManager enemyManager;
+    private StageManager stageManager;
+
 
     private void Awake()
     {
@@ -27,6 +29,16 @@ public class GameManager : MonoBehaviour
 
         enemyManager = GetComponentInChildren<EnemyManager>();
         enemyManager.Init(this);
+
+        stageManager = GetComponentInChildren<StageManager>();
+        stageManager.Init(this);
+    }
+
+
+    private void Start()
+    {
+        StartGame();
+        Debug.Log(currentWaveIndex);
     }
 
     public void StartGame()
@@ -42,7 +54,8 @@ public class GameManager : MonoBehaviour
 
     public void EndOfWave()
     {
-        StartNextWave();
+        stageManager.StageClear();
+        //StartNextWave();
     }
 
     public void GameOver()
@@ -52,9 +65,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartGame();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    StartGame();
+        //}
     }
 }
