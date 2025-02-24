@@ -21,7 +21,7 @@ public class Skill : MonoBehaviour
     // Start is called before the first frame update
 
 
-    [SerializeField] private Image[] images;
+    [SerializeField] private Sprite[] images;
     [SerializeField] private Button SkipBut;
     [SerializeField] private GameObject Parent;
     private Player player;
@@ -103,7 +103,7 @@ public class Skill : MonoBehaviour
             {
                 int index = i;
                 Buttons[index].onClick.AddListener(() => skills[0].Action());
-                Images[index].sprite = skills[0].Image.sprite;
+                Images[index].sprite = skills[0].Image;
                 Skillname[index].text = skills[0].name;
                 SKilldescrt[index].text = skills[0].description;
             }
@@ -112,7 +112,7 @@ public class Skill : MonoBehaviour
             {
                 int index = i;
                 Buttons[index].onClick.AddListener(() => skills[lists[index]].Action());
-                Images[index].sprite = skills[lists[index]].Image.sprite;
+                Images[index].sprite = skills[lists[index]].Image;
                 Skillname[index].text = skills[lists[index]].name;
                 SKilldescrt[index].text = skills[lists[index]].description;
                 skills[lists[index]].Level++;
@@ -126,7 +126,7 @@ public class Skill : MonoBehaviour
             {
                 int index = i;
                 Buttons[index].onClick.AddListener(() => skills[lists[index]].Action());
-                Images[index].sprite = skills[lists[index]].Image.sprite;
+                Images[index].sprite = skills[lists[index]].Image;
                 Skillname[index].text = skills[lists[index]].name;
                 SKilldescrt[index].text = skills[lists[index]].description;
                 skills[lists[index]].Level++;
@@ -198,11 +198,11 @@ public class Skill : MonoBehaviour
         public int Level;
         public string name;
         public string description;
-        public Image Image;
+        public Sprite Image;
         public float value;
         public Action Action;
 
-        public SkillSet(SkillType type, int Level, string name, string description, Image image, float value, Action action = null)
+        public SkillSet(SkillType type, int Level, string name, string description, Sprite image, float value, Action action = null)
         {
             this.type = type;
             this.Level = Level;
