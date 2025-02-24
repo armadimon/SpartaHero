@@ -10,7 +10,7 @@ public class RangeWeaponHandler : WeaponHandler
     public int BulletIndex { get => bulletIndex; }
 
     [SerializeField] private float bulletSize = 1f;
-    public float BulletSize { get => bulletSize; }
+    public float BulletSize { get => bulletSize; set => bulletSize = value; }
 
     [SerializeField] private float duration;
     public float Duration { get => duration; }
@@ -19,7 +19,7 @@ public class RangeWeaponHandler : WeaponHandler
     public float Spread { get => spread; }
     
     [SerializeField] private int numberOfProjectilesPerShot;
-    public int NumberOfProjectilesPerShot { get => numberOfProjectilesPerShot; }
+    public int NumberOfProjectilesPerShot { get => numberOfProjectilesPerShot; set => numberOfProjectilesPerShot = value; }
     
     [SerializeField] private float multipleProjectilesAngle;
     public float MultipleProjectilesAngle { get => multipleProjectilesAngle; }
