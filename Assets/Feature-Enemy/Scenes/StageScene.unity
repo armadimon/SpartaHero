@@ -996,6 +996,7 @@ GameObject:
   - component: {fileID: 418362744}
   - component: {fileID: 418362743}
   - component: {fileID: 418362742}
+  - component: {fileID: 418362748}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -1134,6 +1135,19 @@ Transform:
   - {fileID: 1245359957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &418362748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418362741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294d7d00b71ccee4d87e3a6c216a2c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!1 &532768374
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,7 +6304,7 @@ GameObject:
   - component: {fileID: 1045376443}
   - component: {fileID: 1045376442}
   - component: {fileID: 1045376441}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

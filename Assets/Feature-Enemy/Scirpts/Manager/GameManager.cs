@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         stageManager = GetComponentInChildren<StageManager>();
         stageManager.Init(this);
 
-        DontDestroyOnLoad(this);
+        // DontDestroyOnLoad(this);
     }
 
 
