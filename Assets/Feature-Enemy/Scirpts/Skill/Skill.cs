@@ -29,10 +29,14 @@ public class Skill : MonoBehaviour
 
     private Transform WeaponPivot;
     private List<WeaponHandler> handlers = new List<WeaponHandler>();
+
+
+
     private List<Button> Buttons = new List<Button>();
     private List<Image> Images = new List<Image>();
     private List<TextMeshProUGUI> Skillname = new List<TextMeshProUGUI>();
     private List<TextMeshProUGUI> SKilldescrt = new List<TextMeshProUGUI>();
+
     private List<SkillSet> Skills = new List<SkillSet>();
 
     private void Awake()
@@ -45,6 +49,7 @@ public class Skill : MonoBehaviour
             SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
 
         }
+
         WeaponPivot = player.GetChild(1);
         for (int i = 0;i < WeaponPivot.childCount;i++)
         {
@@ -79,6 +84,7 @@ public class Skill : MonoBehaviour
     public void Skip()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     private void SkillSelcet()
