@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Properties;
 using UnityEngine;
-using Random = UnityEngine.Random;
+
 
 public class RangeWeaponHandler : WeaponHandler
 {
@@ -36,10 +36,10 @@ public class RangeWeaponHandler : WeaponHandler
     protected override void Start()
     {
         base.Start();
-        {
-            projectileManager = ProjectileManager.Instance;    
-        }
+        projectileManager = ProjectileManager.Instance;
     }
+
+
 
     public override void Attack()
     {

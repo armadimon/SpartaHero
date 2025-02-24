@@ -27,10 +27,7 @@ public class ProjectileController : MonoBehaviour
 
     private void Update()
     {
-        if (!isReady)
-        {
-            return;
-        }
+        if (!isReady) return;
 
         currentDuration += Time.deltaTime;
 
@@ -66,7 +63,7 @@ public class ProjectileController : MonoBehaviour
 
         transform.right = this.direction;
 
-        if (this.direction.x < 0)
+        if (direction.x < 0)
             pivot.localRotation = Quaternion.Euler(180, 0, 0);
         else
             pivot.localRotation = Quaternion.Euler(0, 0, 0);
