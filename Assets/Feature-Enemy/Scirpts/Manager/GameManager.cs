@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     public void SkillSelectActive()
     {
         uiManager.setActve();
+        Time.timeScale = 0f;
     }
 
     private void Update()

@@ -177,35 +177,41 @@ public class Skill : MonoBehaviour
     private void AttackUp(int value)
     {
         handlers[0].Power += value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
     private void HealthUp(int value)
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         player.GetComponent<StatHandler>().Health += value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
-    private void SpeedUp(float value) 
+    private void SpeedUp(float value)
     {
         player.GetComponent<StatHandler>().Speed += value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
     private void AttackSpeedUp(float value)
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         handlers[0].Speed += value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
     private void AttackRangeUp(float value)
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         handlers[0].AttackRange += value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
     private void AttackDelayDown(float value)
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         handlers[0].Delay -= value;
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
 
     }
@@ -217,6 +223,7 @@ public class Skill : MonoBehaviour
             RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
             rangeWeaponHandler.NumberOfProjectilesPerShot += value;
         }
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
     private void BulletSizeup(float value)
@@ -226,6 +233,7 @@ public class Skill : MonoBehaviour
             RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
             rangeWeaponHandler.BulletSize += value;
         }
+        Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
 
