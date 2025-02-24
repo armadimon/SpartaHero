@@ -120,10 +120,11 @@ public class BossController : BaseController
     IEnumerator ExecuteJumpAttack()
     {
         
-        // TODO: 공격 판정 실행 (OverlapArea, Raycast 등 활용)
+        // TODO: 공격 판정 실행
+        
+        weaponHandler.Attack();
         Vector2 direction = (target.position - transform.position);
-
-        // 2. 거리 계산: this와 target 사이의 거리
+        
         Debug.Log(direction.magnitude);
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(attackRangeIndicator.transform.position, 1, LayerMask.GetMask("Player"));
         // RaycastHit2D hit = Physics2D.CircleCast(attackRangeIndicator.transform.position, 1f, direction.normalized, 0);
@@ -131,8 +132,23 @@ public class BossController : BaseController
         if (hitColliders.Length > 0)
         {
             Debug.Log(hitColliders[0].gameObject.name);
+            ResourceController resourceController = hitColliders[0].GetComponent<ResourceController>();
+            Debug.Log(resourceController);
+            if (resourceController != null)
+            {
+                resourceController.ChangeHealth(-weaponHandler.Power);
+                if (weaponHandler.IsOnKnockBack)
+                {
+                    BaseController controller = hitColliders[0].GetComponent<BaseController>();
+                    if (controller != null)
+                    {
+                        controller.ApplyKnockBack(transform, weaponHandler.KnockBackPower, weaponHandler.KnockBackTime);
+                    }
+                }
+            }
             Debug.Log("점프 공격!"); // 공격 실행 로그 (임시)
         }
+        transform.position = attackRangeIndicator.transform.position;
         yield return new WaitForSeconds(attackDamageTime); // 공격 애니메이션 및 판정 시간 대기
 
         // TODO: 공격 후 처리 (예: 보스 상태 변경, 쿨타임 시작 등)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682014450686238938}
-  - component: {fileID: 8628023392107540616}
+  - component: {fileID: -2602734881166350351}
   m_Layer: 0
   m_Name: E_Ogre_Fist_EquipWeapon
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 5368326087152306442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8628023392107540616
+--- !u!114 &-2602734881166350351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,20 +42,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5623169830667709564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4275aa44863e90941b311847f4cf313d, type: 3}
+  m_Script: {fileID: 11500000, guid: f9cb5fabf0aaa944e8481c5d9407edfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 1
-  weaponSize: 0.8
-  power: 1
+  weaponSize: 0.01
+  power: 5
   speed: 2
   attackRange: 12
   target:
     serializedVersion: 2
     m_Bits: 8
   isOnKnockBack: 0
-  knockBackPower: 0.1
-  knockBackTime: 0.5
+  knockBackPower: 3
+  knockBackTime: 1
   collideBoxSize: {x: 1, y: 1}
 --- !u!1 &6786068803299059312
 GameObject:

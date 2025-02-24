@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 367639706}
   weaponPivot: {fileID: 930862632}
-  WeaponPrefab: {fileID: 8628023392107540616, guid: bf379d6ec95f0dd4880c130e670b48e6, type: 3}
+  WeaponPrefab: {fileID: -2602734881166350351, guid: bf379d6ec95f0dd4880c130e670b48e6, type: 3}
   target: {fileID: 1493133731}
   attackRangeIndicator: {fileID: 925370216}
   attackRangeDisplayTime: 2
@@ -7157,6 +7157,7 @@ GameObject:
   - component: {fileID: 1493133734}
   - component: {fileID: 1493133735}
   - component: {fileID: 1493133736}
+  - component: {fileID: 1493133737}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -7295,6 +7296,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   speed: 3
+--- !u!114 &1493133737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493133730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294d7d00b71ccee4d87e3a6c216a2c80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthChangeDelay: 0.5
 --- !u!1 &1679275525
 GameObject:
   m_ObjectHideFlags: 0
