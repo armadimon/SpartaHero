@@ -7,6 +7,8 @@ public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = 0.5f;
 
+
+
     private BaseController _baseController;
     private StatHandler _statHandler;
     private AnimationHandler _animationHandler;
@@ -62,6 +64,22 @@ public class ResourceController : MonoBehaviour
             Death();
         }
         return true;
+    }
+
+    public void PlayerGetExp()
+    {
+        int inde = GameManager.Instance.Level;
+        if(inde >10) inde = 10;
+
+        GameManager.Instance.CurrentExp += _statHandler.Exp;
+
+        if(GameManager.Instance.CurrentExp > GameManager.Instance.NeedExp[inde])
+        {
+            GameManager.Instance.Level++;
+            GameManager.Instance.SkillSelectActive();
+
+
+        }
     }
 
     private void Death()

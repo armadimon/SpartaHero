@@ -24,8 +24,9 @@ public class Skill : MonoBehaviour
     [SerializeField] private Sprite[] images;
     [SerializeField] private Button SkipBut;
     [SerializeField] private GameObject Parent;
-    private Player player;
-
+    [SerializeField] private GameObject playerWeaponPivot;
+    //private Player player;
+    public List<WeaponHandler> handlers = new List<WeaponHandler>();
     private List<Button> Buttons = new List<Button>();
     private List<Image> Images = new List<Image>();
     private List<TextMeshProUGUI> Skillname = new List<TextMeshProUGUI>();
@@ -34,7 +35,7 @@ public class Skill : MonoBehaviour
 
     private void Awake()
     {
-        player = FindAnyObjectByType<Player>();
+        //player = FindAnyObjectByType<Player>();
         for (int i = 0; i < transform.childCount; i++)
         {
             Buttons.Add(transform.GetChild(i).GetComponent<Button>());
@@ -42,22 +43,21 @@ public class Skill : MonoBehaviour
             Skillname.Add(Buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>());
             SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
         }
+    
         SkillCreate();
+
+
 
     }
     void Start()
     {
         SkipBut.onClick.AddListener(Skip);
-       
-  
-
+        //수정되어야 함
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
     }
 
     // Update is called once per frame
-    void Update()
-    {
 
-    }
     private void OnEnable()
     {
         Cut();
@@ -80,15 +80,15 @@ public class Skill : MonoBehaviour
 
 
         //수정이 필요함
-        bool IsHaveMelee = player.transform.Find("mogie").GetComponent<MeleeWeaponHandler>() != null;
-        bool IsHaveRange = player.transform.Find("mogie2").GetComponent<RangeWeaponHandler>() != null;
+        //bool IsHaveMelee = player.transform.Find("mogie").GetComponent<MeleeWeaponHandler>() != null;
+        //bool IsHaveRange = player.transform.Find("mogie2").GetComponent<RangeWeaponHandler>() != null;
 
         foreach (SkillSet skill in Skills)
         {
             //내부에서 파악
-            if (skill.type == SkillType.Melee && !IsHaveMelee)
+            if (skill.type == SkillType.Melee)
                 continue;
-            if (skill.type == SkillType.Range && !IsHaveRange)
+            if (skill.type == SkillType.Range)
                 continue;
             skills.Add(skill);
         }
@@ -139,16 +139,16 @@ public class Skill : MonoBehaviour
 
     private void SkillCreate()
     {
-        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], 50, HealthUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackSpeedUp));
-        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackSpeedUp));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackCountUp));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackCountUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], 50, () => HealthUp(50)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], 5, () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], 5, () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, () =>AttackSpeedUp(4)));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, () =>AttackSpeedUp(5)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, () =>AttackCountUp(5)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, () =>AttackCountUp(5)));
     }
 
     private void Cut()
@@ -164,30 +164,37 @@ public class Skill : MonoBehaviour
     }
 
     //
-    private void AttackUp()
+    private void AttackUp(int value)
     {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
+        //handlers[0].Power += value;
+        Parent.gameObject.SetActive(false);
+    }
+    private void HealthUp(int value)
+    {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
+        Parent.gameObject.SetActive(false);
+    }
+    private void AttackSpeedUp(int value)
+    {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
 
         Parent.gameObject.SetActive(false);
     }
-    private void HealthUp()
+    private void AttackRangeUp(int value)
     {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         Parent.gameObject.SetActive(false);
     }
-    private void AttackSpeedUp()
+    private void AttackDelayDown(int value)
     {
-        Parent.gameObject.SetActive(false);
-    }
-    private void AttackRangeUp()
-    {
-        Parent.gameObject.SetActive(false);
-    }
-    private void AttackDelayDown()
-    {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         Parent.gameObject.SetActive(false);
 
     }
-    private void AttackCountUp()
+    private void AttackCountUp(int value)
     {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         Parent.gameObject.SetActive(false);
     }
 
