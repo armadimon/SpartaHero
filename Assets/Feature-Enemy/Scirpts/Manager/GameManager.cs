@@ -53,12 +53,14 @@ public class GameManager : MonoBehaviour
     {
         Difficulty++;
         Debug.Log("diff " + Difficulty);
-        enemyManager.StartWave(Difficulty);
+        Stage stageLevel = stageManager.SetStageLevel(Difficulty);
+
+        enemyManager.StartWave(stageLevel);
     }
 
     public void EndOfWave()
     {
-        stageManager.StageClear();
+        stageManager.StageClear(Difficulty);
         //StartNextWave();
     }
 

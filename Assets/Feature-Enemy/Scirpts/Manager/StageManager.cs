@@ -4,41 +4,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public enum StageLevel
-{
-    one,
-    two,
-    three,
-    four,
-    five,
-    six,
-    seven,
-    eight,
-    nine,
-    ten
-}
-
-
-
 public class StageManager : MonoBehaviour
 {
     GameManager gameManager;
     DoorController doorController;
 
-    
+    private bool isClear = false;       // temp?
 
-    private bool isClear = false;
-
-    List<int> stageLevels = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };   // 스테이지 레벨
-
-    //private List<EnemyController> activeEnemies = new List<EnemyController>(); // 현재 활성화된 적들 (EM에 있음)
+    List<Stage> stages = new List<Stage>() {    // 스테이지 리스트 생성 (1 ~ 10)
+        new Stage(1, 100, 100, 1, 3),
+        new Stage(2, 100, 100, 2, 4),
+        new Stage(3, 100, 100, 3, 5),
+        new Stage(4, 100, 100, 4, 6),
+        new Stage(5, 1000, 1000, 1, 2),
+        new Stage(6, 100, 100, 4, 6),
+        new Stage(7, 100, 100, 5, 7),
+        new Stage(8, 100, 100, 6, 8),
+        new Stage(9, 100, 100, 7, 9),
+        new Stage(10, 1000, 1000, 1, 2),
+        //     LEVEL, EXP, GOLD, MIN, MAX
+    };
 
 
     private void Awake()
     {
         doorController = FindObjectOfType<DoorController>();
     }
-
 
 
     public void Init(GameManager gameManager)
@@ -50,54 +41,30 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         if (doorController == null)
-            Debug.Log("DOORhandler x");
+            Debug.Log("DoorHandler null");
         else
             doorController.CloseDoor();
     }
 
 
-    private void SetStageLevel()
+    public Stage SetStageLevel(int diff)    // 게임 시작 전 스테이지 레벨 세팅
     {
-        // 1. 갖고 있는 난이도 값을 받아 계산하여 랜덤한 갯수와 적절한 강함을 가진 몬스터를 먼저 아래에 넣어주고 관리
-        // 랜덤 몬스터, 스테이지 세팅
-
-        //    if ()
-        //    {
-
-        //    }
-
-
-        //    else if ()
-        //    {
-        //        // 보스 스테이지
-        //    }
-
-        //    switch 
-
+        return stages[diff - 1];
     }
 
 
-    private void Update()
-    {
-        // 2. active 몬스터가 다 사라지면 스테이지 매니저에 클리어에 관한 정보 전달. (적들 잡은 경험치 포함)
-    }
-
-
-    public void StageClear()
+    public void StageClear(int diff)        // 스테이지 클리어 시
     {
         isClear = true;
-        doorController.OpenDoor();     // 3. 스테이지 클리어 후 스테이지 전진할 문 활성화
-        //player.exp += monsters.exp;
-        // 아니면 스테이지 자체 exp를 구현? 이상하긴 한데 궁전은 스테이지를 다 깨야 exp가 플러스되니까 ㄱㅊ을 것 같기도
+        doorController.OpenDoor();
+        //player.gold += stageClearGold;    // 플레이어에게 클리어 골드 지급
+        //player.exp += stageClearExp;      // 플레이어에게 클리어 경험치 지급
     }
 
 
-    public void NextStage()
+    public void NextStage()     // 씬 재로드
     {
-        // 4. 문을 통과하면 임시로 만들어놓은 난이도 값을 많이 올려서 난이도 조절 기능이 작동하는지 테스트
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
 }
 

@@ -35,20 +35,21 @@ public class EnemyManager : MonoBehaviour
     {
         this.gameManager = gameManager;
     }
-    public void StartWave(int waveCount)
+    public void StartWave(Stage stage)
     {
-        Debug.Log("Starting wave " + waveCount);
-        if (waveCount <= 0)
+        Debug.Log("Starting wave " + stage.Level);
+        if (stage.Level <= 0)
         {
             gameManager.EndOfWave();
             return;
         }
 
-        if (waveCount != 5)
+        if (stage.Level != 5)
         {
             if(waveRoutine != null)
                 StopCoroutine(waveRoutine);
-            waveRoutine =  StartCoroutine(SpawnWave(waveCount));
+            int randomNum = Random.Range(stage.MonstersMin, stage.MonstersMax);
+            waveRoutine =  StartCoroutine(SpawnWave(randomNum));
             
         }
         else
