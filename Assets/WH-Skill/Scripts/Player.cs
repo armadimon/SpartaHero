@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
 
     [SerializeField] private int[] levelExp = {1,2,3,4,5,6,7,8,9,10};
+    [SerializeField] private WeaponHandler[] weaponHandlers;
 
     private int level = 0;
     private int AllExp = 0;

@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 enum SkillType
-{ 
+{
     Default,
     Melee,
     Range,
@@ -22,6 +23,8 @@ public class Skill : MonoBehaviour
     [SerializeField] private Image[] images;
     [SerializeField] private Button SkipBut;
 
+    private Player player;
+
     private List<Button> Buttons = new List<Button>();
     private List<Image> Images = new List<Image>();
     private List<string> Skillname = new List<string>();
@@ -30,6 +33,7 @@ public class Skill : MonoBehaviour
 
     private void Awake()
     {
+        player = FindAnyObjectByType<Player>();
         for (int i = 0; i < transform.childCount; i++)
         {
             Buttons.Add(transform.GetChild(i).GetComponent<Button>());
@@ -48,7 +52,7 @@ public class Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -59,39 +63,75 @@ public class Skill : MonoBehaviour
 
     private void SkillSelcet()
     {
-        List<SkillSet> skills = new List<SkillSet> ();
+        List<SkillSet> skills = new List<SkillSet>();
         System.Random random = new System.Random();
+
+        List<int> list = new List<int>();
+        List<int> lists = new List<int>();
+
+
+        //수정이 필요함
+        bool IsHaveMelee = player.transform.Find("Mogie").GetComponent<MeleeWeaponHandler>() != null;
+        bool IsHaveRange = player.transform.Find("Mogie2").GetComponent<RangeWeaponHandler>() != null;
 
         foreach (SkillSet skill in Skills)
         {
             //내부에서 파악
-            //if(skill.SkillType == SkillType.Melee && Player.? == null)
-            //continue;
-            //if(skill.SkillType == SkillType.Melee && Player.? == null)
-            //continue;
+            if (skill.type == SkillType.Melee && !IsHaveMelee)
+                continue;
+            if (skill.type == SkillType.Range && !IsHaveRange)
+                continue;
             skills.Add(skill);
         }
 
-        //내부에서 버튼의 갯수가 어떻게 될 때마다 체력 회복으로 전부 탈바꿈 하는 것도 필요할 듯
-        //if(skills.count < 3) ->
-        
+        list = Enumerable.Range(0, skills.Count).ToList();
+        list = list.OrderBy(x => random.Next()).ToList();
 
 
-        for (int i = 0; i< Buttons.Count; i++)
+        if (skills.Count  < 3) 
         {
-           // Buttons[i].onClick.AddListener()
+            for(int i = 0; i < Buttons.Count - skills.Count; i++) 
+            {
+                Buttons[i].onClick.AddListener(() => skills[0].Action());
+                Images[i].sprite = skills[0].Image.sprite;
+                Skillname[i] = skills[0].name;
+                SKilldescrt[i] = skills[0].description;
+            }
+            lists = list.Take(skills.Count).ToList();
+            for (int i = 0+ Buttons.Count - skills.Count; i < Buttons.Count; i++)
+            {
+                Buttons[i].onClick.AddListener(() => skills[lists[i]].Action());
+                Images[i].sprite = skills[lists[i]].Image.sprite;
+                Skillname[i] = skills[lists[i]].name;
+                SKilldescrt[i] = skills[lists[i]].description;
+            }
         }
-       
+        else
+        {
+            lists = list.Take(3).ToList();
+
+            for(int i = 0; i < Buttons.Count; i++) 
+            {
+                Buttons[i].onClick.AddListener(() => skills[lists[i]].Action());
+                Images[i].sprite = skills[lists[i]].Image.sprite;
+                Skillname[i] = skills[lists[i]].name;
+                SKilldescrt[i] = skills[lists[i]].description;
+            }
+        }
+
+  
+
     }
 
     private void SkillCreate()
     {
-        Skills.Add(new SkillSet(SkillType.Default,0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default,0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default,0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default,0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default,0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Melee, 0,"공격력 증가", "공격력이 증가해요", images[0], 5, AttackSpeedUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "체력 회복", "체력이 증가해요", images[0], 50, HealthUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackSpeedUp));
         Skills.Add(new SkillSet(SkillType.Melee, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackSpeedUp));
         Skills.Add(new SkillSet(SkillType.Range, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackCountUp));
         Skills.Add(new SkillSet(SkillType.Range, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackCountUp));
@@ -99,10 +139,10 @@ public class Skill : MonoBehaviour
 
     private void Cut()
     {
-        foreach (SkillSet skill in Skills) 
+        foreach (SkillSet skill in Skills)
         {
-            
-            if(skill.Level >= 3)
+
+            if (skill.Level >= 3)
             {
                 Skills.Remove(skill);
             }
@@ -111,6 +151,10 @@ public class Skill : MonoBehaviour
 
     //
     private void AttackUp()
+    {
+
+    }
+    private void HealthUp()
     {
 
     }
@@ -130,19 +174,19 @@ public class Skill : MonoBehaviour
     {
 
     }
-   
+
 
     private class SkillSet
     {
-        SkillType type;
+        public SkillType type;
         public int Level;
-        string name;
-        string description;
-        Image Image;
-        float value;
-        Action Action;
+        public string name;
+        public string description;
+        public Image Image;
+        public float value;
+        public Action Action;
 
-        public SkillSet(SkillType type,int Level, string name, string description, Image image, float value, Action action = null)
+        public SkillSet(SkillType type, int Level, string name, string description, Image image, float value, Action action = null)
         {
             this.type = type;
             this.Level = Level;
