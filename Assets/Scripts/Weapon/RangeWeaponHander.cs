@@ -2,65 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Properties;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class RangeWeaponHander : WeaponHandler
+public class RangeWeaponHandler : WeaponHandler
 {
+
     [Header("Ranged Attack Data")]
     [SerializeField] private Transform projectileSpawnPosition;
 
-    [SerializeField] private int bulletIndez;
+    [SerializeField] private int bulletIndex;
+    public int BulletIndex { get { return bulletIndex; } }
 
-    public int BulletIndex {  get { return bulletIndez; } }
-
-    [SerializeField] private float bulletSize = 1f; //Åº Á¾·ù
-
-    public float BulletSize { get { return bulletSize; } } //Åº Å©±â
+    [SerializeField] private float bulletSize = 1;
+    public float BulletSize { get { return bulletSize; } }
 
     [SerializeField] private float duration;
-    public float Duration { get { return duration; } } //Åº À¯È¿½Ã°£
+    public float Duration { get { return duration; } }
 
-    [SerializeField] private float spread; // ÅºÀÇ »ìÆ÷¹Ý°æ
-
+    [SerializeField] private float spread;
     public float Spread { get { return spread; } }
 
-    [SerializeField] private int numberofprojectilesPerShot; //¿¬»ç°³¼ö
-    public int NumberofprojectilesPerShot { get { return numberofprojectilesPerShot; } }
+    [SerializeField] private int numberofProjectilesPerShot;
+    public int NumberofProjectilesPerShot { get { return numberofProjectilesPerShot; } }
 
-    [SerializeField] private float multipleProjectileAngle; // °¢ ÅºÀÇ »ìÆ÷¹Ý°æ
-    public float MultipleProjectileAngle { get { return multipleProjectileAngle; } }
+    [SerializeField] private float multipleProjectilesAngel;
+    public float MultipleProjectilesAngel { get { return multipleProjectilesAngel; } }
 
-    [SerializeField] private Color projectileColor; // Åº »ö»ó
-
+    [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get { return projectileColor; } }
-
 
     public override void Attack()
     {
         base.Attack();
-        float projectileAngleSpace = multipleProjectileAngle;
-        int numberOfProjectilePerShot = numberofprojectilesPerShot;
 
-        float minAlge = -(numberOfProjectilePerShot / 2f) * projectileAngleSpace;
+        float projectilesAngleSpace = multipleProjectilesAngel;
+        int numberOfProjectilesPerShot = numberofProjectilesPerShot;
 
-        for (int i = 0; i < numberOfProjectilePerShot; i++)
+        float minAngle = -(numberOfProjectilesPerShot / 2f) * projectilesAngleSpace + 0.5f * multipleProjectilesAngel;
+
+
+        for (int i = 0; i < numberOfProjectilesPerShot; i++)
         {
-            float angle = minAlge + projectileAngleSpace * i;
+            float angle = minAngle + projectilesAngleSpace * i;
             float randomSpread = Random.Range(-spread, spread);
-            angle =+ randomSpread;
+            angle += randomSpread;
             CreateProjectile(Controller.LookDirection, angle);
         }
     }
 
-    private void CreateProjectile(Vector3 _lookDirection, float angle)
+    private void CreateProjectile(Vector2 _lookDirection, float angle)
     {
 
     }
-
-
     private static Vector2 RotateVector2(Vector2 v, float degree)
     {
         return Quaternion.Euler(0, 0, degree) * v;
     }
-
-
 }
