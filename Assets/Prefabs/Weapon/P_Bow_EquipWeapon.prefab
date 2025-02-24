@@ -50,19 +50,19 @@ MonoBehaviour:
   power: 5
   speed: 10
   attackRange: 10
-  targer:
+  target:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   isOnKnockback: 1
   knockbackPower: 0.1
   knockbackTime: 0.5
   projectileSpawnPosition: {fileID: 5305403370286896111}
-  bulletIndez: 0
+  bulletIndex: 0
   bulletSize: 0.7
   duration: 10
   spread: 1
-  numberofprojectilesPerShot: 3
-  multipleProjectileAngle: 3
+  numberofProjectilesPerShot: 0
+  multipleProjectilesAngel: 0
   projectileColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &4024269985551604111
 GameObject:

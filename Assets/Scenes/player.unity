@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 61323575}
   - component: {fileID: 61323576}
   - component: {fileID: 61323577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,9 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5988db8a4fa9cd748ac3ca4626a9bf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chracterRenderer: {fileID: 1499797805}
+  characterRenderer: {fileID: 1499797805}
   weaponPivot: {fileID: 1858944860}
-  WeaponPrefabr: {fileID: 7101190014136859303, guid: 661f4002323d62d47909e17b14ea3921, type: 3}
+  WeaponPrefab: {fileID: 7101190014136859303, guid: 661f4002323d62d47909e17b14ea3921, type: 3}
 --- !u!114 &61323575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 174746123}
   - component: {fileID: 174746122}
   - component: {fileID: 174746121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3222,8 +3222,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457340679}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.9084063, y: -0.011708014, z: 0.009202534}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3231,7 +3231,7 @@ Transform:
   - {fileID: 96842318}
   - {fileID: 2042720384}
   - {fileID: 174746120}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1624207868}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499797803
 GameObject:
@@ -3244,7 +3244,7 @@ GameObject:
   - component: {fileID: 1499797804}
   - component: {fileID: 1499797805}
   - component: {fileID: 1499797806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3339,6 +3339,53 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1503657283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1503657285}
+  - component: {fileID: 1503657284}
+  m_Layer: 0
+  m_Name: ProjectileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1503657284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503657283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6839e4036694e7743a6e4aa7c39a55b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefabs:
+  - {fileID: 7664127714762515855, guid: d9b899718aba7d14a892a86908bfd11b, type: 3}
+  - {fileID: 2552437507211489254, guid: e35ebe2fa022eee48b9243c55a850072, type: 3}
+--- !u!4 &1503657285
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503657283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624207867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3367,7 +3414,8 @@ Transform:
   m_LocalPosition: {x: -1.9084063, y: 0.011708014, z: -0.009202534}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1457340681}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1858944859
@@ -3379,7 +3427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1858944860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4052,4 +4100,4 @@ SceneRoots:
   - {fileID: 354719551}
   - {fileID: 61323573}
   - {fileID: 1624207868}
-  - {fileID: 1457340681}
+  - {fileID: 1503657285}
