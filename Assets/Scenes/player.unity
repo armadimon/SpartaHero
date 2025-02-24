@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 61323572}
   - component: {fileID: 61323571}
   - component: {fileID: 61323574}
+  - component: {fileID: 61323575}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -245,6 +246,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chracterRenderer: {fileID: 1499797805}
   weaponPivot: {fileID: 1858944860}
+--- !u!114 &61323575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61323570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff27d3507925345991297c9398436f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &96842317
 GameObject:
   m_ObjectHideFlags: 0
