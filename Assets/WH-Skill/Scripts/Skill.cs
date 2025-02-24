@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,13 +23,13 @@ public class Skill : MonoBehaviour
 
     [SerializeField] private Image[] images;
     [SerializeField] private Button SkipBut;
-
+    [SerializeField] private GameObject Parent;
     private Player player;
 
     private List<Button> Buttons = new List<Button>();
     private List<Image> Images = new List<Image>();
-    private List<string> Skillname = new List<string>();
-    private List<string> SKilldescrt = new List<string>();
+    private List<TextMeshProUGUI> Skillname = new List<TextMeshProUGUI>();
+    private List<TextMeshProUGUI> SKilldescrt = new List<TextMeshProUGUI>();
     private List<SkillSet> Skills = new List<SkillSet>();
 
     private void Awake()
@@ -38,21 +39,29 @@ public class Skill : MonoBehaviour
         {
             Buttons.Add(transform.GetChild(i).GetComponent<Button>());
             Images.Add(Buttons[i].transform.GetChild(0).GetComponent<Image>());
-            Skillname.Add(Buttons[i].transform.GetChild(1).GetComponent<string>());
-            SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<string>());
+            Skillname.Add(Buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>());
+            SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
         }
+        SkillCreate();
 
     }
     void Start()
     {
         SkipBut.onClick.AddListener(Skip);
-        SkillCreate();
+       
+  
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+    private void OnEnable()
+    {
+        Cut();
+        SkillSelcet();
     }
 
 
@@ -71,8 +80,8 @@ public class Skill : MonoBehaviour
 
 
         //수정이 필요함
-        bool IsHaveMelee = player.transform.Find("Mogie").GetComponent<MeleeWeaponHandler>() != null;
-        bool IsHaveRange = player.transform.Find("Mogie2").GetComponent<RangeWeaponHandler>() != null;
+        bool IsHaveMelee = player.transform.Find("mogie").GetComponent<MeleeWeaponHandler>() != null;
+        bool IsHaveRange = player.transform.Find("mogie2").GetComponent<RangeWeaponHandler>() != null;
 
         foreach (SkillSet skill in Skills)
         {
@@ -92,18 +101,21 @@ public class Skill : MonoBehaviour
         {
             for(int i = 0; i < Buttons.Count - skills.Count; i++) 
             {
-                Buttons[i].onClick.AddListener(() => skills[0].Action());
-                Images[i].sprite = skills[0].Image.sprite;
-                Skillname[i] = skills[0].name;
-                SKilldescrt[i] = skills[0].description;
+                int index = i;
+                Buttons[index].onClick.AddListener(() => skills[0].Action());
+                Images[index].sprite = skills[0].Image.sprite;
+                Skillname[index].text = skills[0].name;
+                SKilldescrt[index].text = skills[0].description;
             }
             lists = list.Take(skills.Count).ToList();
             for (int i = 0+ Buttons.Count - skills.Count; i < Buttons.Count; i++)
             {
-                Buttons[i].onClick.AddListener(() => skills[lists[i]].Action());
-                Images[i].sprite = skills[lists[i]].Image.sprite;
-                Skillname[i] = skills[lists[i]].name;
-                SKilldescrt[i] = skills[lists[i]].description;
+                int index = i;
+                Buttons[index].onClick.AddListener(() => skills[lists[index]].Action());
+                Images[index].sprite = skills[lists[index]].Image.sprite;
+                Skillname[index].text = skills[lists[index]].name;
+                SKilldescrt[index].text = skills[lists[index]].description;
+                skills[lists[index]].Level++;
             }
         }
         else
@@ -112,10 +124,12 @@ public class Skill : MonoBehaviour
 
             for(int i = 0; i < Buttons.Count; i++) 
             {
-                Buttons[i].onClick.AddListener(() => skills[lists[i]].Action());
-                Images[i].sprite = skills[lists[i]].Image.sprite;
-                Skillname[i] = skills[lists[i]].name;
-                SKilldescrt[i] = skills[lists[i]].description;
+                int index = i;
+                Buttons[index].onClick.AddListener(() => skills[lists[index]].Action());
+                Images[index].sprite = skills[lists[index]].Image.sprite;
+                Skillname[index].text = skills[lists[index]].name;
+                SKilldescrt[index].text = skills[lists[index]].description;
+                skills[lists[index]].Level++;
             }
         }
 
@@ -125,16 +139,16 @@ public class Skill : MonoBehaviour
 
     private void SkillCreate()
     {
-        Skills.Add(new SkillSet(SkillType.Default, 0, "체력 회복", "체력이 증가해요", images[0], 50, HealthUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackUp));
-        Skills.Add(new SkillSet(SkillType.Melee, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackSpeedUp));
-        Skills.Add(new SkillSet(SkillType.Melee, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackSpeedUp));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackCountUp));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "공격력 증가", "공격력이 증가해요", images[0], 5, AttackCountUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], 50, HealthUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackUp));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackSpeedUp));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackSpeedUp));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackRangeUp", "AttackRangeUp", images[0], 5, AttackCountUp));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackDelayDown", "AttackDelayDown", images[0], 5, AttackCountUp));
     }
 
     private void Cut()
@@ -153,26 +167,28 @@ public class Skill : MonoBehaviour
     private void AttackUp()
     {
 
+        Parent.gameObject.SetActive(false);
     }
     private void HealthUp()
     {
-
+        Parent.gameObject.SetActive(false);
     }
     private void AttackSpeedUp()
     {
-
+        Parent.gameObject.SetActive(false);
     }
     private void AttackRangeUp()
     {
-
+        Parent.gameObject.SetActive(false);
     }
     private void AttackDelayDown()
     {
+        Parent.gameObject.SetActive(false);
 
     }
     private void AttackCountUp()
     {
-
+        Parent.gameObject.SetActive(false);
     }
 
 

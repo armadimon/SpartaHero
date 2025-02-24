@@ -6,11 +6,28 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     // Start is called before the first frame update
-  
-  
-    
+
+    [SerializeField] private GameObject GameObject;
+
+
+    public static UiManager Instance;
+
+
+    private void Awake()
+    {
+        if(Instance == null) 
+        {
+            Instance = this;
+
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     void Start()
     {
+
  
     }
 
@@ -18,5 +35,10 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void setActve()
+    {
+        GameObject.gameObject.SetActive(true);
     }
 }
