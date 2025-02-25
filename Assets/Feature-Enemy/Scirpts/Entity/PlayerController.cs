@@ -40,4 +40,25 @@ public class PlayerController : BaseController
         base.Death();
         _gameManager.GameOver();
     }
+
+   
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("BowBtn"))
+        {
+            Debug.Log("활과 부딪힘");
+            WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+        }
+        else if (collision.gameObject.CompareTag("SwordBtn"))
+        {
+            Debug.Log("검과 부딪힘");
+            WeaponPrefab = Resources.Load<WeaponHandler>("E_Knife_EquipWeapon 1");
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+            
+        }
+        else return;
+    }
+
 }

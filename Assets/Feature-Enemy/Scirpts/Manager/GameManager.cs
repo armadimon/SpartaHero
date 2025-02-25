@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,9 +29,9 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            
+
         }
-        
+
         player = FindObjectOfType<PlayerController>();
         player.Init(this);
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name == "MainLobbyScene")  return;
         StartGame();
     }
 
