@@ -23,6 +23,9 @@ public class RangeWeaponHandler : WeaponHandler
     
     [SerializeField] private float multipleProjectilesAngle;
     public float MultipleProjectilesAngle { get => multipleProjectilesAngle; }
+
+    [SerializeField] private int BoundCount;
+    public int BoundCountt { get => BoundCount; set => BoundCount = value; }
     
     [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get => projectileColor; }

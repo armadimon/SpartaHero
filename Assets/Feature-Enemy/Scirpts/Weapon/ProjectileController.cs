@@ -20,6 +20,8 @@ public class ProjectileController : MonoBehaviour
 
     public bool fxOnDestroy = true;
 
+  
+
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -44,9 +46,20 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        int boundcount = rangeWeaponHandler.BoundCountt;
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-            DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
+            if (boundcount > 0)
+            {
+                Bounding(collision);
+                boundcount--;
+            }
+            else
+            {
+                DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
+            }
+         
+          
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
@@ -67,6 +80,19 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
         }
             
+    }
+
+    private void Bounding(Collider2D collider)
+    {
+        Vector2 Current = rigidbody.velocity;
+        Vector2 CollisionPonit = collider.ClosestPoint(transform.position);
+        Vector2 WallPoint = collider.transform.position;
+
+        Vector2 normal = (CollisionPonit - WallPoint).normalized;
+
+        Vector2 Re = Vector2.Reflect(Current, normal);
+
+        rigidbody.velocity = Re;
     }
 
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)
