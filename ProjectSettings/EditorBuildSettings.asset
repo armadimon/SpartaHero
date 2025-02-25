@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Skill.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/SH_Scene/MainLobbyScene.unity
+    guid: c0f7ce4a606709a47815227a4fcfe822
+  - enabled: 1
+    path: Assets/SH_Scene/TestScene.unity
+    guid: ae1a7226182c35441af120e6f90823c1
   m_configObjects: {}
