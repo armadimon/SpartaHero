@@ -17,16 +17,24 @@ public class ProjectileController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     
     ProjectileManager projectileManager;
-
+    private Vector2 reflectionVelocity;
     public bool fxOnDestroy = true;
+    public int boundcount;
 
-  
+    bool isFirst = true;
 
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         pivot = transform.GetChild(0);
+        rangeWeaponHandler = GetComponentInParent<RangeWeaponHandler>();
+        
+    }
+
+    private void Start()
+    {
+        boundcount = rangeWeaponHandler.BoundCountt;
     }
 
     private void Update()
@@ -41,25 +49,33 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(transform.position, false);
         }
 
+        if(isFirst)
         rigidbody.velocity = direction * rangeWeaponHandler.Speed;
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        int boundcount = rangeWeaponHandler.BoundCountt;
+        
+
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-            if (boundcount > 0)
+
+            if (boundcount> 0)
             {
-                Bounding(collision);
+
+                isFirst = false;
+                Bounding();
                 boundcount--;
             }
             else
             {
+
                 DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
             }
-         
-          
+
+
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
@@ -77,22 +93,33 @@ public class ProjectileController : MonoBehaviour
                     }
                 }
             }
-            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
+            Debug.Log($"bound{boundcount}");
+
+            if (boundcount > 0)
+            {
+                isFirst = false;
+                Bounding();
+                boundcount--;
+            }
+            else
+            {
+       
+                DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
+            }
         }
-            
     }
 
-    private void Bounding(Collider2D collider)
+    private void Bounding()
     {
-        Vector2 Current = rigidbody.velocity;
-        Vector2 CollisionPonit = collider.ClosestPoint(transform.position);
-        Vector2 WallPoint = collider.transform.position;
-
-        Vector2 normal = (CollisionPonit - WallPoint).normalized;
-
-        Vector2 Re = Vector2.Reflect(Current, normal);
-
-        rigidbody.velocity = Re;
+  
+        if(boundcount>0 && !isFirst)
+        {
+            rigidbody.velocity = -rigidbody.velocity;
+            spriteRenderer.flipY = !spriteRenderer.flipY;
+       
+        }
+       
+        
     }
 
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)
