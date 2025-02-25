@@ -7,9 +7,9 @@ public class SkillHandler : MonoBehaviour
 
     public int boundcount = 0;
     public int Penetration = 0;
-
-
     public bool isFirst = true;
+
+    public bool IsSlow = false;
     public void Bounding(Rigidbody2D rigidbody, SpriteRenderer spriteRenderer)
     {
         if (boundcount > 0 && !isFirst)

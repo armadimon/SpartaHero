@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeWeaponHandler : WeaponHandler
@@ -32,6 +33,9 @@ public class RangeWeaponHandler : WeaponHandler
 
     [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get => projectileColor; }
+
+    [SerializeField] List<bool> Debuffe =new List<bool>();
+    public List<bool> Debuff { get => Debuff; set => Debuff = value; }
     
     private ProjectileManager projectileManager;
     

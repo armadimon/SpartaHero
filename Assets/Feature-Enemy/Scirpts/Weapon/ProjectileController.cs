@@ -37,6 +37,8 @@ public class ProjectileController : MonoBehaviour
     {
         skillHandler.boundcount = rangeWeaponHandler.BoundCountt;
         skillHandler.Penetration = rangeWeaponHandler.Penetration;
+
+        rangeWeaponHandler.Debuff.Add(skillHandler.IsSlow);
     }
 
     private void Update()
@@ -76,9 +78,10 @@ public class ProjectileController : MonoBehaviour
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
             ResourceController resourceController = collision.GetComponent<ResourceController>();
+            if (rangeWeaponHandler.Debuff[0])
+                skillHandler.StartSlow(collision);
 
-
-            skillHandler.StartSlow(collision);
+        
 
 
             if (resourceController != null)

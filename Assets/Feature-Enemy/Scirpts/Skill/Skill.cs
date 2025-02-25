@@ -165,8 +165,10 @@ public class Skill : MonoBehaviour
         Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
         Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
         Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => Boundup(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => Penetration(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Boundup", images[0], () => Boundup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration", images[0], () => Penetration(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Slow", images[0], Slow));
+
     }
 
     private void Cut()
@@ -263,6 +265,16 @@ public class Skill : MonoBehaviour
         {
             RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
             rangeWeaponHandler.Penetration += value;
+        }
+        Time.timeScale = 1f;
+        Parent.gameObject.SetActive(false);
+    }
+    private void Slow()
+    {
+        if (handlers[0] is RangeWeaponHandler)
+        {
+            RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
+            rangeWeaponHandler.Debuff[0] = true;
         }
         Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
