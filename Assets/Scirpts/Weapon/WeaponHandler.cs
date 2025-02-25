@@ -1,7 +1,8 @@
 
+using Assets.Scirpts.Weapon;
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour
+public class WeaponHandler : MonoBehaviour, IAttack
 {
     [Header("Attack Info")]
     [SerializeField] private float delay = 1f;
@@ -18,14 +19,14 @@ public class WeaponHandler : MonoBehaviour
     
     [SerializeField] private float attackRange = 1f;
 
-    [SerializeField] private int Id = 0;
-
     public float AttackRange
     {
         get => attackRange;
         set => attackRange = value;
     }
-    
+
+    [SerializeField] public int Id = 0;
+
     public LayerMask target;
 
     [Header("Knock Back Info")]
@@ -39,7 +40,7 @@ public class WeaponHandler : MonoBehaviour
     public float KnockBackTime { get => knockBackTime; set => knockBackTime = value; }
 
     private static readonly int IsAttack = Animator.StringToHash("IsAttack");
-    
+
     public BaseController Controller { get; private set; }
     
     private Animator animator;
@@ -67,12 +68,10 @@ public class WeaponHandler : MonoBehaviour
     public virtual void AttackAnimation()
     {
         animator.SetTrigger(IsAttack);
-
     }
 
     public virtual void Rotate(bool isLeft)
     {
         weaponRenderer.flipY = isLeft;
-        
     }
 }

@@ -301,10 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 2715738323541904515}
   weaponPivot: {fileID: 5827777134004221308}
-  Bow: {fileID: 3236819483450127527, guid: 8d5d1fd27cc135d4781da630d9ac6af1, type: 3}
-  Sword: {fileID: 0}
-  Staff: {fileID: 0}
-  Spear: {fileID: 0}
+  WeaponPrefab: {fileID: 3236819483450127527, guid: 8d5d1fd27cc135d4781da630d9ac6af1, type: 3}
   followRange: 15
 --- !u!114 &-9167493269135480875
 MonoBehaviour:

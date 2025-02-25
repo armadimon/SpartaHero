@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : BaseController
 {
     private Camera _camera;
     private GameManager _gameManager;
+
+    [SerializeField] private WeaponHandler Bow;
+    [SerializeField] private WeaponHandler Sword;
+    [SerializeField] private WeaponHandler Staff;
+    [SerializeField] private WeaponHandler Spear;
 
     public void Init(GameManager gameManager)
     {
@@ -39,5 +46,39 @@ public class PlayerController : BaseController
     {
         base.Death();
         _gameManager.GameOver();
+    }
+
+
+    // 활 장착
+    public void ChoiceBow()
+    {
+        if (weaponHandler != null)
+            Destroy(weaponHandler.gameObject);
+
+        weaponHandler = Instantiate(Bow, weaponPivot);
+    }
+    // 칼 장착
+    public void ChoiceSword()
+    {
+        if (weaponHandler != null)
+            Destroy(weaponHandler.gameObject);
+
+        weaponHandler = Instantiate(Sword, weaponPivot);
+    }
+    // 지팡이 장착
+    public void ChoiceStaff()
+    {
+        if (weaponHandler != null)
+            Destroy(weaponHandler.gameObject);
+
+        weaponHandler = Instantiate(Staff, weaponPivot);
+    }
+    // 창 장착
+    public void ChoiceSpear()
+    {
+        if (weaponHandler != null)
+            Destroy(weaponHandler.gameObject);
+
+        weaponHandler = Instantiate(Spear, weaponPivot);
     }
 }

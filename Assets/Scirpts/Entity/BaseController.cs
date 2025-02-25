@@ -11,11 +11,7 @@ public class BaseController : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Transform weaponPivot;
-    [SerializeField] private WeaponHandler Bow;
-    [SerializeField] private WeaponHandler Sword;
-    [SerializeField] private WeaponHandler Staff;
-    [SerializeField] private WeaponHandler Spear;
+    [SerializeField] protected Transform weaponPivot;
 
     protected Vector2 movementDirection = Vector2.zero;
 
@@ -29,6 +25,8 @@ public class BaseController : MonoBehaviour
 
     protected AnimationHandler animationHandler;
     protected StatHandler statHandler;
+
+    [SerializeField] WeaponHandler WeaponPrefab;
     protected WeaponHandler weaponHandler;
 
     protected bool isAttacking;
@@ -40,42 +38,12 @@ public class BaseController : MonoBehaviour
         animationHandler = GetComponent<AnimationHandler>();
         statHandler = GetComponent<StatHandler>();
 
-        weaponHandler = Instantiate(Bow, weaponPivot);
-
+        if (WeaponPrefab != null)
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+        else
+            weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
 
-    // 무기 장착
-    public void ChoiceBow()
-    {
-        if(weaponHandler != null)
-            Destroy(weaponHandler.gameObject);
-
-        weaponHandler = Instantiate(Bow, weaponPivot);
-    }
-    // 무기 장착
-    public void ChoiceSword()
-    {
-        if (weaponHandler != null)
-            Destroy(weaponHandler.gameObject);
-
-        weaponHandler = Instantiate(Sword, weaponPivot);
-    }
-    // 무기 장착
-    public void ChoiceStaff()
-    {
-        if (weaponHandler != null)
-            Destroy(weaponHandler.gameObject);
-
-        weaponHandler = Instantiate(Staff, weaponPivot);
-    }
-    // 무기 장착
-    public void ChoiceSpear()
-    {
-        if (weaponHandler != null)
-            Destroy(weaponHandler.gameObject);
-
-        weaponHandler = Instantiate(Spear, weaponPivot);
-    }
 
     protected virtual void Update()
     {
@@ -135,8 +103,6 @@ public class BaseController : MonoBehaviour
     {
         knockBackDuration = duration;
         knockBack = (other.position - transform.position).normalized * power;
-
-
     }
 
     private void HandleAttackDelay()
@@ -159,6 +125,7 @@ public class BaseController : MonoBehaviour
     {
         if (lookDirection != Vector2.zero)
             weaponHandler?.Attack();
+
     }
 
     public virtual void Death()

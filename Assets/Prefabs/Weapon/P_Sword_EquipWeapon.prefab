@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5127104136519340340}
   - component: {fileID: 2706483844033318169}
-  - component: {fileID: 1232693424189669982}
   m_Layer: 0
   m_Name: P_Sword_EquipWeapon
   m_TagString: Untagged
@@ -59,27 +58,6 @@ MonoBehaviour:
   knockBackPower: -1
   knockBackTime: 0.1
   collideBoxSize: {x: 1, y: 1}
---- !u!95 &1232693424189669982
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437380474442465280}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f1fbf9e4ad8b40e45b9c142139bf5388, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5736364188112763109
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6373377959933346103}
   - component: {fileID: 4318479103405173461}
+  - component: {fileID: 2149172575816602425}
   m_Layer: 0
   m_Name: WeaponSprite
   m_TagString: Untagged
@@ -164,3 +143,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2149172575816602425
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736364188112763109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1fbf9e4ad8b40e45b9c142139bf5388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

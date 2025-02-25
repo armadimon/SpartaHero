@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scirpts.Weapon;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MeleeWeaponHandler : WeaponHandler
+public class MeleeWeaponHandler : WeaponHandler, IAttack
 {
-        [Header("Melee Attack Data")]
+    [Header("Melee Attack Data")]
     
     public Vector2 collideBoxSize = Vector2.one;
 
@@ -44,7 +45,6 @@ public class MeleeWeaponHandler : WeaponHandler
 
     public override void Rotate(bool isLeft)
     {
-        base.Rotate(isLeft);
         if (isLeft)
             transform.eulerAngles = new Vector3(0, 180, 0);
         else
