@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
+
 using UnityEngine;
 
 public class PlayerController : BaseController
 {
+    private GameManager gameManager;
     private Camera camera;
 
-    protected override void Start()
+    public void Init(GameManager gameManager)
     {
-        base.Start();
+        this.gameManager = gameManager;
         camera = Camera.main;
     }
+
 
     protected override void HandleAction()
     {
@@ -35,5 +39,12 @@ public class PlayerController : BaseController
         }
 
         isAttacking = Input.GetMouseButton(0);
+    }
+
+
+    public override void Death()
+    {
+        base.Death();
+        gameManager.GameOver();
     }
 }
