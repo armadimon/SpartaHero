@@ -19,7 +19,11 @@ public class ProjectileController : MonoBehaviour
     ProjectileManager projectileManager;
     private Vector2 reflectionVelocity;
     public bool fxOnDestroy = true;
-    public int boundcount;
+
+    //Weapon Variable
+    int boundcount;
+    int Penetration;
+
 
     bool isFirst = true;
 
@@ -35,6 +39,7 @@ public class ProjectileController : MonoBehaviour
     private void Start()
     {
         boundcount = rangeWeaponHandler.BoundCountt;
+        Penetration = rangeWeaponHandler.Penetration;
     }
 
     private void Update()
@@ -57,11 +62,8 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-
             if (boundcount > 0)
             {
                 isFirst = false;
@@ -72,8 +74,6 @@ public class ProjectileController : MonoBehaviour
             {
                 DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
             }
-
-
         }
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
@@ -91,26 +91,21 @@ public class ProjectileController : MonoBehaviour
                     }
                 }
             }
-            Debug.Log($"bound{boundcount}");
-
-
-
-            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
-
+            if (Penetration <= 0)
+            {
+                DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
+            }
+            Penetration--;
         }
     }
 
     private void Bounding()
     {
-
         if (boundcount > 0 && !isFirst)
         {
             rigidbody.velocity = -rigidbody.velocity;
             spriteRenderer.flipY = !spriteRenderer.flipY;
-
         }
-
-
     }
 
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)

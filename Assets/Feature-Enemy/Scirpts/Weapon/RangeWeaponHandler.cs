@@ -26,7 +26,10 @@ public class RangeWeaponHandler : WeaponHandler
 
     [SerializeField] private int BoundCount = 100;
     public int BoundCountt { get => BoundCount; set => BoundCount = value; }
-    
+
+    [SerializeField] private int penetration = 1;
+    public int Penetration { get => penetration; set => penetration = value; }
+
     [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get => projectileColor; }
     
