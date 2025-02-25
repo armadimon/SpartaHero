@@ -21,11 +21,7 @@ public class ProjectileController : MonoBehaviour
     public bool fxOnDestroy = true;
 
     //Weapon Variable
-    int boundcount;
-    int Penetration;
-
-
-    bool isFirst = true;
+    SkillHandler skillHandler;
 
     private void Awake()
     {
@@ -33,13 +29,14 @@ public class ProjectileController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         pivot = transform.GetChild(0);
         rangeWeaponHandler = GetComponentInParent<RangeWeaponHandler>();
+        skillHandler = GetComponent<SkillHandler>();
 
     }
 
     private void Start()
     {
-        boundcount = rangeWeaponHandler.BoundCountt;
-        Penetration = rangeWeaponHandler.Penetration;
+        skillHandler.boundcount = rangeWeaponHandler.BoundCountt;
+        skillHandler.Penetration = rangeWeaponHandler.Penetration;
     }
 
     private void Update()
@@ -54,7 +51,7 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(transform.position, false);
         }
 
-        if (isFirst)
+        if (skillHandler.isFirst)
             rigidbody.velocity = direction * rangeWeaponHandler.Speed;
 
 
@@ -64,12 +61,12 @@ public class ProjectileController : MonoBehaviour
     {
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-            if (boundcount > 0)
+            if (skillHandler.boundcount > 0)
             {
                 //if Arrow hit the wall then Bounce
-                isFirst = false;
-                Bounding();
-                boundcount--;
+                skillHandler.isFirst = false;
+                skillHandler.Bounding(rigidbody,spriteRenderer);
+                skillHandler.boundcount--;
             }
             else
             {
@@ -79,7 +76,11 @@ public class ProjectileController : MonoBehaviour
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
             ResourceController resourceController = collision.GetComponent<ResourceController>();
-            StartSlow(collision);
+
+
+            skillHandler.StartSlow(collision);
+
+
             if (resourceController != null)
             {
                 resourceController.ChangeHealth(-rangeWeaponHandler.Power);
@@ -95,57 +96,13 @@ public class ProjectileController : MonoBehaviour
             }
 
             //if Penetration left dont Destroy
-            if (Penetration <= 0)
+            if (skillHandler.Penetration <= 0)
             {
                 DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
             }
-            Penetration--;
+            skillHandler.Penetration--;
         }
     }
-
-    private void Bounding()
-    {
-        if (boundcount > 0 && !isFirst)
-        {
-            rigidbody.velocity = -rigidbody.velocity;
-            spriteRenderer.flipY = !spriteRenderer.flipY;
-        }
-    }
-
-    private void StartSlow(Collider2D collider)
-    {
-        StartCoroutine(Slowro(collider));
-    }
-
-    private IEnumerator Slowro(Collider2D collider)
-    {
-        Transform Enemy = collider.transform;
-        if (Enemy.GetComponent<StatHandler>() != null)
-        {
-            StatHandler statHandler = Enemy.GetComponent<StatHandler>();
-            statHandler.Speed = 2f;
-            yield return new WaitForSeconds(3);
-            statHandler.Speed = 3f;
-            Debug.Log("on");
-        }
-        else
-        {
-            Debug.Log("null");
-        }
-        if (Enemy.transform.childCount != 0)
-        {
-            SpriteRenderer sprite = Enemy.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            sprite.color = new Color(1f, 200 / 255f, 0f);
-            yield return new WaitForSeconds(3);
-            sprite.color = new Color(1f,1f,1f);
-            Debug.Log("on");
-        }
-        else
-        {
-            Debug.Log("null");
-        }
-    }
-
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)
     {
         this.projectileManager = projectileManager;
