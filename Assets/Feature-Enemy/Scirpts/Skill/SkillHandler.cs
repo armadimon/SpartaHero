@@ -19,6 +19,8 @@ public class SkillHandler : MonoBehaviour
         }
     }
 
+
+
     public void StartSlow(Collider2D collider)
     {
         StartCoroutine(Slowro(collider));
@@ -34,7 +36,12 @@ public class SkillHandler : MonoBehaviour
             statHandler.Speed = 2f;
             Transform sprite = Enemy.transform.GetChild(1);
             sprite.gameObject.SetActive(true);
+
+
             yield return new WaitForSeconds(3);
+
+
+
             statHandler.Speed = 3f;
             sprite.gameObject.SetActive(false);
             Debug.Log("Coloron");

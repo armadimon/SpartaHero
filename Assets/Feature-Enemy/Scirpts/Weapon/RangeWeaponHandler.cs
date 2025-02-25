@@ -35,7 +35,7 @@ public class RangeWeaponHandler : WeaponHandler
     public Color ProjectileColor { get => projectileColor; }
 
     [SerializeField] List<bool> Debuffe =new List<bool>();
-    public List<bool> Debuff { get => Debuff; set => Debuff = value; }
+    public List<bool> Debuff { get => Debuffe; set => Debuffe = value; }
     
     private ProjectileManager projectileManager;
     
