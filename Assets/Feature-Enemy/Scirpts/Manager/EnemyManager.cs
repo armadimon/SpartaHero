@@ -11,6 +11,8 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> enemyPrefabs; // 생성할 적 프리팹 리스트
     [SerializeField]
     private List<GameObject> BossPrefabs; // 생성할 보스 프리팹 리스트
+    [SerializeField]
+    private List<GameObject> PosionPrefabs; // 생성할 보스 프리팹 리스트
 
     [SerializeField]
     private List<Rect> spawnAreas; // 적을 생성할 영역 리스트
@@ -31,6 +33,13 @@ public class EnemyManager : MonoBehaviour
 
     GameManager gameManager;
     PlayerController player;
+    ItemController ItemController;
+
+    private void Start()
+    {
+        ItemController = GetComponent<ItemController>();
+    }
+
 
     public void Init(GameManager gameManager)
     {
@@ -150,6 +159,7 @@ public class EnemyManager : MonoBehaviour
 
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
+        SpawnRandomItem(enemy);
         activeEnemies.Remove(enemy);
         StatHandler enemyStat = enemy.GetComponent<StatHandler>();
         StatHandler playerStat = player.gameObject.GetComponent<StatHandler>();
@@ -167,5 +177,23 @@ public class EnemyManager : MonoBehaviour
         activeBoss.Remove(boss);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
+    }
+
+    public void SpawnRandomItem(EnemyController enemy)
+    {
+        GameObject randomPrefab = PosionPrefabs[Random.Range(0, PosionPrefabs.Count)];
+        //죽은 적 위치 확인
+        Vector3 enemyDeathPosition = enemy.transform.position;
+
+
+        //랜덤 생성
+        bool Droprate = Random.Range(0, 1) == 1? false: true;
+        if (Droprate)
+        {
+            //아이템 생성   
+            GameObject spawnedPosion = Instantiate(randomPrefab, enemyDeathPosition, Quaternion.identity);
+            ItemController itemController = spawnedPosion.GetComponent<ItemController>();
+            itemController.Init(itemController, this.transform);
+        }
     }
 }
