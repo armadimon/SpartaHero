@@ -158,16 +158,26 @@ public class Skill : MonoBehaviour
     private void SkillCreate()
     {
         Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], () => HealthUp(50)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], () => AttackUp(3)));
+        // Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], () => AttackUp(3)));
         Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "SpeedUp", images[0], () => SpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], () => AttackSpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], () => AttackRangeUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => Boundup(1)));
+        // Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], () => AttackSpeedUp(3)));
+        // Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], () => AttackRangeUp(3)));
+        // Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
+        // Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
+        // Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
+        // Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => Boundup(1)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "Parrying", "Parrying", images[0], () => Parrying()));
     }
 
+    private void Parrying()
+    {
+        MeleeWeaponHandler pWeaponHandler = player.GetComponentInChildren<MeleeWeaponHandler>();
+        pWeaponHandler.ActiveSkills.Add(ActiveSkill.Parrying, true);
+        pWeaponHandler.StartParryCoroutine();
+        Time.timeScale = 1f;
+        Parent.gameObject.SetActive(false);
+    }
+    
     private void Cut()
     {
         foreach (SkillSet skill in Skills)
@@ -277,10 +287,8 @@ public class Skill : MonoBehaviour
             Action = action;
         }
     }
-
-
-
 }
+
 
 
 

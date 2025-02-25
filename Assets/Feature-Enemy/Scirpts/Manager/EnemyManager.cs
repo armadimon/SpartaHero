@@ -137,6 +137,7 @@ public class EnemyManager : MonoBehaviour
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
         activeEnemies.Remove(enemy);
+        
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
     }

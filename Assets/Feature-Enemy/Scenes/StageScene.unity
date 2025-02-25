@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1583120442}
   weaponPivot: {fileID: 550774826}
-  WeaponPrefab: {fileID: 3717791299586459588, guid: 92b0e112d600db84eab6ba4b6de56999, type: 3}
+  WeaponPrefab: {fileID: 2706483844033318169, guid: e32567655cea9a74585f68f343b3412a, type: 3}
 --- !u!61 &418362745
 BoxCollider2D:
   m_ObjectHideFlags: 0

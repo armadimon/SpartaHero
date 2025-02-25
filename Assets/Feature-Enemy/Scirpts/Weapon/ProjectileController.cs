@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [SerializeField] private LayerMask levelCollisionLayer;
+    [SerializeField] public LayerMask levelCollisionLayer;
 
-    private RangeWeaponHandler rangeWeaponHandler;
+    public RangeWeaponHandler rangeWeaponHandler;
+    public LayerMask nowTargetLayer;
 
     private float currentDuration;
-    private Vector2 direction;
+    public Vector2 direction;
     private bool isReady;
     private Transform pivot;
 
@@ -35,6 +36,7 @@ public class ProjectileController : MonoBehaviour
     private void Start()
     {
         boundcount = rangeWeaponHandler.BoundCountt;
+        nowTargetLayer = rangeWeaponHandler.target.value;
     }
 
     private void Update()
@@ -75,7 +77,7 @@ public class ProjectileController : MonoBehaviour
 
 
         }
-        else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
+        else if (nowTargetLayer == (nowTargetLayer | (1 << collision.gameObject.layer)))
         {
             ResourceController resourceController = collision.GetComponent<ResourceController>();
 
