@@ -201,4 +201,5 @@ MonoBehaviour:
   spread: 1
   numberOfProjectilesPerShot: 1
   multipleProjectilesAngle: 1
+  BoundCount: 0
   projectileColor: {r: 0.9528302, g: 0.4269758, b: 0.4269758, a: 1}

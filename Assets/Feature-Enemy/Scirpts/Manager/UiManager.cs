@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
 
 
     public static UiManager Instance;
+    GameManager gameManager;
 
 
     private void Awake()
@@ -25,17 +26,11 @@ public class UiManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    void Start()
+    public void Init(GameManager gameManager)
     {
-
- 
+        this.gameManager = gameManager;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void setActve()
     {

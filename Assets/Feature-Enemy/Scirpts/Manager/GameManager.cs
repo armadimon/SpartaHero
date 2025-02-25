@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
     [SerializeField] private static int Difficulty = 0;
 
+    public int[] NeedExp = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+    public int CurrentExp;
+    public int Level = 0;
+
     public PlayerController player { get; private set; }
     private ResourceController _playerResourceController;
 
@@ -16,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
+    private UiManager uiManager;
 
 
     private void Awake()
@@ -34,6 +39,9 @@ public class GameManager : MonoBehaviour
 
         stageManager = GetComponentInChildren<StageManager>();
         stageManager.Init(this);
+
+        uiManager = GetComponentInChildren<UiManager>();
+        uiManager.Init(this);
 
         // DontDestroyOnLoad(this);
     }
@@ -67,6 +75,12 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         enemyManager.StopWave();
+    }
+
+    public void SkillSelectActive()
+    {
+        uiManager.setActve();
+        Time.timeScale = 0f;
     }
 
     private void Update()

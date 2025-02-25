@@ -7,8 +7,14 @@ public class EnemyController : BaseController
     private EnemyManager enemyManger;
     private Transform target;
 
+    private ResourceController resourceController;
+
     [SerializeField] private float followRange = 15f;
 
+    private void Start()
+    {
+        resourceController = GetComponent<ResourceController>();
+    }
     public void Init(EnemyManager enemyManager, Transform target)
     {
         this.enemyManger = enemyManager;
@@ -72,6 +78,7 @@ public class EnemyController : BaseController
     public override void Death()
     {
         base.Death();
+        resourceController.PlayerGetExp();
         enemyManger.RemoveEnemyOnDeath(this);
     }
 }
