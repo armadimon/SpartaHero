@@ -66,6 +66,7 @@ public class ProjectileController : MonoBehaviour
         {
             if (boundcount > 0)
             {
+                //if Arrow hit the wall then Bounce
                 isFirst = false;
                 Bounding();
                 boundcount--;
@@ -78,10 +79,11 @@ public class ProjectileController : MonoBehaviour
         else if (rangeWeaponHandler.target.value == (rangeWeaponHandler.target.value | (1 << collision.gameObject.layer)))
         {
             ResourceController resourceController = collision.GetComponent<ResourceController>();
-
+            StartSlow(collision);
             if (resourceController != null)
             {
                 resourceController.ChangeHealth(-rangeWeaponHandler.Power);
+                
                 if (rangeWeaponHandler.IsOnKnockBack)
                 {
                     BaseController controller = collision.GetComponent<BaseController>();
@@ -91,6 +93,8 @@ public class ProjectileController : MonoBehaviour
                     }
                 }
             }
+
+            //if Penetration left dont Destroy
             if (Penetration <= 0)
             {
                 DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
@@ -105,6 +109,40 @@ public class ProjectileController : MonoBehaviour
         {
             rigidbody.velocity = -rigidbody.velocity;
             spriteRenderer.flipY = !spriteRenderer.flipY;
+        }
+    }
+
+    private void StartSlow(Collider2D collider)
+    {
+        StartCoroutine(Slowro(collider));
+    }
+
+    private IEnumerator Slowro(Collider2D collider)
+    {
+        Transform Enemy = collider.transform;
+        if (Enemy.GetComponent<StatHandler>() != null)
+        {
+            StatHandler statHandler = Enemy.GetComponent<StatHandler>();
+            statHandler.Speed = 2f;
+            yield return new WaitForSeconds(3);
+            statHandler.Speed = 3f;
+            Debug.Log("on");
+        }
+        else
+        {
+            Debug.Log("null");
+        }
+        if (Enemy.transform.childCount != 0)
+        {
+            SpriteRenderer sprite = Enemy.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            sprite.color = new Color(1f, 200 / 255f, 0f);
+            yield return new WaitForSeconds(3);
+            sprite.color = new Color(1f,1f,1f);
+            Debug.Log("on");
+        }
+        else
+        {
+            Debug.Log("null");
         }
     }
 
