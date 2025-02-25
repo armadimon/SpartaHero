@@ -33,7 +33,7 @@ public class DoorController : MonoBehaviour
         openedDoor.SetActive(true);
     }
 
-    public void CloseDoor()    // �� ��Ȱ��ȭ
+    public void CloseDoor()    // �� �� Ȱ��ȭ
     {
         closedDoor.SetActive(true);
         openedDoor.SetActive(false);

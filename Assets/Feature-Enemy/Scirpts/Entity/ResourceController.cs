@@ -7,8 +7,6 @@ public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = 0.5f;
 
-
-
     private BaseController _baseController;
     private StatHandler _statHandler;
     private AnimationHandler _animationHandler;
