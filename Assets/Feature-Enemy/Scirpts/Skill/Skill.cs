@@ -165,6 +165,7 @@ public class Skill : MonoBehaviour
         Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
         Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
         Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => Boundup(1)));
     }
 
     private void Cut()
@@ -238,6 +239,17 @@ public class Skill : MonoBehaviour
         {
             RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
             rangeWeaponHandler.BulletSize += value;
+        }
+        Time.timeScale = 1f;
+        Parent.gameObject.SetActive(false);
+    }
+    private void Boundup(int value)
+    {
+        //handlers.Add(FindAnyObjectByType<WeaponHandler>());
+        if (handlers[0] is RangeWeaponHandler)
+        {
+            RangeWeaponHandler rangeWeaponHandler = (RangeWeaponHandler)handlers[0];
+            rangeWeaponHandler.BoundCountt += value;
         }
         Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
