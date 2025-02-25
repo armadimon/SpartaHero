@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scirpts.Weapon;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MeleeWeaponHandler : WeaponHandler, IAttack
+public class MeleeWeaponHandler : WeaponHandler
 {
     [Header("Melee Attack Data")]
     
@@ -50,4 +49,6 @@ public class MeleeWeaponHandler : WeaponHandler, IAttack
         else
             transform.eulerAngles = new Vector3(0, 0, 0);
     }
+
+
 }

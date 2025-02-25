@@ -1,9 +1,8 @@
 
-using Assets.Scirpts.Weapon;
 using UnityEngine;
 
-public class WeaponHandler : MonoBehaviour, IAttack
-{
+public  class WeaponHandler : MonoBehaviour
+{ 
     [Header("Attack Info")]
     [SerializeField] private float delay = 1f;
     public float Delay { get => delay; set => delay = value; }

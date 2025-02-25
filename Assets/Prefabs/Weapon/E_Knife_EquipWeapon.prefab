@@ -57,7 +57,7 @@ MonoBehaviour:
   isOnKnockBack: 0
   knockBackPower: 0.1
   knockBackTime: 0.5
-  collideBoxSize: {x: 1, y: 1}
+  collideBoxSize: {x: 1, y: 1.5}
 --- !u!1 &6786068803299059312
 GameObject:
   m_ObjectHideFlags: 0

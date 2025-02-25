@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    UiManager uiManager;
+    WeaponHandler weaponHandler;
 
     private void Start()
     {
-        uiManager = GetComponentInChildren<UiManager>();
+        weaponHandler = GetComponentInChildren<WeaponHandler>();
     }
 
 
     public void EqWeapon() 
     {
-        uiManager.gameObject.SetActive(true);
+        weaponHandler.gameObject.SetActive(true);
     }
 }
