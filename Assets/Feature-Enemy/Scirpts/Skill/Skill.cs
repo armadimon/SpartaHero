@@ -219,6 +219,7 @@ public class Skill : MonoBehaviour
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         player.GetComponent<StatHandler>().Health += value;
+        player.GetComponent<ResourceController>().CurrentHealth += value;
         Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
