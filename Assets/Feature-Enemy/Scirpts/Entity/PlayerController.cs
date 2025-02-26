@@ -6,11 +6,12 @@ public class PlayerController : BaseController
 {
     private Camera _camera;
     private GameManager _gameManager;
-
+    
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;
         _camera = Camera.main;
+        DontDestroyOnLoad(this.gameObject);
     }
     
     protected override void HandleAction()

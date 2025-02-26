@@ -41,30 +41,23 @@ public class Skill : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(transform.childCount + " child count");
         for (int i = 0; i < transform.childCount; i++)
         {
             Buttons.Add(transform.GetChild(i).GetComponent<Button>());
             Images.Add(Buttons[i].transform.GetChild(0).GetComponent<Image>());
             Skillname.Add(Buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>());
             SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
-
         }
-
+        player = FindObjectOfType<PlayerController>().transform;
         WeaponPivot = player.GetChild(1);
+               
+        Debug.Log( WeaponPivot.name + "WeaponPivot.name");
         for (int i = 0;i < WeaponPivot.childCount;i++)
         {
             handlers.Add(WeaponPivot.GetChild(i).GetComponent<WeaponHandler>());
         }
-
-
         SkillCreate();
-
-
-
-    }
-    void Start()
-    {
-
         //player = FindAnyObjectByType<Player>();
 
         SkipBut.onClick.AddListener(Skip);
@@ -97,10 +90,27 @@ public class Skill : MonoBehaviour
 
 
         //������ �ʿ���
-        bool IsRange = WeaponPivot.GetChild(0).GetComponent<RangeWeaponHandler>() != null;
-        bool IsMelee = WeaponPivot.GetChild(0).GetComponent<MeleeWeaponHandler>() != null;
+        bool IsRange = false;
+        bool IsMelee = false;
+        if (WeaponPivot != null && WeaponPivot.childCount > 0)
+        {
+            Transform firstChild = WeaponPivot.GetChild(0);
+            if (firstChild != null)
+            {
+                IsRange = firstChild.GetComponent<RangeWeaponHandler>() != null;
+                IsMelee = firstChild.GetComponent<MeleeWeaponHandler>() != null;
 
-
+                // IsRange 및 IsMelee 사용
+            }
+            else
+            {
+                Debug.LogError("WeaponPivot의 첫 번째 자식이 null입니다.");
+            }
+        }
+        else
+        {
+            Debug.LogError("WeaponPivot이 null이거나 자식이 없습니다.");
+        }
         foreach (SkillSet skill in Skills)
         {
             //���ο��� �ľ�

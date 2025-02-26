@@ -39,7 +39,7 @@ public class ProjectileController : MonoBehaviour
         nowTargetLayer = rangeWeaponHandler.target.value;
         skillHandler.boundcount = rangeWeaponHandler.BoundCountt;
         skillHandler.Penetration = rangeWeaponHandler.Penetration;
-
+        projectileManager = FindObjectOfType<ProjectileManager>();
         rangeWeaponHandler.Debuff.Add(skillHandler.IsSlow);
     }
 

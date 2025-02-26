@@ -53,7 +53,6 @@ public class ResourceController : MonoBehaviour
         CurrentHealth += change;
         CurrentHealth = CurrentHealth > MaxHealth ? MaxHealth : CurrentHealth;
         CurrentHealth = CurrentHealth < 0 ? 0 : CurrentHealth;
-        Debug.Log(CurrentHealth);
         if (change < 0)
         {
             _animationHandler.Damage();

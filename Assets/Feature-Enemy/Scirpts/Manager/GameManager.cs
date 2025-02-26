@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private EnemyManager enemyManager;
     private StageManager stageManager;
     private UiManager uiManager;
+    private GameDataManager gameDataManager;
 
 
     private void Awake()
@@ -42,8 +43,7 @@ public class GameManager : MonoBehaviour
 
         uiManager = GetComponentInChildren<UiManager>();
         uiManager.Init(this);
-
-        // DontDestroyOnLoad(this);
+        
     }
 
 

@@ -137,7 +137,8 @@ public class EnemyManager : MonoBehaviour
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
         activeEnemies.Remove(enemy);
-        
+        StatHandler enemyStat = enemy.GetComponent<StatHandler>();
+        GameDataManager.Instance.AddGold(enemyStat.Gold);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
     }
