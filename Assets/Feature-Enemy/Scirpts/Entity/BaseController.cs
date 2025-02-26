@@ -28,7 +28,7 @@ public class BaseController : MonoBehaviour
     protected WeaponHandler weaponHandler;
 
     protected bool isAttacking;
-    protected float timeSinceLastAttack = float.MaxValue;
+    private float timeSinceLastAttack = float.MaxValue;
     
     protected void Awake()
     {
@@ -50,8 +50,8 @@ public class BaseController : MonoBehaviour
         HandleAction();
         Rotate(lookDirection);
         HandleAttackDelay();
+
     }
-    
     protected virtual void Start()
     {
         
