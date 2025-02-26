@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : BaseController
@@ -7,12 +8,19 @@ public class PlayerController : BaseController
     private Camera _camera;
     private GameManager _gameManager;
 
+    [SerializeField] private GameObject restWeapon;
+    [SerializeField] private GameObject pivot;
+
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;
         _camera = Camera.main;
     }
-    
+
+    protected override void Start()
+    {
+    }
+
     protected override void HandleAction()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -45,31 +53,29 @@ public class PlayerController : BaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (weaponHandler != null)
+        {
+            Destroy(weaponHandler.gameObject);
+        }
+
+
         if (collision.tag == "BowBtn")
         {
-            weaponHandler = null;
-            WeaponPrefab = null;
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
         else if (collision.tag == "SwordBtn")
         {
-            weaponHandler = null;
-            WeaponPrefab = null;
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Sword_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
         else if (collision.tag == "SpearBtn")
         {
-            weaponHandler = null;
-            WeaponPrefab = null;
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Spear_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
         else if (collision.tag == "StaffBtn")
         {
-            weaponHandler = null;
-            WeaponPrefab = null;
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Staff_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
