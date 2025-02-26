@@ -9,11 +9,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
     [SerializeField] private static int Difficulty = 0;
-
-    public int[] NeedExp = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-    public int CurrentExp;
-    public int Level = 0;
-
+    
     public PlayerController player { get; private set; }
     private ResourceController _playerResourceController;
 
@@ -21,7 +17,9 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
-    private UiManager uiManager;
+    public UIManager uiManager;
+    private GameDataManager gameDataManager;
+
 
 
     private void Awake()
@@ -36,22 +34,21 @@ public class GameManager : MonoBehaviour
         player.Init(this);
 
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this);
+        if (enemyManager != null)
+            enemyManager.Init(this);
 
         stageManager = GetComponentInChildren<StageManager>();
-        stageManager.Init(this);
+        if (stageManager != null)
+            stageManager.Init(this);
 
-        uiManager = GetComponentInChildren<UiManager>();
-        uiManager.Init(this);
-
-        // DontDestroyOnLoad(this);
+        uiManager = GetComponentInChildren<UIManager>();
     }
 
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "MainLobbyScene")  return;
-        StartGame();
+        if (enemyManager != null)
+            StartGame();
     }
 
     public void StartGame()
@@ -62,7 +59,6 @@ public class GameManager : MonoBehaviour
     void StartNextWave()
     {
         Difficulty++;
-        Debug.Log("diff " + Difficulty);
         Stage stageLevel = stageManager.SetStageLevel(Difficulty);
 
         enemyManager.StartWave(stageLevel);
@@ -81,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void SkillSelectActive()
     {
-        uiManager.setActve();
+        UIManager.Instance.ShowPanel("SkillSelectActive");
         Time.timeScale = 0f;
     }
 

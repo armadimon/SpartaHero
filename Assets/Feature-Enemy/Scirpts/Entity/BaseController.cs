@@ -39,7 +39,6 @@ public class BaseController : MonoBehaviour
         if (WeaponPrefab != null)
         {
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-
         }
         else
             weaponHandler = GetComponentInChildren<WeaponHandler>();

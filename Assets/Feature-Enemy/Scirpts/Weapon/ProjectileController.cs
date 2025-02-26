@@ -39,7 +39,7 @@ public class ProjectileController : MonoBehaviour
         nowTargetLayer = rangeWeaponHandler.target.value;
         skillHandler.boundcount = rangeWeaponHandler.BoundCountt;
         skillHandler.Penetration = rangeWeaponHandler.Penetration;
-
+        projectileManager = FindObjectOfType<ProjectileManager>();
         rangeWeaponHandler.Debuff.Add(skillHandler.IsSlow);
     }
 
@@ -67,6 +67,7 @@ public class ProjectileController : MonoBehaviour
         {
             if (skillHandler.boundcount > 0)
             {
+     
                 //if Arrow hit the wall then Bounce
                 skillHandler.isFirst = false;
                 skillHandler.Bounding(rigidbody,spriteRenderer);

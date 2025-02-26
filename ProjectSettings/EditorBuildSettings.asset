@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/SH_Scene/MainLobbyScene1.unity
     guid: c0f7ce4a606709a47815227a4fcfe822
   - enabled: 1
+    path: Assets/SH_Scene/TestScene.unity
+    guid: ae1a7226182c35441af120e6f90823c1
+  - enabled: 1
     path: Assets/Feature-Enemy/Scenes/StageScene.unity
     guid: 4832833695ae08e4090357097a44ed75
   m_configObjects: {}

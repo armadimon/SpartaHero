@@ -8,10 +8,11 @@ public class StageManager : MonoBehaviour
 {
     GameManager gameManager;
     DoorController doorController;
+    public PlayerController player { get; private set; }
 
     private bool isClear = false;       // temp?
 
-    List<Stage> stages = new List<Stage>() {    // ½ºÅ×ÀÌÁö ¸®½ºÆ® »ı¼º (1 ~ 10)
+    List<Stage> stages = new List<Stage>() {    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ (1 ~ 10)
         new Stage(1, 100, 100, 1, 3),
         new Stage(2, 100, 100, 2, 4),
         new Stage(3, 100, 100, 3, 5),
@@ -29,12 +30,15 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         doorController = FindObjectOfType<DoorController>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
 
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
+        player = FindObjectOfType<PlayerController>();
+        player.transform.position = Vector2.zero;
     }
 
 
@@ -44,25 +48,40 @@ public class StageManager : MonoBehaviour
             Debug.Log("DoorHandler null");
         else
             doorController.CloseDoor();
+        
     }
 
 
-    public Stage SetStageLevel(int diff)    // °ÔÀÓ ½ÃÀÛ Àü ½ºÅ×ÀÌÁö ·¹º§ ¼¼ÆÃ
+    public Stage SetStageLevel(int diff)    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         return stages[diff - 1];
     }
 
 
-    public void StageClear(int diff)        // ½ºÅ×ÀÌÁö Å¬¸®¾î ½Ã
+    public void StageClear(int diff)        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     {
         isClear = true;
+        if(GameManager.Instance.uiManager.BossUi.gameObject.activeSelf == true)
+        {
+            GameManager.Instance.uiManager.BossUi.gameObject.SetActive(false);
+        }
+
         doorController.OpenDoor();
-        //player.gold += stageClearGold;    // ÇÃ·¹ÀÌ¾î¿¡°Ô Å¬¸®¾î °ñµå Áö±Ş
-        //player.exp += stageClearExp;      // ÇÃ·¹ÀÌ¾î¿¡°Ô Å¬¸®¾î °æÇèÄ¡ Áö±Ş
+        //player.gold += stageClearGold;    // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //player.exp += stageClearExp;      // ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        player.transform.position = Vector2.zero;
+    }
 
-    public void NextStage()     // ¾À Àç·Îµå
+    private void OnDestroy()
+    {
+        // ì´ë²¤íŠ¸ í•´ì œ
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    public void NextStage()     // ï¿½ï¿½ ï¿½ï¿½Îµï¿½
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

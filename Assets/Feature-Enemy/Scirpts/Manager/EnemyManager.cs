@@ -30,10 +30,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 1f;
 
     GameManager gameManager;
+    PlayerController player;
 
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
+        player = FindObjectOfType<PlayerController>();
+        if (player == null)
+        {
+            Debug.LogError("No player found");
+        }
     }
     public void StartWave(Stage stage)
     {
@@ -55,6 +61,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             StartBossStage();
+            GameManager.Instance.uiManager.BossUIActive();
         }
     }
 
@@ -116,6 +123,13 @@ public class EnemyManager : MonoBehaviour
         // 적 생성 및 리스트에 추가
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
+
+        GameObject Healthbar = Instantiate(GameManager.Instance.uiManager.Prefabs[0]);
+        Healthbar.transform.SetParent(spawnedEnemy.transform, false);
+
+        Follow Health = Healthbar.GetComponentInChildren<Follow>();
+        Health.SetTarget(spawnedEnemy.transform);
+
         enemyController.Init(this, gameManager.player.transform);
         activeEnemies.Add(enemyController);
     }
@@ -137,10 +151,16 @@ public class EnemyManager : MonoBehaviour
     public void RemoveEnemyOnDeath(EnemyController enemy)
     {
         activeEnemies.Remove(enemy);
+        StatHandler enemyStat = enemy.GetComponent<StatHandler>();
+        StatHandler playerStat = player.gameObject.GetComponent<StatHandler>();
+        ResourceController playerResource = player.GetComponent<ResourceController>();
         
+        playerResource.GetExp(enemyStat.Exp);
+        GameDataManager.Instance.AddGold(enemyStat.Gold);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
     }
+    
     
     public void RemoveBossOnDeath(BossController boss)
     {

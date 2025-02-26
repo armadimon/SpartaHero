@@ -407,7 +407,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   exp: 10
+  level: 1
+  requiredExp: 100
   speed: 3
+  gold: 5
 --- !u!114 &8427438608088754302
 MonoBehaviour:
   m_ObjectHideFlags: 0

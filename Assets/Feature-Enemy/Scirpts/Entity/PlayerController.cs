@@ -8,19 +8,24 @@ public class PlayerController : BaseController
     private Camera _camera;
     private GameManager _gameManager;
 
-    [SerializeField] private GameObject restWeapon;
-    [SerializeField] private GameObject pivot;
+
+    private Follow follow;
+
 
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;
         _camera = Camera.main;
-    }
 
-    protected override void Start()
-    {
-    }
+        DontDestroyOnLoad(this.gameObject);
 
+        for (int i = 0; i < transform.GetChild(3).transform.childCount; i++)
+        {
+            follow = transform.GetChild(3).transform.GetChild(i).GetComponent<Follow>();
+            follow.SetTarget(transform);
+        }
+
+    }
     protected override void HandleAction()
     {
         float horizontal = Input.GetAxis("Horizontal");
