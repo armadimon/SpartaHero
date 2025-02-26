@@ -265,6 +265,10 @@ MonoBehaviour:
   - {fileID: 3030543911287065252, guid: fff38dfaf55bdc24999e77f3af0c1ffa, type: 3}
   BossPrefabs:
   - {fileID: 218478205502235027, guid: b766ca056ed45c944b2f758406ffc015, type: 3}
+  PosionPrefabs:
+  - {fileID: 4601859610457091581, guid: bae5cd00ac7422d4aa39947d550b534c, type: 3}
+  - {fileID: 5190092082001133901, guid: 43c3ff4d5654f0740acd1d6eb0d2a28b, type: 3}
+  - {fileID: 2276678977861636417, guid: 35f28a6f5fe133d498d1f3b525b3eb7d, type: 3}
   spawnAreas:
   - serializedVersion: 2
     x: -7.5
@@ -1326,7 +1330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   exp: 10
-  speed: 6.7
+  speed: 3
 --- !u!114 &418362743
 MonoBehaviour:
   m_ObjectHideFlags: 0
