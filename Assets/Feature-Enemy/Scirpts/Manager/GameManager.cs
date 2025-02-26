@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
-    private UiManager uiManager;
+    private UIManager uiManager;
     private GameDataManager gameDataManager;
 
 
@@ -36,20 +36,21 @@ public class GameManager : MonoBehaviour
         player.Init(this);
 
         enemyManager = GetComponentInChildren<EnemyManager>();
-        enemyManager.Init(this);
+        if (enemyManager != null)
+            enemyManager.Init(this);
 
         stageManager = GetComponentInChildren<StageManager>();
-        stageManager.Init(this);
+        if (stageManager != null)
+            stageManager.Init(this);
 
-        uiManager = GetComponentInChildren<UiManager>();
-        uiManager.Init(this);
-        
+        uiManager = GetComponentInChildren<UIManager>();
     }
 
 
     private void Start()
     {
-        StartGame();
+        if (enemyManager != null)
+            StartGame();
     }
 
     public void StartGame()
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     public void SkillSelectActive()
     {
-        uiManager.setActve();
+        UIManager.Instance.ShowPanel("SkillSelectActive");
         Time.timeScale = 0f;
     }
 

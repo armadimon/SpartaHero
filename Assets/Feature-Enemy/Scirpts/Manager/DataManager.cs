@@ -35,10 +35,11 @@ public class GameDataManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(key))
         {
+            Debug.Log(PlayerPrefs.GetString(key));
             string json = PlayerPrefs.GetString(key);
             return JsonConvert.DeserializeObject<T>(json);
         }
-
+        Debug.Log("check");
         return defaultValue;
     }
 
@@ -51,9 +52,14 @@ public class GameDataManager : MonoBehaviour
     public void AddGold(int amount)
     {
         totalGold += amount;
-        SaveGameData("TotalGold", totalGold);
+        SaveGameData("Gold", totalGold);
     }
 
+    public int GetGold()
+    {
+        return totalGold;
+    }
+    
     public void AddAchievement(string achievement)
     {
         if (!achievements.Contains(achievement))
