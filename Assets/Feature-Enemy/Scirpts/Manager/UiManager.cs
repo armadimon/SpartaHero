@@ -7,7 +7,8 @@ public class UiManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private GameObject GameObject;
+    [SerializeField]
+    private GameObject GameObject;
 
 
     public static UiManager Instance;

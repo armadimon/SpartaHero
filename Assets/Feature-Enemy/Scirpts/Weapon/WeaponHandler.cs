@@ -1,5 +1,12 @@
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+public enum ActiveSkill
+{
+    Parrying
+}
 
 public class WeaponHandler : MonoBehaviour
 {
@@ -43,6 +50,7 @@ public class WeaponHandler : MonoBehaviour
     
     private Animator animator;
     private SpriteRenderer weaponRenderer;
+    public Dictionary<ActiveSkill, bool> ActiveSkills { get; set; }
 
     protected void Awake()
     {
@@ -52,6 +60,7 @@ public class WeaponHandler : MonoBehaviour
 
         animator.speed = 1.0f / delay;
         transform.localScale = Vector3.one * weaponSize;
+        ActiveSkills = new Dictionary<ActiveSkill, bool>();
     }
 
     protected virtual void Start()

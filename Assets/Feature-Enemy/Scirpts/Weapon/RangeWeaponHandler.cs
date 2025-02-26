@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RangeWeaponHandler : WeaponHandler
@@ -26,9 +27,15 @@ public class RangeWeaponHandler : WeaponHandler
 
     [SerializeField] private int BoundCount = 100;
     public int BoundCountt { get => BoundCount; set => BoundCount = value; }
-    
+
+    [SerializeField] private int penetration = 1;
+    public int Penetration { get => penetration; set => penetration = value; }
+
     [SerializeField] private Color projectileColor;
     public Color ProjectileColor { get => projectileColor; }
+
+    [SerializeField] List<bool> Debuffe =new List<bool>();
+    public List<bool> Debuff { get => Debuffe; set => Debuffe = value; }
     
     private ProjectileManager projectileManager;
     

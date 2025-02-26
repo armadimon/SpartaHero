@@ -68,7 +68,6 @@ public class BossController : BaseController
 
             if (distance < weaponHandler.AttackRange)
             {
-                Debug.Log("check");
                 // layerMask를 통한 충돌 구분
                 int layerMaskTarget = weaponHandler.target;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction,
