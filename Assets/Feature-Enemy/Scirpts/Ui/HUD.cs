@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
 {
     public enum Uitype { EXP, HealthBar, BossHealthBar}
     public Uitype uitype;
+    PlayerController player;
+    StatHandler playerStatHandler;
 
     private Slider Slider;
 
@@ -16,6 +18,8 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         Slider = GetComponent<Slider>();
+        player = FindObjectOfType<PlayerController>();
+        playerStatHandler = player.GetComponent<StatHandler>();
     }
 
     private void LateUpdate()
@@ -47,9 +51,9 @@ public class HUD : MonoBehaviour
                 Slider.fillRect.gameObject.SetActive(Slider.value > 0);
                 break;
             case Uitype.EXP:
-                int level = GameManager.Instance.Level;
-                float MaxExp = GameManager.Instance.NeedExp[level];
-                float current = GameManager.Instance.CurrentExp;
+                int level = playerStatHandler.Level;
+                float MaxExp = playerStatHandler.RequiredExp;
+                float current = playerStatHandler.Exp;
 
 
                 if( current >= MaxExp)
@@ -59,11 +63,6 @@ public class HUD : MonoBehaviour
                 Slider.value = current / MaxExp;
                 Slider.fillRect.gameObject.SetActive(Slider.value > 0);
                 break;
-                
-
-
         }
-
     }
-
 }

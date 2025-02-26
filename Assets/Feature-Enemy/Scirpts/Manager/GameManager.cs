@@ -8,11 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
     [SerializeField] private static int Difficulty = 0;
-
-    public float[] NeedExp = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-    public float CurrentExp;
-    public int Level = 0;
-
+    
     public PlayerController player { get; private set; }
     private ResourceController _playerResourceController;
 
@@ -62,7 +58,6 @@ public class GameManager : MonoBehaviour
     void StartNextWave()
     {
         Difficulty++;
-        Debug.Log("diff " + Difficulty);
         Stage stageLevel = stageManager.SetStageLevel(Difficulty);
 
         enemyManager.StartWave(stageLevel);
@@ -82,7 +77,6 @@ public class GameManager : MonoBehaviour
     public void SkillSelectActive()
     {
         UIManager.Instance.ShowPanel("SkillSelectActive");
-
         Time.timeScale = 0f;
     }
 

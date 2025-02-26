@@ -27,7 +27,7 @@ public class StatHandler : MonoBehaviour
             Debug.Log("Current Level: " + level);
         }
     }
-
+    
     public int RequiredExp
     {
         get => requiredExp;
@@ -54,7 +54,9 @@ public class StatHandler : MonoBehaviour
         exp -= requiredExp;
         Level++;
 
-        requiredExp = level * 10; 
+        GameManager.Instance.SkillSelectActive();
+        requiredExp = level * requiredExp;
+        Debug.Log("New Level: " + level + ", Exp: " + requiredExp);
     }
 
 

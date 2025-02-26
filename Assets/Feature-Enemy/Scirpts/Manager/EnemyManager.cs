@@ -30,10 +30,16 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 1f;
 
     GameManager gameManager;
+    PlayerController player;
 
     public void Init(GameManager gameManager)
     {
         this.gameManager = gameManager;
+        player = FindObjectOfType<PlayerController>();
+        if (player == null)
+        {
+            Debug.LogError("No player found");
+        }
     }
     public void StartWave(Stage stage)
     {
@@ -146,10 +152,15 @@ public class EnemyManager : MonoBehaviour
     {
         activeEnemies.Remove(enemy);
         StatHandler enemyStat = enemy.GetComponent<StatHandler>();
+        StatHandler playerStat = player.gameObject.GetComponent<StatHandler>();
+        ResourceController playerResource = player.GetComponent<ResourceController>();
+        
+        playerResource.GetExp(enemyStat.Exp);
         GameDataManager.Instance.AddGold(enemyStat.Gold);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();
     }
+    
     
     public void RemoveBossOnDeath(BossController boss)
     {
