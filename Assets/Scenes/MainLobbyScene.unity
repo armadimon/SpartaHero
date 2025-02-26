@@ -64634,7 +64634,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SKillSelect: {fileID: 0}
   BossUi: {fileID: 0}
-  Prefabs: []
+  Prefabs:
+  - {fileID: 6438689238548588318, guid: 154a86292f9303145806d2cbf8b1dccf, type: 3}
 --- !u!4 &1183165918
 Transform:
   m_ObjectHideFlags: 0
@@ -71053,7 +71054,7 @@ SceneRoots:
   - {fileID: 999099924}
   - {fileID: 862125041}
   - {fileID: 1748663671}
-  - {fileID: 1183165918}
   - {fileID: 226687296}
   - {fileID: 1654706849}
   - {fileID: 639760322}
+  - {fileID: 1183165918}
