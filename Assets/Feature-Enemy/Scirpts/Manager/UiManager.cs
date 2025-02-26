@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
     public GameObject BossUi;
     public GameObject[] Prefabs;
 
-    public static UiManager Instance;
     GameManager gameManager;
 
 

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
-    private UIManager uiManager;
+    public UIManager uiManager;
     private GameDataManager gameDataManager;
 
 
