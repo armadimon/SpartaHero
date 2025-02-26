@@ -13,8 +13,11 @@ public class PlayerController : BaseController
     {
         _gameManager = gameManager;
         _camera = Camera.main;
-        follow = transform.GetChild(3).transform.GetChild(0).GetComponent<Follow>();
-        follow.SetTarget(transform);
+        for (int i = 0; i < transform.GetChild(3).transform.childCount; i++)
+        {
+            follow = transform.GetChild(3).transform.GetChild(i).GetComponent<Follow>();
+            follow.SetTarget(transform);
+        }
     }
     protected override void HandleAction()
     {

@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
     [SerializeField] private static int Difficulty = 0;
 
-    public int[] NeedExp = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
-    public int CurrentExp;
+    public float[] NeedExp = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+    public float CurrentExp;
     public int Level = 0;
 
     public PlayerController player { get; private set; }

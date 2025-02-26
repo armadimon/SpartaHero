@@ -28,6 +28,21 @@ public class HUD : MonoBehaviour
                 float CurrentHp = GetComponentInParent<ResourceController>().CurrentHealth;
                 Slider.value = CurrentHp/MaxHP;
                 break;
+            case Uitype.EXP:
+                int level = GameManager.Instance.Level;
+                float MaxExp = GameManager.Instance.NeedExp[level];
+                float current = GameManager.Instance.CurrentExp;
+
+
+                if( current >= MaxExp)
+                {
+                    current -= MaxExp;
+                }
+                Slider.value = current / MaxExp;
+                Slider.fillRect.gameObject.SetActive(Slider.value > 0);
+                break;
+                
+
 
         }
 
