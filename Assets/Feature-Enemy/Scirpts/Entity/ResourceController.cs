@@ -72,8 +72,9 @@ public class ResourceController : MonoBehaviour
 
         GameManager.Instance.CurrentExp += _statHandler.Exp;
 
-        if(GameManager.Instance.CurrentExp > GameManager.Instance.NeedExp[inde])
+        if(GameManager.Instance.CurrentExp >= GameManager.Instance.NeedExp[inde])
         {
+            GameManager.Instance.CurrentExp -= GameManager.Instance.NeedExp[inde];
             GameManager.Instance.Level++;
             GameManager.Instance.SkillSelectActive();
 

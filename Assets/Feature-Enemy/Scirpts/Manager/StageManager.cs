@@ -61,6 +61,11 @@ public class StageManager : MonoBehaviour
     public void StageClear(int diff)        // �������� Ŭ���� ��
     {
         isClear = true;
+        if(GameManager.Instance.uiManager.BossUi.gameObject.activeSelf == true)
+        {
+            GameManager.Instance.uiManager.BossUi.gameObject.SetActive(false);
+        }
+
         doorController.OpenDoor();
         //player.gold += stageClearGold;    // �÷��̾�� Ŭ���� ��� ����
         //player.exp += stageClearExp;      // �÷��̾�� Ŭ���� ����ġ ����

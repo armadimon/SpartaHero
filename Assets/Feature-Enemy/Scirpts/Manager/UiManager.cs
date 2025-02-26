@@ -6,9 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+
     public static UIManager Instance { get; private set; }
     
     private Dictionary<string, GameObject> uiPanels = new Dictionary<string, GameObject>();
+
+    // Start is called before the first frame update
+
+    [SerializeField] private GameObject SKillSelect;
+    public GameObject BossUi;
+    public GameObject[] Prefabs;
+
+    public static UiManager Instance;
+    GameManager gameManager;
+
+
 
     private void Awake()
     {
@@ -30,6 +42,7 @@ public class UIManager : MonoBehaviour
             uiPanels.Add(name, panel);
         }
     }
+
 
     public void ShowPanel(string name)
     {
@@ -66,6 +79,12 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         uiPanels.Clear();
+    }
+
+    public void BossUIActive()
+    {
+        BossUi.gameObject.SetActive(true);
+
     }
 }
 

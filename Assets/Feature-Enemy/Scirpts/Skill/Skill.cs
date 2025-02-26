@@ -49,7 +49,9 @@ public class Skill : MonoBehaviour
             Skillname.Add(Buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>());
             SKilldescrt.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
         }
+
         player = FindObjectOfType<PlayerController>().transform;
+
         WeaponPivot = player.GetChild(1);
                
         Debug.Log( WeaponPivot.name + "WeaponPivot.name");
@@ -167,17 +169,21 @@ public class Skill : MonoBehaviour
 
     private void SkillCreate()
     {
-        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], () => HealthUp(50)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "SpeedUp", images[0], () => SpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], () => AttackSpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], () => AttackRangeUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Boundup", images[0], () => Boundup(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration", images[0], () => Penetration(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Slow", images[0], Slow));
+
+        
+        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "HP 50 UP", images[0], () => HealthUp(50)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "Attack Power 3 UP", images[0], () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "Speed 3 UP", images[0], () => SpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeed 3 UP", images[0], () => AttackSpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRange 3 UP", images[0], () => AttackRangeUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelay  0.2 Down", images[0], () => AttackDelayDown(0.2f)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCount 1 UP", images[0], () => AttackCountUp(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSize 1 UP", images[0], () => BulletSizeup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Bound Count 1 UP", images[0], () => Boundup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration 1 UP", images[0], () => Penetration(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Shoot a slowing arrow", images[0], Slow));
         Skills.Add(new SkillSet(SkillType.Melee, 0, "Parrying", "Parrying", images[0], () => Parrying()));
+
 
     }
 
