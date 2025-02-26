@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    private EnemyManager enemyManager;
+    private PlayerController player;
     private ItemController itemController;
     private Transform target;
-    ResourceController resourceController;
-    WeaponHandler weaponHandler;
-    StatHandler statHandler;
+
+    ItemManager itemManager;
 
     public void Init(ItemController itemController, Transform target)
     {
@@ -21,61 +21,60 @@ public class ItemController : MonoBehaviour
 
     private void Start()
     {
-        resourceController = gameObject.GetComponent<ResourceController>();
-        weaponHandler = gameObject.GetComponent<WeaponHandler>();
-        statHandler = gameObject.GetComponent<StatHandler>();
+        player = FindObjectOfType<PlayerController>();
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(GameObject.FindObjectOfType<PlayerController>())
-            Destroy(gameObject);
+        if (player)
+            gameObject.SetActive(false);
+
 
         string Name = this.gameObject.name;
 
             switch (Name)
             {
                 case "HealingPotion(Clone)":
-                    UseheaHealingPotion();
-                    break;
+                    HealingPotion();
+                break;
                 case "PowerUpPotion(Clone)":
-                    UsePowerUpPotion();
-                    break;
+                    Debug.Log("공격력 증가");
+                    player.GetComponentInChildren<WeaponHandler>().Speed += 3f;
+                    Invoke("PowerUpPotion", 3); // 3초 후 시작
+
+                break;
                 case "SpeedpPotion(Clone)":
-                    UseSpeedPotion();
+                    Debug.Log("속도 증가");
+                    player.GetComponent<StatHandler>().Speed += 3f;
+                    Invoke("SpeedPotion",3); // 3초 후 시작
                 break;
                 default:
                     break;
             }
-    }
 
-    private void UseheaHealingPotion()
+
+    }
+    private void HealingPotion()
     {
         Debug.Log("체력 회복");
-        statHandler.Health += 2;
+        player.GetComponent<StatHandler>().Health += 5;
+        Destroy(gameObject);
     }
 
-    private IEnumerator UsePowerUpPotion()
+    private void PowerUpPotion()
     {
-        Debug.Log("공격력 증가");
-        float Power = weaponHandler.AttackRange;
-        weaponHandler.Power += 10f;
-        Debug.Log($"변경 공격력 : {weaponHandler.AttackRange}");
-        yield return new WaitForSecondsRealtime(3f); // 3초 대기
-        weaponHandler.Power = Power;
-        Debug.Log($"초기화 공격력 : {weaponHandler.AttackRange}");
+        Debug.Log("공격력 감소");
+        player.GetComponentInChildren<WeaponHandler>().Speed -= 3f;
+        Destroy(gameObject);
     }
-    private IEnumerator UseSpeedPotion()
+    private void SpeedPotion()
     {
-        Debug.Log("속도 증가");
-        float speed = statHandler.Speed;
-        statHandler.Speed += 10f;
-        Debug.Log($"변경 속도 : {statHandler.Speed}");
-        yield return new WaitForSecondsRealtime(3f); // 3초 대기
-        statHandler.Speed = speed;
-        Debug.Log($"초기화 공격력 : {statHandler.Speed}");
+        Debug.Log("속도 감소");
+        player.GetComponent<StatHandler>().Speed -= 3f;
+        Destroy(gameObject);
     }
+
 
 
 }

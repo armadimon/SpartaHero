@@ -4,42 +4,33 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    //[SerializeField]
-    //public List<GameObject> PosionPrefabs; // 생성할 아이템 프리팹 리스트
 
-    //[SerializeField]
-    //public List<ItemController> activePosion = new List<ItemController>(); // 현재 활성화된 아이템들
+    private PlayerController player;
 
-    //public EnemyManager enemyManager;
-    //public EnemyController enemyController;
-    //public ResourceController resourceController;
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+    public void UseHealingPotion()
+    {
+        Debug.Log("체력 회복");
+        player.GetComponent<StatHandler>().Health += 5;
+    }
 
-    //GameObject spawnedPosion;
+    public IEnumerator UsePowerUpPotion()
+    {
+        Debug.Log("공격력 증가");
+        yield return new WaitForSeconds(3f); // 3초 대기
+    }
+    public IEnumerator UseSpeedPotion()
+    {
+        Debug.Log("속도 증가");
+        player.GetComponent<StatHandler>().Speed += 3f;
 
-    //public void Start()
-    //{
-    //    enemyManager = GetComponent<EnemyManager>();
-    //    enemyController = GetComponent<EnemyController>();
-    //    resourceController = GetComponent<ResourceController>();
-    //}
-    //public void Spawnitem(EnemyController enemy)
-    //{
-    //    GameObject randomPrefab = PosionPrefabs[Random.Range(0, PosionPrefabs.Count)];
-    //    //죽은 적 위치 확인
-    //    Vector3 enemyDeathPosition = enemy.transform.position;
+        yield return new WaitForSeconds(3f); // 3초 대기
 
+        Debug.Log("속도 감소");
+        player.GetComponent<StatHandler>().Speed -= 3f;
 
-
-    //    //bool Droprate = Random.Range(0, 2) == 1? false: true;
-    //    //if (Droprate)
-
-    //    //아이템 생성   
-    //    GameObject spawnedPosion = Instantiate(randomPrefab, enemyDeathPosition, Quaternion.identity);
-    //    ItemController itemController = spawnedPosion.GetComponent<ItemController>();
-    //    itemController.Init(this);
-    //    activePosion.Add(itemController);
-    //}
-
-
-
+    }
 }

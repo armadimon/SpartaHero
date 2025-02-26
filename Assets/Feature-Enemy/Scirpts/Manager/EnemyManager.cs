@@ -182,12 +182,11 @@ public class EnemyManager : MonoBehaviour
     public void SpawnRandomItem(EnemyController enemy)
     {
         GameObject randomPrefab = PosionPrefabs[Random.Range(0, PosionPrefabs.Count)];
-        //죽은 적 위치 확인
         Vector3 enemyDeathPosition = enemy.transform.position;
 
 
         //랜덤 생성
-        bool Droprate = Random.Range(0, 1) == 1? false: true;
+        bool Droprate = Random.Range(0, 100) > 30? false: true;
         if (Droprate)
         {
             //아이템 생성   
