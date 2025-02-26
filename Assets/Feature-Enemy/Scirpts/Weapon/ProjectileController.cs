@@ -20,9 +20,9 @@ public class ProjectileController : MonoBehaviour
     ProjectileManager projectileManager;
     private Vector2 reflectionVelocity;
     public bool fxOnDestroy = true;
-    public int boundcount;
 
-    bool isFirst = true;
+    //Weapon Variable
+    SkillHandler skillHandler;
 
     private void Awake()
     {
@@ -30,13 +30,17 @@ public class ProjectileController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         pivot = transform.GetChild(0);
         rangeWeaponHandler = GetComponentInParent<RangeWeaponHandler>();
+        skillHandler = GetComponent<SkillHandler>();
 
     }
 
     private void Start()
     {
-        boundcount = rangeWeaponHandler.BoundCountt;
         nowTargetLayer = rangeWeaponHandler.target.value;
+        skillHandler.boundcount = rangeWeaponHandler.BoundCountt;
+        skillHandler.Penetration = rangeWeaponHandler.Penetration;
+
+        rangeWeaponHandler.Debuff.Add(skillHandler.IsSlow);
     }
 
     private void Update()
@@ -51,7 +55,7 @@ public class ProjectileController : MonoBehaviour
             DestroyProjectile(transform.position, false);
         }
 
-        if (isFirst)
+        if (skillHandler.isFirst)
             rigidbody.velocity = direction * rangeWeaponHandler.Speed;
 
 
@@ -59,31 +63,33 @@ public class ProjectileController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
         if (levelCollisionLayer.value == (levelCollisionLayer.value | (1 << collision.gameObject.layer)))
         {
-
-            if (boundcount > 0)
+            if (skillHandler.boundcount > 0)
             {
-                isFirst = false;
-                Bounding();
-                boundcount--;
+                //if Arrow hit the wall then Bounce
+                skillHandler.isFirst = false;
+                skillHandler.Bounding(rigidbody,spriteRenderer);
+                skillHandler.boundcount--;
             }
             else
             {
                 DestroyProjectile(collision.ClosestPoint(transform.position) - direction * 0.2f, fxOnDestroy);
             }
-
-
         }
         else if (nowTargetLayer == (nowTargetLayer | (1 << collision.gameObject.layer)))
         {
             ResourceController resourceController = collision.GetComponent<ResourceController>();
+            if (rangeWeaponHandler.Debuff[0])
+                skillHandler.StartSlow(collision);
+
+        
+
 
             if (resourceController != null)
             {
                 resourceController.ChangeHealth(-rangeWeaponHandler.Power);
+                
                 if (rangeWeaponHandler.IsOnKnockBack)
                 {
                     BaseController controller = collision.GetComponent<BaseController>();
@@ -93,28 +99,15 @@ public class ProjectileController : MonoBehaviour
                     }
                 }
             }
-            Debug.Log($"bound{boundcount}");
 
-
-
-            DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
-
+            //if Penetration left dont Destroy
+            if (skillHandler.Penetration <= 0)
+            {
+                DestroyProjectile(collision.ClosestPoint(transform.position), fxOnDestroy);
+            }
+            skillHandler.Penetration--;
         }
     }
-
-    private void Bounding()
-    {
-
-        if (boundcount > 0 && !isFirst)
-        {
-            rigidbody.velocity = -rigidbody.velocity;
-            spriteRenderer.flipY = !spriteRenderer.flipY;
-
-        }
-
-
-    }
-
     public void Init(Vector2 direction, RangeWeaponHandler weaponHandler, ProjectileManager projectileManager)
     {
         this.projectileManager = projectileManager;
