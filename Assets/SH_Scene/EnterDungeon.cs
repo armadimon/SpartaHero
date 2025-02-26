@@ -7,6 +7,6 @@ public class EnterDungeon : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("StageScene");
     }
 }
