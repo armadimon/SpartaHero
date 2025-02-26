@@ -7,12 +7,15 @@ public class PlayerController : BaseController
     private Camera _camera;
     private GameManager _gameManager;
 
+    private Follow follow;
+
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;
         _camera = Camera.main;
+        follow = transform.GetChild(3).transform.GetChild(0).GetComponent<Follow>();
+        follow.SetTarget(transform);
     }
-    
     protected override void HandleAction()
     {
         float horizontal = Input.GetAxis("Horizontal");

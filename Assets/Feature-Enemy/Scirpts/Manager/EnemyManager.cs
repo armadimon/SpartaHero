@@ -116,6 +116,13 @@ public class EnemyManager : MonoBehaviour
         // 적 생성 및 리스트에 추가
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
+
+        GameObject Healthbar = Instantiate(GameManager.Instance.uiManager.Prefabs[0]);
+        Healthbar.transform.SetParent(spawnedEnemy.transform, false);
+
+        Follow Health = Healthbar.GetComponentInChildren<Follow>();
+        Health.SetTarget(spawnedEnemy.transform);
+
         enemyController.Init(this, gameManager.player.transform);
         activeEnemies.Add(enemyController);
     }

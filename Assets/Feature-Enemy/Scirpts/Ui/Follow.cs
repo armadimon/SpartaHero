@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    RectTransform transform;
+    RectTransform transforms;
+
+    Transform Target;
     public enum Who { Player, Enemy}
     public Who who;
     void Start()
     {
-        transform = GetComponent<RectTransform>();
+        transforms = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        switch (who)
+        if(Target != null)
         {
-            case Who.Player:
-                transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.player.transform.position + new Vector3(-0.9f, 0.6f, 0f));
-                break;
+            transforms.position  = Camera.main.WorldToScreenPoint(Target.transform.position + new Vector3(0,1f,0));
         }
     }
+
+    public void SetTarget(Transform transform)
+    {
+        Target = transform;
+    }
+
+    
 
         
 }

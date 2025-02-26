@@ -24,8 +24,8 @@ public class HUD : MonoBehaviour
         {
             case Uitype.HealthBar:
 
-                float MaxHP = GameManager.Instance.player.GetComponent<StatHandler>().Health;
-                float CurrentHp = GameManager.Instance.player.GetComponent<ResourceController>().CurrentHealth;
+                float MaxHP = GetComponentInParent<StatHandler>().Health;
+                float CurrentHp = GetComponentInParent<ResourceController>().CurrentHealth;
                 Slider.value = CurrentHp/MaxHP;
                 break;
 

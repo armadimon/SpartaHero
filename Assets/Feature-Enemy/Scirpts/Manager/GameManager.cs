@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     private StageManager stageManager;
-    private UiManager uiManager;
+    public UiManager uiManager;
 
 
     private void Awake()
