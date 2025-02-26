@@ -18,13 +18,19 @@ public class PushSwitch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
-
+        PlayerController player = collision.GetComponent<PlayerController>();
+        Debug.Log(collision.name + "1");
+        if (player != null && collision.CompareTag("Player"))
+        {
+            Debug.Log(collision.name + "2");
+            player.SwapWeapon(this.gameObject);
+        }
+        
         StartCoroutine("OperateButton");
     }
 
 
-    private IEnumerator OperateButton()     // 2ÃÊ ÈÄ ¿ø·¡ »óÅÂ·Î
+    private IEnumerator OperateButton()     // 2ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½
     {
         button.sprite = redButtonDown;
         yield return new WaitForSeconds(1f);

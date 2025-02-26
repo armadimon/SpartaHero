@@ -48,33 +48,29 @@ public class PlayerController : BaseController
         base.Death();
         _gameManager.GameOver();
     }
-
-   
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    public void SwapWeapon(GameObject btn)
     {
         if (weaponHandler != null)
         {
             Destroy(weaponHandler.gameObject);
         }
-
-
-        if (collision.tag == "BowBtn")
+        if (btn.tag == "BowBtn")
         {
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
-        else if (collision.tag == "SwordBtn")
+        else if (btn.tag == "SwordBtn")
         {
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Sword_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
-        else if (collision.tag == "SpearBtn")
+        else if (btn.tag == "SpearBtn")
         {
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Spear_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
-        else if (collision.tag == "StaffBtn")
+        else if (btn.tag == "StaffBtn")
         {
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Staff_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
