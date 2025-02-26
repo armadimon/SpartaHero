@@ -2869,6 +2869,7 @@ GameObject:
   - component: {fileID: 84802318}
   - component: {fileID: 84802320}
   - component: {fileID: 84802319}
+  - component: {fileID: 84802321}
   m_Layer: 0
   m_Name: BowButton
   m_TagString: BowBtn
@@ -2988,6 +2989,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &84802321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84802317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a61cacf0fb01bc40830f0900977da49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redButtonDown: {fileID: 21300000, guid: 0229adfa54f8ed147b084a49fed3b609, type: 3}
+  redButtonUp: {fileID: 21300000, guid: 409b71853b241684ebeefb4b7ec84a74, type: 3}
 --- !u!1 &102652256
 GameObject:
   m_ObjectHideFlags: 0
@@ -42000,6 +42015,7 @@ GameObject:
   - component: {fileID: 609604436}
   - component: {fileID: 609604438}
   - component: {fileID: 609604437}
+  - component: {fileID: 609604439}
   m_Layer: 0
   m_Name: SwordButton
   m_TagString: SwordBtn
@@ -42119,6 +42135,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &609604439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609604435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a61cacf0fb01bc40830f0900977da49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redButtonDown: {fileID: 21300000, guid: 0229adfa54f8ed147b084a49fed3b609, type: 3}
+  redButtonUp: {fileID: 21300000, guid: 409b71853b241684ebeefb4b7ec84a74, type: 3}
 --- !u!1 &657105371
 GameObject:
   m_ObjectHideFlags: 0
@@ -59065,7 +59095,7 @@ GameObject:
   - component: {fileID: 1490260632}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59124,7 +59154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 135838058}
   weaponPivot: {fileID: 2039129242}
-  WeaponPrefab: {fileID: 8628023392107540616, guid: 977c6e0aa6466ec4190446dbd689183f, type: 3}
+  WeaponPrefab: {fileID: 3717791299586459588, guid: 92b0e112d600db84eab6ba4b6de56999, type: 3}
 --- !u!61 &1490260636
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -69532,6 +69562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2130885676}
   - component: {fileID: 2130885677}
+  - component: {fileID: 2130885678}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -69548,7 +69579,7 @@ Transform:
   m_GameObject: {fileID: 2130885675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.034607, y: 18.75, z: 0.77279866}
+  m_LocalPosition: {x: -26.03461, y: 18.75, z: 0.7727987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -69606,6 +69637,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &2130885678
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130885675}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 062cafc07eced8a4887b86feffb037f0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
