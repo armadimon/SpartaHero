@@ -47,16 +47,31 @@ public class PlayerController : BaseController
     {
         if (collision.tag == "BowBtn")
         {
-            Debug.Log("활과 부딪힘");
+            weaponHandler = null;
+            WeaponPrefab = null;
             WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
         else if (collision.tag == "SwordBtn")
         {
-            Debug.Log("검과 부딪힘");
-            WeaponPrefab = Resources.Load<WeaponHandler>("E_Knife_EquipWeapon 1");
+            weaponHandler = null;
+            WeaponPrefab = null;
+            WeaponPrefab = Resources.Load<WeaponHandler>("P_Sword_EquipWeapon 1");
             weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-            
+        }
+        else if (collision.tag == "SpearBtn")
+        {
+            weaponHandler = null;
+            WeaponPrefab = null;
+            WeaponPrefab = Resources.Load<WeaponHandler>("P_Spear_EquipWeapon 1");
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+        }
+        else if (collision.tag == "StaffBtn")
+        {
+            weaponHandler = null;
+            WeaponPrefab = null;
+            WeaponPrefab = Resources.Load<WeaponHandler>("P_Staff_EquipWeapon 1");
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
         }
         else return;
     }

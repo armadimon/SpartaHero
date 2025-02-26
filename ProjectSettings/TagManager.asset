@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SwordBtn
   - BowBtn
+  - SpearBtn
+  - StaffBtn
   layers:
   - Default
   - TransparentFX
