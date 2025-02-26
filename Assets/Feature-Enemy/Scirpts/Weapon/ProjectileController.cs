@@ -65,6 +65,7 @@ public class ProjectileController : MonoBehaviour
         {
             if (skillHandler.boundcount > 0)
             {
+     
                 //if Arrow hit the wall then Bounce
                 skillHandler.isFirst = false;
                 skillHandler.Bounding(rigidbody,spriteRenderer);
