@@ -69975,7 +69975,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 3717791299586459588, guid: 92b0e112d600db84eab6ba4b6de56999, type: 3}
   Enemy: []
   targeting: {fileID: 0}
-  scanRange: 30
+  scanRange: 12
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
