@@ -55,6 +55,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             StartBossStage();
+            GameManager.Instance.uiManager.BossUIActive();
         }
     }
 

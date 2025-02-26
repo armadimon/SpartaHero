@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void SkillSelectActive()
     {
-        uiManager.setActve();
+        uiManager.SkillsetActve();
         Time.timeScale = 0f;
     }
 

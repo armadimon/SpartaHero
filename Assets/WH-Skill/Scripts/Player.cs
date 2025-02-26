@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
             level++;
             i++;
             Debug.Log($"현재 레벨{level} 현재 순번{i}");
-            UiManager.Instance.setActve();
+            UiManager.Instance.SkillsetActve();
         }
 
        

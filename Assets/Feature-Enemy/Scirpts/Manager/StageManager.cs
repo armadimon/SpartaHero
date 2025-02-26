@@ -56,6 +56,11 @@ public class StageManager : MonoBehaviour
     public void StageClear(int diff)        // 스테이지 클리어 시
     {
         isClear = true;
+        if(GameManager.Instance.uiManager.BossUi.gameObject.activeSelf == true)
+        {
+            GameManager.Instance.uiManager.BossUi.gameObject.SetActive(false);
+        }
+
         doorController.OpenDoor();
         //player.gold += stageClearGold;    // 플레이어에게 클리어 골드 지급
         //player.exp += stageClearExp;      // 플레이어에게 클리어 경험치 지급

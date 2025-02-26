@@ -7,7 +7,8 @@ public class UiManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private GameObject GameObject;
+    [SerializeField] private GameObject SKillSelect;
+    public GameObject BossUi;
     public GameObject[] Prefabs;
 
     public static UiManager Instance;
@@ -32,8 +33,12 @@ public class UiManager : MonoBehaviour
     }
 
 
-    public void setActve()
+    public void SkillsetActve()
     {
-        GameObject.gameObject.SetActive(true);
+        SKillSelect.gameObject.SetActive(true);
+    }
+    public void BossUIActive()
+    {
+        BossUi.gameObject.SetActive(true);
     }
 }
