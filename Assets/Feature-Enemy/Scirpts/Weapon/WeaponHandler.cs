@@ -52,6 +52,8 @@ public class WeaponHandler : MonoBehaviour
     private SpriteRenderer weaponRenderer;
     public Dictionary<ActiveSkill, bool> ActiveSkills { get; set; }
 
+    public AudioClip attackSoundClip;                               // 추가
+
     protected void Awake()
     {
         Controller = GetComponentInParent<BaseController>();    
@@ -70,6 +72,9 @@ public class WeaponHandler : MonoBehaviour
     public virtual void Attack()
     {
         AttackAnimation();
+
+        if (attackSoundClip != null)                            //추가
+            SoundManager.PlayClip(attackSoundClip);             //추가
     }
 
     public virtual void AttackAnimation()
