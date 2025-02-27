@@ -17,7 +17,6 @@ public class PlayerController : BaseController
 
     private Follow follow;
 
-
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;

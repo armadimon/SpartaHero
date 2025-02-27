@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Newtonsoft.Json.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class ItemController : MonoBehaviour
     private Transform target;
 
     ItemManager itemManager;
+    GameDataManager gameDataManager;
 
     public void Init(ItemController itemController, Transform target)
     {
@@ -22,11 +24,15 @@ public class ItemController : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        gameDataManager = FindObjectOfType<GameDataManager>();
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
+
+        gameDataManager.GetUsePotionNum(); 
         if (player)
             gameObject.SetActive(false);
 

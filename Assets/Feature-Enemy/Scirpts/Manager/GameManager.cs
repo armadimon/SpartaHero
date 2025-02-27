@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
             stageManager.Init(this);
 
         stageUI = GetComponentInChildren<StageUI>();
+
+        gameDataManager = FindObjectOfType<GameDataManager>();
     }
 
 
@@ -70,6 +72,7 @@ public class GameManager : MonoBehaviour
     {
         stageManager.StageClear(Difficulty);
         UIManager.Instance.ShowPanel("StageClear");
+        gameDataManager.GetStageClearNum();
     }
 
     public void GameOver()
