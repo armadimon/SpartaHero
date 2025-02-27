@@ -76,7 +76,7 @@ public class Skill : MonoBehaviour
 
     public void Skip()
     {
-        gameObject.SetActive(false);
+        Parent.SetActive(false);
         Time.timeScale = 1f;
     }
 

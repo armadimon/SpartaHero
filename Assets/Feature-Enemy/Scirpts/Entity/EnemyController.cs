@@ -79,6 +79,7 @@ public class EnemyController : BaseController
     public override void Death()
     {
         base.Death();
+        if(enemyManger != null) 
         enemyManger.RemoveEnemyOnDeath(this);
     }
 }
