@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class MainLobbyUI : MonoBehaviour
 {
     public GameDataManager dataManager;
-    Text goldText;
+    public GameObject goldUI;
+    public GameObject toastMsg;
+    public Text goldText;
+    
     private void Start()
     {
-        UIManager.Instance.RegisterPanel("GoldUI", gameObject);
-        goldText = GetComponentInChildren<Text>();
+        UIManager.Instance.RegisterPanel("GoldUI", goldUI);
+        UIManager.Instance.RegisterPanel("ToastMsg", toastMsg);
         dataManager = GameDataManager.Instance;
         goldText.text = dataManager.GetGold().ToString();
     }

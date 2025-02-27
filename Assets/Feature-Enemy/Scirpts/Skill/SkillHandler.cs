@@ -42,7 +42,8 @@ public class SkillHandler : MonoBehaviour
 
 
             statHandler.Speed = 3f;
-            sprite.gameObject.SetActive(false);
+            if (sprite != null)
+                sprite.gameObject.SetActive(false);
             Debug.Log("Coloron");
 
         }

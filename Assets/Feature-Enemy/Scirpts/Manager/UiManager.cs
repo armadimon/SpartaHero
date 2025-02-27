@@ -58,6 +58,34 @@ public class UIManager : MonoBehaviour
             uiPanels[name].SetActive(true);
         }
     }
+    public void ShowToast(string name, string message, float duration)
+    {
+        StartCoroutine(ShowToastCoroutine(name, message, duration));
+    }
+
+    IEnumerator ShowToastCoroutine(string name, string message, float duration)
+    {
+        uiPanels[name].SetActive(true);
+        uiPanels[name].GetComponentInChildren<Text>().text = message;
+        yield return new WaitForSeconds(duration);
+
+        // 페이드 아웃 애니메이션
+        CanvasGroup canvasGroup = uiPanels[name].GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+        {
+            float fadeDuration = 0.5f;
+            float startTime = Time.time;
+
+            while (Time.time < startTime + fadeDuration)
+            {
+                canvasGroup.alpha = Mathf.Lerp(1f, 0f, (Time.time - startTime) / fadeDuration);
+                yield return null;
+            }
+        }
+
+        uiPanels[name].SetActive(false);
+    }
+    
 
     public void HidePanel(string name)
     {

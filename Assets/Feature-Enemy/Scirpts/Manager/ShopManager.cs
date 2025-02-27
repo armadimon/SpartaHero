@@ -102,10 +102,14 @@ public class ShopManager : MonoBehaviour
     
     private void GetItem(string itemName, int Gold)
     {
+        if (Gold > GameDataManager.Instance.GetGold())
+        {
+            UIManager.Instance.ShowToast("ToastMsg", "GOLD가 부족합니다!", 3);
+            return;
+        }
         if (GameDataManager.Instance.Inventory.Contains(itemName))
         {
-            Debug.Log("You already have it!");
-            return;
+            UIManager.Instance.ShowToast("ToastMsg", "You already have it!", 3);
         }
         else
         {

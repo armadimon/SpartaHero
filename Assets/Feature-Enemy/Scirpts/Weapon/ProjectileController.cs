@@ -69,9 +69,8 @@ public class ProjectileController : MonoBehaviour
      
                 //if Arrow hit the wall then Bounce
                 skillHandler.isFirst = false;
-                
                 Vector2 closestPoint = collision.ClosestPoint(transform.position);
-                Vector2 normalVector = closestPoint - (Vector2)transform.position;
+                Vector2 normalVector = (Vector2)transform.position - closestPoint;
                 normalVector.Normalize();
                 direction = Vector2.Reflect(direction, normalVector);
                 rigidbody.velocity = direction * rangeWeaponHandler.Speed;
