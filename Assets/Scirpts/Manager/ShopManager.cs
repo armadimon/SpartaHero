@@ -45,9 +45,31 @@ public class ShopManager : MonoBehaviour
         ItemCreate();
         closeBtn.onClick.AddListener(Close);
         nextBtn.onClick.AddListener(NextList);
+        gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        List<string> inventory = GameDataManager.Instance.Inventory; // 저장된 인벤토리 아이템 이름 리스트 가져옴
+
+        Debug.Log($"인벤토리에 확인 : {inventory}");
+        foreach (var itemName in inventory)
+        {
+            // Items 리스트에서 이름이 일치하는 아이템 찾기
+            ItemSet item = Items.Find(i => i.name == itemName);
+
+            if (item != null)
+            {
+                // InventoryManager에 아이템 추가
+                InventoryManager.Instance.AddItem(item);
+                Debug.Log($"인벤토리에 추가됨: {item.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"아이템을 찾을 수 없음: {itemName}");
+            }
+        }
+    }
 
     private void OnEnable()
     {
@@ -56,11 +78,13 @@ public class ShopManager : MonoBehaviour
     public void NextList()
     {
         itemIndex++;
-        Debug.Log("Next List : "  + itemIndex);
-        if (itemIndex > Items.Count / 3)
+
+        // 페이지가 초과되면 처음으로 돌아감
+        if (itemIndex >= Mathf.CeilToInt(Items.Count / 3f))
         {
             itemIndex = 0;
         }
+
         ShowItem();
     }
 
@@ -72,19 +96,30 @@ public class ShopManager : MonoBehaviour
 
     private void ShowItem()
     {
-        Debug.Log(itemIndex);
-        
-            for (int i = 0; i < 3; i++)
+        Debug.Log($"현재 페이지: {itemIndex}");
+
+        foreach (var btn in Buttons)
+        {
+            btn.onClick.RemoveAllListeners();
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            int index = (itemIndex * 3) + i;
+
+            if (index < Items.Count)
             {
-                int index = (itemIndex * 3) + i;
-                if (index <= Items.Count - 1)
-                {
-                    Buttons[i].onClick.AddListener(() => Items[index].Action());
-                    Images[i].sprite = Items[index].Image;
-                    ItemName[i].text = Items[index].name;
-                    ItemDesc[i].text = Items[index].description;
-                }
+                Buttons[i].gameObject.SetActive(true);
+                Buttons[i].onClick.AddListener(() => Items[index].Action());
+                Images[i].sprite = Items[index].Image;
+                ItemName[i].text = Items[index].name;
+                ItemDesc[i].text = Items[index].description;
             }
+            else
+            {
+                Buttons[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     private void ItemCreate()

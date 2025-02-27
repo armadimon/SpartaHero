@@ -33,6 +33,7 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogError("Player object not found!");
         }
+        
     }
 
     public void AddItem(ItemSet itemData)
@@ -45,6 +46,35 @@ public class InventoryManager : MonoBehaviour
         if (itemData.type == ItemType.Weapon)
         {
             itemData.OnClick = () => player.SwapWeapon(itemData.name);
+        }
+
+        if (itemData.type == ItemType.Cosmetic)
+        {
+            
+            itemData.OnClick = () => player.ChangeCharacter(itemData.name);
+        }
+
+        // 버튼 클릭 이벤트 추가
+        Button button = newItem.GetComponentInChildren<Button>();
+        button.onClick.AddListener(() => itemData.OnClick?.Invoke());
+    }
+    
+    public void LoadItem(ItemSet itemData)
+    {
+        GameObject newItem = Instantiate(itemPrefab, content); // 아이템 추가
+
+        // UI 업데이트 (아이콘 & 이름)
+        newItem.transform.GetComponentInChildren<Image>().sprite = itemData.Image;
+        newItem.transform.GetComponentInChildren<Text>().text = itemData.name;
+        if (itemData.type == ItemType.Weapon)
+        {
+            itemData.OnClick = () => player.SwapWeapon(itemData.name);
+        }
+
+        if (itemData.type == ItemType.Cosmetic)
+        {
+            
+            itemData.OnClick = () => player.ChangeCharacter(itemData.name);
         }
 
         // 버튼 클릭 이벤트 추가

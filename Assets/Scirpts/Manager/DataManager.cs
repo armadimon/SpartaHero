@@ -55,6 +55,7 @@ public class GameDataManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(key))
         {
+            Debug.Log(PlayerPrefs.GetString(key));
             string json = PlayerPrefs.GetString(key);
             return JsonConvert.DeserializeObject<T>(json);
         }
@@ -92,6 +93,7 @@ public class GameDataManager : MonoBehaviour
         if (Inventory.Contains(ItemName))
             return;
         Inventory.Add(ItemName);
+        SaveGameData("Inventory", Inventory);
     }
 
     // 도전과제를 완료하면 도전과제 이름만 저장. 도전과제를 불러올때 이걸 참고해서 성공여부 판단

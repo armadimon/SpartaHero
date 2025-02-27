@@ -12,7 +12,7 @@ public class PlayerController : BaseController
     public float scanRange;
     public LayerMask targetLayer;
     private Follow follow;
-    
+    private Animator animator;
     // private static PlayerController instance;
     //
     // void Awake()
@@ -34,6 +34,7 @@ public class PlayerController : BaseController
     {
         _gameManager = gameManager;
         _camera = Camera.main;
+        animator = GetComponentInChildren<Animator>();
         
         DontDestroyOnLoad(gameObject);
         for (int i = 0; i < transform.GetChild(3).transform.childCount; i++)
@@ -42,6 +43,7 @@ public class PlayerController : BaseController
             follow.SetTarget(transform);
         }
     }
+    
     protected override void HandleAction()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -114,5 +116,22 @@ public class PlayerController : BaseController
         else
             return;
     }
-
+    
+    public void ChangeCharacter(string name)
+    {
+        if (animator == null)
+        {
+            return;
+        }
+        AnimatorOverrideController overrideController = Resources.Load<AnimatorOverrideController>("Animation/" + name);
+        
+        if (overrideController != null)
+        {
+            animator.runtimeAnimatorController = overrideController;
+        }
+        else
+        {
+            Debug.LogError("Animator Override Controller Error.");
+        }
+    }
 }
