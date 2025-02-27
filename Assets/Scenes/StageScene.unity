@@ -29229,6 +29229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openedDoor: {fileID: 1014569407}
   closedDoor: {fileID: 1392403289}
+  openClip: {fileID: 8300000, guid: 8eeb26ea237bc0145affe01a357d2afd, type: 3}
 --- !u!1 &1790539640
 GameObject:
   m_ObjectHideFlags: 0

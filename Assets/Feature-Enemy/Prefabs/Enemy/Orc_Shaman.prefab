@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthChangeDelay: 0.5
+  damageClip: {fileID: 8300000, guid: d37b90fc171c1bc41969f81f49a6c1d0, type: 3}
 --- !u!1 &4507956883084191908
 GameObject:
   m_ObjectHideFlags: 0

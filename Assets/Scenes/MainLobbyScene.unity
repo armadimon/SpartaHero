@@ -67291,6 +67291,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 274946141274163323, guid: 14f88609e363cb544b3d82f5f5406b07, type: 3}
+      propertyPath: damageClip
+      value: 
+      objectReference: {fileID: 8300000, guid: eaf1514eaf2b21045abcda5f1d968819, type: 3}
     - target: {fileID: 1016494501231070659, guid: 14f88609e363cb544b3d82f5f5406b07, type: 3}
       propertyPath: m_Name
       value: Player

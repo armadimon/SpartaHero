@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StageScene.unity
-    guid: 4832833695ae08e4090357097a44ed75
+    path: Assets/SH_Scene/TitleScene.unity
+    guid: 6c6684c5f86445942835a6953633ae76
   - enabled: 1
     path: Assets/Scenes/MainLobbyScene.unity
     guid: 105bee650fd93a140a44c22b4259d67b
@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tutirial/TutorialSilhum.unity
     guid: 64609ff1188e33c4b8d774f09f4e54dc
+ - enabled: 1
+    path: Assets/Scenes/StageScene.unity
+    guid: 4832833695ae08e4090357097a44ed75
+  - enabled: 1
+    path: Assets/SH_Scene/TestScene.unity
+    guid: 5b4494e53b847b945860a8a920e8a296
   m_configObjects: {}
