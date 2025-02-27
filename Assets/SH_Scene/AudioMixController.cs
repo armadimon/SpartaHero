@@ -7,30 +7,51 @@ using UnityEngine.UI;
 public class AudioMixController : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider BGMSlider;	// 볼륨을 조절할 Slider
+    [SerializeField] private Slider BGMSlider;
+    [SerializeField] private Slider SFXSlider;
 
 
     private void Awake()
     {
         BGMSlider.onValueChanged.AddListener(SetBGMVolume);
+        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("Volume"))
+        // BGM
+        if (PlayerPrefs.HasKey("BGMVolume"))
         {
-            BGMSlider.value = PlayerPrefs.GetFloat("Volume");
+            BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
         }
         else
             BGMSlider.value = 0.5f;
 
         audioMixer.SetFloat("BGM", Mathf.Log10(BGMSlider.value) * 20);
+
+        // SFX
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
+            SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        }
+        else
+            SFXSlider.value = 0.5f;
+
+        audioMixer.SetFloat("SFX", Mathf.Log10(SFXSlider.value) * 20);
+
     }
 
     // Slider를 통해 걸어놓은 이벤트
     public void SetBGMVolume(float volume)
     {
         audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("Volume", BGMSlider.value);
+        PlayerPrefs.SetFloat("BGMVolume", BGMSlider.value);
     }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        PlayerPrefs.SetFloat("SFX", SFXSlider.value);
+    }
+
 }
