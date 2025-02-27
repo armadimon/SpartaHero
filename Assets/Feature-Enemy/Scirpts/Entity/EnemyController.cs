@@ -8,6 +8,7 @@ public class EnemyController : BaseController
     private Transform target;
 
     private ResourceController resourceController;
+    private ItemManager itemManager;
 
     [SerializeField] private float followRange = 15f;
 

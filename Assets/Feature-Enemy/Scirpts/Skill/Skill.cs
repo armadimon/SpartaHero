@@ -172,17 +172,17 @@ public class Skill : MonoBehaviour
 
         
         Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "HP 50 UP", images[0], () => HealthUp(50)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "Attack Power 3 UP", images[0], () => AttackUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "Speed 3 UP", images[0], () => SpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeed 3 UP", images[0], () => AttackSpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRange 3 UP", images[0], () => AttackRangeUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelay  0.2 Down", images[0], () => AttackDelayDown(0.2f)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCount 1 UP", images[0], () => AttackCountUp(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSize 1 UP", images[0], () => BulletSizeup(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Bound Count 1 UP", images[0], () => Boundup(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration 1 UP", images[0], () => Penetration(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Shoot a slowing arrow", images[0], Slow));
-        Skills.Add(new SkillSet(SkillType.Melee, 0, "Parrying", "Parrying", images[0], () => Parrying()));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "Attack Power \n3 UP", images[1], () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "Speed \n3 UP", images[2], () => SpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeed \n3 UP", images[3], () => AttackSpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRange \n3 UP", images[4], () => AttackRangeUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelay  \n0.2 Down", images[5], () => AttackDelayDown(0.2f)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCount \n1 UP", images[6], () => AttackCountUp(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSize \n1 UP", images[7], () => BulletSizeup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Bound Count \n1 UP", images[8], () => Boundup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration \n1 UP", images[9], () => Penetration(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Shoot a \nslowing arrow", images[10], Slow));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "Parrying", "Parrying", images[11], () => Parrying()));
 
 
     }
@@ -219,6 +219,7 @@ public class Skill : MonoBehaviour
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         player.GetComponent<StatHandler>().Health += value;
+        player.GetComponent<ResourceController>().CurrentHealth += value;
         Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }

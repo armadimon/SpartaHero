@@ -6,14 +6,13 @@ using UnityEngine;
 public class ResourceController : MonoBehaviour
 {
     [SerializeField] private float healthChangeDelay = 0.5f;
-    
     private BaseController _baseController;
     private StatHandler _statHandler;
     private AnimationHandler _animationHandler;
     
     private float timeSinceLastChange = float.MaxValue;
     
-    public float CurrentHealth { get; private set; }
+    public float CurrentHealth { get; set; }
     public float MaxHealth => _statHandler.Health;
 
     private void Awake()
