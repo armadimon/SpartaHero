@@ -30,9 +30,6 @@ public class ItemController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-
-        gameDataManager.GetUsePotionNum(); 
         if (player)
             gameObject.SetActive(false);
 

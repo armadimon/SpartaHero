@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
-
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance { get; private set; }
@@ -27,7 +26,6 @@ public class GameDataManager : MonoBehaviour
 
     private List<string> achievements = new List<string>();
     public List<string> Inventory = new List<string>();
-
     public int StageClearNum = 0;
     public int BossKillNum = 0;
     public int UsePotionNum = 0;
@@ -44,7 +42,6 @@ public class GameDataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     public void SaveGameData<T>(string key, T value)
@@ -58,11 +55,9 @@ public class GameDataManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(key))
         {
-            Debug.Log(PlayerPrefs.GetString(key));
             string json = PlayerPrefs.GetString(key);
             return JsonConvert.DeserializeObject<T>(json);
         }
-
         return defaultValue;
     }
 
@@ -97,6 +92,7 @@ public class GameDataManager : MonoBehaviour
         Inventory.Add(ItemName);
     }
 
+    // 업적 추가
     public void AddAchievement(string achievement)
     {
         if (!achievements.Contains(achievement))
@@ -106,33 +102,24 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    public int GetStageClearNum()
+    // 업적 리스트 반환
+    public List<string> GetAchievements()
     {
-        return StageClearNum++;
-    }
-
-    public int GetBossKillNum()
-    {
-        return BossKillNum++;
-    }
-
-    public int GetUsePotionNum()
-    {
-        return UsePotionNum++;
+        return achievements;
     }
 }
 
 [System.Serializable]
-public class PlayerData
+public class AchievementData
 {
-    public int gold;
-    public List<string> inventory;
-    public Dictionary<string, int> achievements;
+    public string Name;
+    public bool IsUnlocked;
+    public string ImagePath;
 
-    public PlayerData()
+    public AchievementData(string name, bool isUnlocked, string imagePath)
     {
-        gold = 0;
-        inventory = new List<string>();
-        achievements = new Dictionary<string, int>();
+        Name = name;
+        IsUnlocked = isUnlocked;
+        ImagePath = imagePath;
     }
 }

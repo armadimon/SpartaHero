@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.ShowPanel("StageClear");
         if (Difficulty < 5)
             stageUI.SwitchingClearPanel();
-        gameDataManager.GetStageClearNum();
     }
 
     public void GameOver()
