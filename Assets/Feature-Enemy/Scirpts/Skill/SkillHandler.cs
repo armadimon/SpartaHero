@@ -14,7 +14,6 @@ public class SkillHandler : MonoBehaviour
     {
         if (boundcount > 0 && !isFirst)
         {
-            rigidbody.velocity = -rigidbody.velocity;
             spriteRenderer.flipY = !spriteRenderer.flipY;
         }
     }

@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class StageUI : MonoBehaviour
 {
-    public GameObject panel;
-    private void Start()
+    public GameObject skillSelectPanel;
+    public GameObject stageResultPanel;
+    public GameObject BossUI;
+    public void Init()
     {
-        UIManager.Instance.RegisterPanel("SkillSelectActive", panel);
+        UIManager.Instance.RegisterPanel("SkillSelectActive", skillSelectPanel);
+        UIManager.Instance.RegisterPanel("StageClear", stageResultPanel);
+        UIManager.Instance.RegisterPanel("BossUI", BossUI);
+        
+    }
+    
+    public void HidePanel(string name)
+    {
+        UIManager.Instance.HidePanel(name);
     }
 }

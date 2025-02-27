@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private static int currentWaveIndex = 0;
 
     private EnemyManager enemyManager;
-    private StageManager stageManager;
-    public UIManager uiManager;
+    public StageManager stageManager;
     private GameDataManager gameDataManager;
+    public StageUI stageUI;
 
 
 
@@ -41,12 +41,14 @@ public class GameManager : MonoBehaviour
         if (stageManager != null)
             stageManager.Init(this);
 
-        uiManager = GetComponentInChildren<UIManager>();
+        stageUI = GetComponentInChildren<StageUI>();
     }
 
 
     private void Start()
     {
+        if (stageUI != null)
+            stageUI.Init();
         if (enemyManager != null)
             StartGame();
     }
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void EndOfWave()
     {
         stageManager.StageClear(Difficulty);
-        //StartNextWave();
+        UIManager.Instance.ShowPanel("StageClear");
     }
 
     public void GameOver()
