@@ -8,7 +8,11 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager Instance { get; private set; }
 
     public int totalGold = 0;
-    private List<string> achievements = new List<string>();
+    public List<string> achievements = new List<string>();
+
+    public int StageClearNum = 0;
+    public int BossKillNum = 0;
+    public int UsePotionNum = 0;
 
     private void Awake()
     {
@@ -22,6 +26,7 @@ public class GameDataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     public void SaveGameData<T>(string key, T value)
@@ -69,6 +74,18 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
+    public int GetStageClearNum()
+    {
+        return StageClearNum++;
+    }
+    public int GetBossKillNum()
+    {
+        return BossKillNum++;
+    }
+    public int GetUsePotionNum()
+    {
+        return UsePotionNum++;
+    }
 
     // public static GameDataManager Instance { get; private set; }
     // private IDataSystem stageDataSystem;
@@ -126,46 +143,46 @@ public class GameDataManager : MonoBehaviour
     // }
     //
 
-//     public static GameDataManager Instance { get; private set; }
-//     private string savePath;
-//     public PlayerData playerData { get; private set; }
-//
-//     private void Awake()
-//     {
-//         if (Instance == null)
-//         {
-//             Instance = this;
-//             DontDestroyOnLoad(gameObject);
-//             savePath = Application.persistentDataPath + "/player_data.json";
-//             LoadGame();
-//         }
-//         else
-//         {
-//             Destroy(gameObject);
-//         }
-//     }
-//
-//     public void SaveGame()
-//     {
-//         string json = JsonConvert.SerializeObject(playerData, Formatting.Indented);
-//         File.WriteAllText(savePath, json);
-//         Debug.Log("Game Saved!");
-//     }
-//
-//     public void LoadGame()
-//     {
-//         if (File.Exists(savePath))
-//         {
-//             string json = File.ReadAllText(savePath);
-//             playerData = JsonConvert.DeserializeObject<PlayerData>(json);
-//         }
-//         else
-//         {
-//             playerData = new PlayerData();
-//         }
-//
-//         Debug.Log("Game Loaded!");
-//     }
+    //     public static GameDataManager Instance { get; private set; }
+    //     private string savePath;
+    //     public PlayerData playerData { get; private set; }
+    //
+    //     private void Awake()
+    //     {
+    //         if (Instance == null)
+    //         {
+    //             Instance = this;
+    //             DontDestroyOnLoad(gameObject);
+    //             savePath = Application.persistentDataPath + "/player_data.json";
+    //             LoadGame();
+    //         }
+    //         else
+    //         {
+    //             Destroy(gameObject);
+    //         }
+    //     }
+    //
+    //     public void SaveGame()
+    //     {
+    //         string json = JsonConvert.SerializeObject(playerData, Formatting.Indented);
+    //         File.WriteAllText(savePath, json);
+    //         Debug.Log("Game Saved!");
+    //     }
+    //
+    //     public void LoadGame()
+    //     {
+    //         if (File.Exists(savePath))
+    //         {
+    //             string json = File.ReadAllText(savePath);
+    //             playerData = JsonConvert.DeserializeObject<PlayerData>(json);
+    //         }
+    //         else
+    //         {
+    //             playerData = new PlayerData();
+    //         }
+    //
+    //         Debug.Log("Game Loaded!");
+    //     }
 }
 
 [System.Serializable]
