@@ -10,6 +10,7 @@ public class DoorController : MonoBehaviour
     // 3. opendoor���� �ݶ��̴� �߰�
 
     StageManager stageManager;
+    EnemyManager enemyManager;
 
     public GameObject openedDoor;
     public GameObject closedDoor;
@@ -23,10 +24,22 @@ public class DoorController : MonoBehaviour
     private void Awake()
     {
         stageManager = FindObjectOfType<StageManager>();
+        enemyManager = FindObjectOfType<EnemyManager>();
+    }
+    private void Start()
+    {
+        if(enemyManager.WhatMap == 0)
+        {
+            transform.position = new Vector3(0f,4.94f,0f);
+        }
+        else if (enemyManager.WhatMap == 1)
+        {
+            transform.position = new Vector3(0f, 24f, 0f);
+        }
     }
 
 
-    
+
     public void OpenDoor()    // �� Ȱ��ȭ
     {
         closedDoor.SetActive(false);

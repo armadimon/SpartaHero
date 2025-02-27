@@ -15,6 +15,11 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> PosionPrefabs; // 생성할 보스 프리팹 리스트
 
     [SerializeField]
+    private GameObject Level;
+    [SerializeField]
+    private List<GirdID> GirdIDs;
+
+    [SerializeField]
     private List<Rect> spawnAreas; // 적을 생성할 영역 리스트
 
     [SerializeField]
@@ -27,6 +32,8 @@ public class EnemyManager : MonoBehaviour
     private List<BossController> activeBoss = new List<BossController>(); // 현재 활성화된 적들
 
     private bool enemySpawnComplete;
+
+    public int WhatMap;
     
     [SerializeField] private float timeBetweenSpawns = 0.2f;
     [SerializeField] private float timeBetweenWaves = 1f;
@@ -38,6 +45,13 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         ItemController = GetComponent<ItemController>();
+        for(int i = 0; i< Level.transform.childCount; i++)
+        {
+            if(Level.transform.GetChild(i).GetComponent<GirdID>() != null)
+            {
+                GirdIDs.Add(Level.transform.GetChild(i).GetComponent<GirdID>());
+            }
+        }
     }
 
 
@@ -52,6 +66,8 @@ public class EnemyManager : MonoBehaviour
     }
     public void StartWave(Stage stage)
     {
+        int Rand = Random.Range(1, GirdIDs.Count);
+        WhatMap = Rand;
         Debug.Log("Starting wave " + stage.Level);
         if (stage.Level <= 0)
         {
@@ -64,13 +80,15 @@ public class EnemyManager : MonoBehaviour
             if(waveRoutine != null)
                 StopCoroutine(waveRoutine);
             int randomNum = Random.Range(stage.MonstersMin, stage.MonstersMax);
-            waveRoutine =  StartCoroutine(SpawnWave(randomNum));
+            waveRoutine =  StartCoroutine(SpawnWave(randomNum, Rand));
+            GirdIDs[Rand].gameObject.SetActive(true);
             
         }
         else
         {
             StartBossStage();
             GameManager.Instance.uiManager.BossUIActive();
+            GirdIDs[0].gameObject.SetActive(true);
         }
     }
 
@@ -96,20 +114,20 @@ public class EnemyManager : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator SpawnWave(int waveCount)
+    private IEnumerator SpawnWave(int waveCount, int Rand)
     {
         enemySpawnComplete = false;
         yield return new WaitForSeconds(timeBetweenWaves);
         for (int i = 0; i < waveCount; i++)
         {
             yield return new WaitForSeconds(timeBetweenSpawns); 
-            SpawnRandomEnemy();
+            SpawnRandomEnemy( Rand);
         }
 
         enemySpawnComplete = true;
     }
 
-    private void SpawnRandomEnemy()
+    private void SpawnRandomEnemy(int Rand)
     {
         if (enemyPrefabs.Count == 0 || spawnAreas.Count == 0)
         {
@@ -119,15 +137,7 @@ public class EnemyManager : MonoBehaviour
 
         // 랜덤한 적 프리팹 선택
         GameObject randomPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-
-        // 랜덤한 영역 선택
-        Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-        // Rect 영역 내부의 랜덤 위치 계산
-        Vector2 randomPosition = new Vector2(
-            Random.Range(randomArea.xMin, randomArea.xMax),
-            Random.Range(randomArea.yMin, randomArea.yMax)
-        );
+        Vector2 randomPosition =CreatSpawnPosition(Rand);
 
         // 적 생성 및 리스트에 추가
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
@@ -194,5 +204,58 @@ public class EnemyManager : MonoBehaviour
             ItemController itemController = spawnedPosion.GetComponent<ItemController>();
             itemController.Init(itemController, this.transform);
         }
+    }
+
+
+    public Vector2 CreatSpawnPosition(int Ran)
+    {
+        if( Ran == 0)
+        {
+            spawnAreas.RemoveAll(x => x == x);
+            spawnAreas = new List<Rect>
+            {
+                new Rect(-7.5f, -4.5f, 4f, 8f),
+                new Rect(3.5f, -4.5f, 4f, 8f)
+            };
+            // 랜덤한 영역 선택
+            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+
+            // Rect 영역 내부의 랜덤 위치 계산
+            Vector2 randomPosition = new Vector2(
+                Random.Range(randomArea.xMin, randomArea.xMax),
+                Random.Range(randomArea.yMin, randomArea.yMax)
+            );
+
+            return randomPosition;
+
+        }
+        else if( Ran == 1)
+        {
+            spawnAreas.RemoveAll(x => x == x);
+            spawnAreas = new List<Rect>
+            {
+                new Rect(-6f, 13f, 12f, 3f),
+                new Rect(-6f, 19f, 12f, 3f),
+            };
+
+            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+
+            // Rect 영역 내부의 랜덤 위치 계산
+            Vector2 randomPosition = new Vector2(
+                Random.Range(randomArea.xMin, randomArea.xMax),
+                Random.Range(randomArea.yMin, randomArea.yMax)
+            );
+
+            return randomPosition;
+
+        }
+        else
+        {
+            return new Vector2(1, 2);
+        }
+        
+        
+  
+
     }
 }
