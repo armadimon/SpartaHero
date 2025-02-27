@@ -63,9 +63,9 @@ public class StageManager : MonoBehaviour
     public void StageClear(int diff)        // �������� Ŭ���� ��
     {
         isClear = true;
-        if(GameManager.Instance.uiManager.BossUi.gameObject.activeSelf == true)
+        if(GameObject.Find("BossWarUI"))
         {
-            GameManager.Instance.uiManager.BossUi.gameObject.SetActive(false);
+            UIManager.Instance.HidePanel("BossUI");
         }
 
         doorController.OpenDoor();

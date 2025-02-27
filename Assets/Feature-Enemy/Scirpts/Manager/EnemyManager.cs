@@ -70,7 +70,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             StartBossStage();
-            GameManager.Instance.uiManager.BossUIActive();
+            UIManager.Instance.ShowPanel("BossUI");
         }
     }
 
@@ -133,7 +133,7 @@ public class EnemyManager : MonoBehaviour
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
 
-        GameObject Healthbar = Instantiate(GameManager.Instance.uiManager.Prefabs[0]);
+        GameObject Healthbar = Instantiate(UIManager.Instance.Prefabs[0]);
         Healthbar.transform.SetParent(spawnedEnemy.transform, false);
 
         Follow Health = Healthbar.GetComponentInChildren<Follow>();

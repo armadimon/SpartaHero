@@ -9,4 +9,5 @@ public class StageClearUI : MonoBehaviour
     {
         text.text = GameManager.Instance.stageManager.CurrentGold.ToString();
     }
+    
 }

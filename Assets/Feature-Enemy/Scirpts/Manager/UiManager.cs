@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     {
         if (!uiPanels.ContainsKey(name))
         {
+            Debug.Log(name + " is not registered yet");
             uiPanels.Add(name, panel);
         }
     }
@@ -45,11 +46,12 @@ public class UIManager : MonoBehaviour
 
     public void ShowPanel(string name)
     {
-        foreach (var panel in uiPanels.Values)
-        {
-            panel.SetActive(false);
-        }
+        // foreach (var panel in uiPanels.Values)
+        // {
+        //     panel.SetActive(false);
+        // }
 
+        Debug.Log(name);
         if (uiPanels.ContainsKey(name))
         {
             Debug.Log(name);

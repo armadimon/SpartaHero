@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     private EnemyManager enemyManager;
     public StageManager stageManager;
-    public UIManager uiManager;
     private GameDataManager gameDataManager;
+    public StageUI stageUI;
 
 
 
@@ -41,12 +41,14 @@ public class GameManager : MonoBehaviour
         if (stageManager != null)
             stageManager.Init(this);
 
-        uiManager = GetComponentInChildren<UIManager>();
+        stageUI = GetComponentInChildren<StageUI>();
     }
 
 
     private void Start()
     {
+        if (stageUI != null)
+            stageUI.Init();
         if (enemyManager != null)
             StartGame();
     }
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour
     public void EndOfWave()
     {
         stageManager.StageClear(Difficulty);
-        uiManager.ShowPanel("StageClear");
+        UIManager.Instance.ShowPanel("StageClear");
     }
 
     public void GameOver()
