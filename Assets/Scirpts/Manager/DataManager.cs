@@ -71,6 +71,8 @@ public class GameDataManager : MonoBehaviour
     public void AddGold(int amount)
     {
         TotalGold += amount;
+        if (AchievementManager.Instance.CheckCondition("RichMan"))
+            AchievementManager.Instance.UnlockAchievement("RichMan");
         SaveGameData("Gold", totalGold);
     }
 
@@ -92,7 +94,7 @@ public class GameDataManager : MonoBehaviour
         Inventory.Add(ItemName);
     }
 
-    // 업적 추가
+    // 도전과제를 완료하면 도전과제 이름만 저장. 도전과제를 불러올때 이걸 참고해서 성공여부 판단
     public void AddAchievement(string achievement)
     {
         if (!achievements.Contains(achievement))
@@ -102,24 +104,10 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
-    // 업적 리스트 반환
+    // 도전과제 리스트 반환
     public List<string> GetAchievements()
     {
         return achievements;
     }
 }
 
-[System.Serializable]
-public class AchievementData
-{
-    public string Name;
-    public bool IsUnlocked;
-    public string ImagePath;
-
-    public AchievementData(string name, bool isUnlocked, string imagePath)
-    {
-        Name = name;
-        IsUnlocked = isUnlocked;
-        ImagePath = imagePath;
-    }
-}

@@ -56,7 +56,7 @@ public class MoveSceneManager : MonoBehaviour
 
     void OnClickStartButton()
     {
-        if (GameDataManager.Instance.LoadGameData("IsTutorialCleared", false))
+        if (AchievementManager.Instance.IsAchievementUnlocked("TutorialMaster"))
         {
             SceneManager.LoadScene("MainLobbyScene");
         }
