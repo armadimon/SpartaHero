@@ -8,28 +8,39 @@ public class PlayerController : BaseController
     private Camera _camera;
     private GameManager _gameManager;
     public Collider2D[] Enemy;
-    
     public Transform targeting;
     public float scanRange;
-
     public LayerMask targetLayer;
-
-
     private Follow follow;
-
+    
+    // private static PlayerController instance;
+    //
+    // void Awake()
+    // {
+    //     base.Awake();
+    //     
+    //     if (instance == null)
+    //     {
+    //         instance = this;
+    //         DontDestroyOnLoad(gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+    
     public void Init(GameManager gameManager)
     {
         _gameManager = gameManager;
         _camera = Camera.main;
-
-        DontDestroyOnLoad(this.gameObject);
-
+        
+        DontDestroyOnLoad(gameObject);
         for (int i = 0; i < transform.GetChild(3).transform.childCount; i++)
         {
             follow = transform.GetChild(3).transform.GetChild(i).GetComponent<Follow>();
             follow.SetTarget(transform);
         }
-
     }
     protected override void HandleAction()
     {

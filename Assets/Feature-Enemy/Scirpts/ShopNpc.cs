@@ -7,7 +7,6 @@ public class ShopNpc : MonoBehaviour
     [SerializeField] private GameObject ShopPanel;
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Player"))
         {
             ShopPanel.SetActive(true);
@@ -16,7 +15,6 @@ public class ShopNpc : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Player"))
         {
             ShopPanel.SetActive(false);

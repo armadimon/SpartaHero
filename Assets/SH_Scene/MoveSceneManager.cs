@@ -56,7 +56,12 @@ public class MoveSceneManager : MonoBehaviour
 
     void OnClickStartButton()
     {
-        SceneManager.LoadScene("Tutorial");
+        if (GameDataManager.Instance.LoadGameData("IsTutorialCleared", false))
+        {
+            SceneManager.LoadScene("MainLobbyScene");
+        }
+        else
+            SceneManager.LoadScene("Tutorial");
         SoundManager.instance.ChangeBackGroundMusic(lobbyBGM);
     }
 

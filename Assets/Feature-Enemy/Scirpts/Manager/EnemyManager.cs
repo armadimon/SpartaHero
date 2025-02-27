@@ -102,8 +102,6 @@ public class EnemyManager : MonoBehaviour
 
         // Rect 영역 내부의 랜덤 위치 계산
         Vector2 randomPosition = CreatSpawnPosition(0);
-
-
         GameObject randomBoss = BossPrefabs[Random.Range(0, BossPrefabs.Count)];
         GameObject spawnedBoss = Instantiate(randomBoss, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         BossController bossController = spawnedBoss.GetComponent<BossController>();
@@ -174,7 +172,6 @@ public class EnemyManager : MonoBehaviour
         SpawnRandomItem(enemy);
         activeEnemies.Remove(enemy);
         StatHandler enemyStat = enemy.GetComponent<StatHandler>();
-        StatHandler playerStat = player.gameObject.GetComponent<StatHandler>();
         ResourceController playerResource = player.GetComponent<ResourceController>();
         
         playerResource.GetExp(enemyStat.Exp);
@@ -188,7 +185,14 @@ public class EnemyManager : MonoBehaviour
     public void RemoveBossOnDeath(BossController boss)
     {
         activeBoss.Remove(boss);
-        if (enemySpawnComplete &&  activeEnemies.Count == 0)
+        
+        StatHandler enemyStat = boss.GetComponent<StatHandler>();
+        ResourceController playerResource = player.GetComponent<ResourceController>();
+        
+        // playerResource.GetExp(enemyStat.Exp);
+        gameManager.stageManager.CurrentGold += enemyStat.Gold;
+        GameDataManager.Instance.AddGold(enemyStat.Gold);
+        if (activeBoss.Count == 0)
             gameManager.EndOfWave();
     }
 

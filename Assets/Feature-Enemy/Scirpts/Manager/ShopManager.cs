@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum ItemType
+public enum ItemType
 {
     Weapon,
     Cosmetic
@@ -118,24 +118,7 @@ public class ShopManager : MonoBehaviour
         }
     }
     
-    private class ItemSet
-    {
-        public ItemType type;
-        public string name;
-        public string description;
-        public int price;
-        public Sprite Image;
-    
-        public Action Action;
 
-        public ItemSet(ItemType type, string name, string description, int price, Sprite image, Action action = null)
-        {
-            this.type = type;
-            this.name = name;
-            this.price = price;
-            this.description = description;
-            Image = image;
-            Action = action;
-        }
-    }
 }
+
+

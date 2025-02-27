@@ -64,14 +64,16 @@ public class GameManager : MonoBehaviour
     {
         Difficulty++;
         Stage stageLevel = stageManager.SetStageLevel(Difficulty);
-
         enemyManager.StartWave(stageLevel);
     }
 
     public void EndOfWave()
     {
+        Debug.Log("DIff : "+ Difficulty);
         stageManager.StageClear(Difficulty);
         UIManager.Instance.ShowPanel("StageClear");
+        if (Difficulty < 5)
+            stageUI.SwitchingClearPanel();
         gameDataManager.GetStageClearNum();
     }
 

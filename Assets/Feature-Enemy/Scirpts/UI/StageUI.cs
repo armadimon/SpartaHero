@@ -15,6 +15,12 @@ public class StageUI : MonoBehaviour
         UIManager.Instance.RegisterPanel("BossUI", BossUI);
 
     }
+
+    public void SwitchingClearPanel()
+    {
+        ReturnBtn temp = stageResultPanel.GetComponentInChildren<ReturnBtn>();
+        temp.gameObject.SetActive(false);
+    }
     
     public void HidePanel(string name)
     {

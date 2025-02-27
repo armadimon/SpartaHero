@@ -18,9 +18,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] Prefabs;
 
     GameManager gameManager;
-
-
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -51,10 +49,8 @@ public class UIManager : MonoBehaviour
         //     panel.SetActive(false);
         // }
 
-        Debug.Log(name);
         if (uiPanels.ContainsKey(name))
         {
-            Debug.Log(name);
             uiPanels[name].SetActive(true);
         }
     }
@@ -82,7 +78,6 @@ public class UIManager : MonoBehaviour
                 yield return null;
             }
         }
-
         uiPanels[name].SetActive(false);
     }
     
