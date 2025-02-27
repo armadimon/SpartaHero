@@ -5,39 +5,45 @@ using System;
 
 public class AChievements : MonoBehaviour
 {
-    private List<AChievementsList> AChievementslist = new List<AChievementsList>();
+    GameDataManager gameDataManager;
+    private List<AChievementsList> aChievementsList = new List<AChievementsList>();
+
+    public int StageClearNum = 0;
+    public int BossKillNum = 0;
+    public int WeaponChangeNum = 0;
 
     private void AChievementCreate()
     {
-        AChievementslist.Add(new AChievementsList("StageClear", false, () => StageClear()));
-        AChievementslist.Add(new AChievementsList("BossKill", false, () => BossKill()));
-        AChievementslist.Add(new AChievementsList("WeaponChange", false, () => WeaponChange()));
+        aChievementsList.Add(new AChievementsList("StageClear", () => StageClear(3)));
+        aChievementsList.Add(new AChievementsList("BossKill", () => BossKill(1)));
+        aChievementsList.Add(new AChievementsList("WeaponChange", () => WeaponChange(1)));
     }
 
-    public void StageClear()
+    public void StageClear(int ClearNum)
     {
-
+        if (WeaponChangeNum > ClearNum)
+            gameDataManager.AddAchievement($"{aChievementsList[0].Name}");
     }
-    public void BossKill()
+    public void BossKill(int KillNum)
     {
-
+        if (WeaponChangeNum > KillNum)
+            gameDataManager.AddAchievement($"{aChievementsList[1].Name}");
     }
-    public void WeaponChange()
+    public void WeaponChange(int ChangeNum)
     {
-
+        if(WeaponChangeNum > ChangeNum)
+            gameDataManager.AddAchievement($"{aChievementsList[2].Name}");
     }
 
 
     private class AChievementsList
     {
-        public string Name {  get; private set; }
-        public bool Clear {  get; private set; }
+        public string Name {  get; set; }
         public Action Action;
 
-        public AChievementsList(string name, bool clear = false, Action action = null) 
+        public AChievementsList(string name,Action action = null) 
         {
             Name = name;
-            Clear = clear;
             Action = action;
         }
     }

@@ -8646,6 +8646,7 @@ MonoBehaviour:
   BossUi: {fileID: 230635675}
   Prefabs:
   - {fileID: 6438689238548588318, guid: 154a86292f9303145806d2cbf8b1dccf, type: 3}
+  AChievementsText: {fileID: 0}
 --- !u!4 &1222615627
 Transform:
   m_ObjectHideFlags: 0
