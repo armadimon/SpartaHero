@@ -89,9 +89,11 @@ public class EnemyManager : MonoBehaviour
         else
         {
             StartBossStage();
-            GameManager.Instance.uiManager.BossUIActive();
+
             StopToMAp();
             GirdIDs[0].gameObject.SetActive(true);
+            UIManager.Instance.ShowPanel("BossUI");
+
         }
     }
 
@@ -143,7 +145,7 @@ public class EnemyManager : MonoBehaviour
         GameObject spawnedEnemy = Instantiate(randomPrefab, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         EnemyController enemyController = spawnedEnemy.GetComponent<EnemyController>();
 
-        GameObject Healthbar = Instantiate(GameManager.Instance.uiManager.Prefabs[0]);
+        GameObject Healthbar = Instantiate(UIManager.Instance.Prefabs[0]);
         Healthbar.transform.SetParent(spawnedEnemy.transform, false);
 
         Follow Health = Healthbar.GetComponentInChildren<Follow>();
@@ -176,6 +178,7 @@ public class EnemyManager : MonoBehaviour
         ResourceController playerResource = player.GetComponent<ResourceController>();
         
         playerResource.GetExp(enemyStat.Exp);
+        gameManager.stageManager.CurrentGold += enemyStat.Gold;
         GameDataManager.Instance.AddGold(enemyStat.Gold);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();

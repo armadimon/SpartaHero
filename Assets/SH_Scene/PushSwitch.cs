@@ -19,10 +19,8 @@ public class PushSwitch : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController player = collision.GetComponent<PlayerController>();
-        Debug.Log(collision.name + "1");
         if (player != null && collision.CompareTag("Player"))
         {
-            Debug.Log(collision.name + "2");
             player.SwapWeapon(this.gameObject);
         }
         

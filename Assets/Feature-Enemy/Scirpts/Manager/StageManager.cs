@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     public PlayerController player { get; private set; }
 
     private bool isClear = false;       // temp?
+    public int CurrentGold { get; set; }
 
     List<Stage> stages = new List<Stage>() {    // �������� ����Ʈ ���� (1 ~ 10)
         new Stage(1, 100, 100, 1, 3),
@@ -31,6 +32,7 @@ public class StageManager : MonoBehaviour
     {
         doorController = FindObjectOfType<DoorController>();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        CurrentGold = 0;
     }
 
 
@@ -61,9 +63,9 @@ public class StageManager : MonoBehaviour
     public void StageClear(int diff)        // �������� Ŭ���� ��
     {
         isClear = true;
-        if(GameManager.Instance.uiManager.BossUi.gameObject.activeSelf == true)
+        if(GameObject.Find("BossWarUI"))
         {
-            GameManager.Instance.uiManager.BossUi.gameObject.SetActive(false);
+            UIManager.Instance.HidePanel("BossUI");
         }
 
         doorController.OpenDoor();

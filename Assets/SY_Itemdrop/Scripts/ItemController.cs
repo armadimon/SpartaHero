@@ -39,15 +39,15 @@ public class ItemController : MonoBehaviour
                     HealingPotion();
                 break;
                 case "PowerUpPotion(Clone)":
-                    Debug.Log("°ø°Ý·Â Áõ°¡");
+                    Debug.Log("ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½ï¿½");
                     player.GetComponentInChildren<WeaponHandler>().Speed += 3f;
-                    Invoke("PowerUpPotion", 3); // 3ÃÊ ÈÄ ½ÃÀÛ
+                    Invoke("PowerUpPotion", 3); // 3ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
                 break;
                 case "SpeedpPotion(Clone)":
-                    Debug.Log("¼Óµµ Áõ°¡");
+                    Debug.Log("ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½");
                     player.GetComponent<StatHandler>().Speed += 3f;
-                    Invoke("SpeedPotion",3); // 3ÃÊ ÈÄ ½ÃÀÛ
+                    Invoke("SpeedPotion",3); // 3ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 break;
                 default:
                     break;
@@ -57,20 +57,20 @@ public class ItemController : MonoBehaviour
     }
     private void HealingPotion()
     {
-        Debug.Log("Ã¼·Â È¸º¹");
-        player.GetComponent<StatHandler>().Health += 5;
+        Debug.Log("Ã¼ï¿½ï¿½ È¸ï¿½ï¿½");
+        player.GetComponent<StatHandler>().Health += 30;
         Destroy(gameObject);
     }
 
     private void PowerUpPotion()
     {
-        Debug.Log("°ø°Ý·Â °¨¼Ò");
+        Debug.Log("ï¿½ï¿½ï¿½Ý·ï¿½ ï¿½ï¿½ï¿½ï¿½");
         player.GetComponentInChildren<WeaponHandler>().Speed -= 3f;
         Destroy(gameObject);
     }
     private void SpeedPotion()
     {
-        Debug.Log("¼Óµµ °¨¼Ò");
+        Debug.Log("ï¿½Óµï¿½ ï¿½ï¿½ï¿½ï¿½");
         player.GetComponent<StatHandler>().Speed -= 3f;
         Destroy(gameObject);
     }
