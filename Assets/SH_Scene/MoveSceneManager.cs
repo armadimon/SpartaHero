@@ -56,7 +56,7 @@ public class MoveSceneManager : MonoBehaviour
 
     void OnClickStartButton()
     {
-        SceneManager.LoadScene("MainLobbyScene");
+        SceneManager.LoadScene("Tutorial");
         SoundManager.instance.ChangeBackGroundMusic(lobbyBGM);
     }
 

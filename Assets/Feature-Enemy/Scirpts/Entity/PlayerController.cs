@@ -88,56 +88,58 @@ public class PlayerController : BaseController
     public void SwapWeapon(GameObject btn)
     {
         bool isSwapped = false;
-        GameObject tmp = weaponHandler.gameObject;
+        GameObject tmp = null;
+        if (weaponHandler != null)
+             tmp = weaponHandler.gameObject;
         if (btn.tag == "BowBtn")
         {
-            if (GameDataManager.Instance.Inventory.Contains("Bow"))
-            {
+            // if (GameDataManager.Instance.Inventory.Contains("Bow"))
+            // {
                 WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
                 weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
                 isSwapped = true;
-            }
-            else
-                Debug.Log("You have to buy it to use it!");
+            // }
+            // else
+            //     Debug.Log("You have to buy it to use it!");
         }
         else if (btn.tag == "SwordBtn")
         {
-            if (GameDataManager.Instance.Inventory.Contains("Sword"))
-            {
+            // if (GameDataManager.Instance.Inventory.Contains("Sword"))
+            // {
                 WeaponPrefab = Resources.Load<WeaponHandler>("P_Sword_EquipWeapon 1");
                 weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
                 isSwapped = true;
-            }
-            else
-            {
-                Debug.Log("You have to buy it to use it!");
-            }
+            // }
+            // else
+            // {
+            //     Debug.Log("You have to buy it to use it!");
+            // }
         }
         else if (btn.tag == "SpearBtn")
         {
-            if (GameDataManager.Instance.Inventory.Contains("Spear"))
-            {
+            // if (GameDataManager.Instance.Inventory.Contains("Spear"))
+            // {
                 WeaponPrefab = Resources.Load<WeaponHandler>("P_Spear_EquipWeapon 1");
                 weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
                 isSwapped = true;
-            }
-            else
-            {
-                Debug.Log("You have to buy it to use it!");
-            }
+            // }
+            // else
+            // {
+            //     Debug.Log("You have to buy it to use it!");
+            // }
         }
         else if (btn.tag == "StaffBtn")
         {
-            if (GameDataManager.Instance.Inventory.Contains("Staff"))
-            {
+            // if (GameDataManager.Instance.Inventory.Contains("Staff"))
+            // {
                 WeaponPrefab = Resources.Load<WeaponHandler>("P_Staff_EquipWeapon 1");
                 weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
                 isSwapped = true;
-            }
-            else
-            {
-                Debug.Log("You have to buy it to use it!");
-            }
+            // }
+            // else
+            // {
+            //     Debug.Log("You have to buy it to use it!");
+            // }
         }
         if (tmp != null && isSwapped)
         {
