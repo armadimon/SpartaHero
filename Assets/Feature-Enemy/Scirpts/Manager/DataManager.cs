@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,23 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance { get; private set; }
 
-    public int totalGold = 0;
+    private int totalGold = 0;
+    
+    public event Action<int> OnGoldChanged;
+    public int TotalGold
+    {
+        get { return totalGold; }
+        set
+        {
+            if (totalGold != value)
+            {
+                totalGold = value;
+                OnGoldChanged?.Invoke(totalGold);
+            }
+        }
+    }
     private List<string> achievements = new List<string>();
+    public List<string> Inventory = new List<string>();
 
     private void Awake()
     {
@@ -45,19 +61,32 @@ public class GameDataManager : MonoBehaviour
 
     private void LoadGameDatas()
     {
-        totalGold = LoadGameData("Gold", 0);
+        TotalGold = LoadGameData("Gold", 0);
         achievements = LoadGameData("Achievements", new List<string>());
+        Inventory = LoadGameData("Inventory", new List<string>());
     }
 
     public void AddGold(int amount)
     {
-        totalGold += amount;
+        TotalGold += amount;
+        SaveGameData("Gold", totalGold);
+    }
+    public void TakeGold(int amount)
+    {
+        TotalGold -= amount;
         SaveGameData("Gold", totalGold);
     }
 
     public int GetGold()
     {
         return totalGold;
+    }
+
+    public void AddItemToInventory(string ItemName)
+    {
+        if (Inventory.Contains(ItemName))
+            return;
+        Inventory.Add(ItemName);
     }
     
     public void AddAchievement(string achievement)
