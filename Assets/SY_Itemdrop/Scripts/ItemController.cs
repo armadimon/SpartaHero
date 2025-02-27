@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Newtonsoft.Json.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
@@ -40,7 +41,7 @@ public class ItemController : MonoBehaviour
                 break;
                 case "PowerUpPotion(Clone)":
                     Debug.Log("공격력 증가");
-                    player.GetComponentInChildren<WeaponHandler>().Speed += 3f;
+                    player.GetComponentInChildren<WeaponHandler>().Power += 3f; // 공격력으로 수정
                     Invoke("PowerUpPotion", 3); // 3초 후 시작
 
                 break;
@@ -58,14 +59,14 @@ public class ItemController : MonoBehaviour
     private void HealingPotion()
     {
         Debug.Log("체력 회복");
-        player.GetComponent<StatHandler>().Health += 5;
+        player.GetComponent<ResourceController>().CurrentHealth += 5;
         Destroy(gameObject);
     }
 
     private void PowerUpPotion()
     {
         Debug.Log("공격력 감소");
-        player.GetComponentInChildren<WeaponHandler>().Speed -= 3f;
+        player.GetComponentInChildren<WeaponHandler>().Power -= 3f; // 공격력으로 수정
         Destroy(gameObject);
     }
     private void SpeedPotion()

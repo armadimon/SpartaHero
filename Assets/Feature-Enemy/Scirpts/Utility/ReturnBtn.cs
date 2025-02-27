@@ -10,6 +10,6 @@ public class ReturnBtn : MonoBehaviour
         PlayerController player = FindObjectOfType<PlayerController>();
         if (player != null)
             Destroy(player.gameObject);
-        SceneManager.LoadScene("MainLobbyScene");
+        SceneManager.LoadScene("MainLobbyScene1");
     }
 }
