@@ -94,14 +94,11 @@ public class EnemyManager : MonoBehaviour
 
     public void StartBossStage()
     {
-        Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
 
         // Rect 영역 내부의 랜덤 위치 계산
-        Vector2 randomPosition = new Vector2(
-            Random.Range(randomArea.xMin, randomArea.xMax),
-            Random.Range(randomArea.yMin, randomArea.yMax)
-        );
-        
+        Vector2 randomPosition = CreatSpawnPosition(0);
+
+
         GameObject randomBoss = BossPrefabs[Random.Range(0, BossPrefabs.Count)];
         GameObject spawnedBoss = Instantiate(randomBoss, new Vector3(randomPosition.x, randomPosition.y), Quaternion.identity);
         BossController bossController = spawnedBoss.GetComponent<BossController>();
@@ -207,6 +204,19 @@ public class EnemyManager : MonoBehaviour
     }
 
 
+    public void StopToMAp()
+    {
+        if (GirdIDs[0].gameObject.activeSelf)
+        {
+            GirdIDs[0].gameObject.SetActive(false);
+        }
+
+        if (GirdIDs[1].gameObject.activeSelf)
+        {
+            GirdIDs[1].gameObject.SetActive(false);
+        }
+    }
+    
     public Vector2 CreatSpawnPosition(int Ran)
     {
         if( Ran == 0)

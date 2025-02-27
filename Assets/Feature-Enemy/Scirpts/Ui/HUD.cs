@@ -29,8 +29,9 @@ public class HUD : MonoBehaviour
             case Uitype.BossHealthBar:
                 float MaxHp = 0f;
                 float curret = 0f;
-                GameObject Orc = FindAnyObjectByType<BossController>().gameObject;
-                if (Orc != null)
+                GameObject Orc = FindAnyObjectByType<BossController>()?.gameObject;
+                if (Orc == null) return;
+                else
                 {
 
                     if (Orc.GetComponent<StatHandler>() != null)
@@ -44,10 +45,7 @@ public class HUD : MonoBehaviour
                     Slider.value = curret / MaxHp;
                     Slider.fillRect.gameObject.SetActive(Slider.value > 0);
                 }
-                else
-                {
-                    return;
-                }
+  
 
                 break;
             case Uitype.HealthBar:

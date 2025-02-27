@@ -498,6 +498,7 @@ MonoBehaviour:
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.3254902}
   activeEnemies: []
   activeBoss: []
+  WhatMap: 0
   timeBetweenSpawns: 0.2
   timeBetweenWaves: 1
 --- !u!1 &216103186
@@ -15079,7 +15080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1462442509
 Transform:
   m_ObjectHideFlags: 0
