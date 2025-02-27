@@ -2749,7 +2749,7 @@ MonoBehaviour:
   soundEffectVolume: 0.286
   soundEffectPitchVariance: 0.214
   musicVolume: 0.295
-  musicClip: {fileID: 8300000, guid: cbe183a25fb8b54458ade275fd4b60db, type: 3}
+  musicClip: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
   soundSourcePrefab: {fileID: 8780219435899078381, guid: a93670e0280fd3547abbe4bf35ab691c, type: 3}
 --- !u!4 &1396270875
 Transform:
