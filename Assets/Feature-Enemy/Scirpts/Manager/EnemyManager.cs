@@ -81,6 +81,8 @@ public class EnemyManager : MonoBehaviour
                 StopCoroutine(waveRoutine);
             int randomNum = Random.Range(stage.MonstersMin, stage.MonstersMax);
             waveRoutine =  StartCoroutine(SpawnWave(randomNum, Rand));
+
+            StopToMAp();
             GirdIDs[Rand].gameObject.SetActive(true);
             
         }
@@ -88,6 +90,7 @@ public class EnemyManager : MonoBehaviour
         {
             StartBossStage();
             GameManager.Instance.uiManager.BossUIActive();
+            StopToMAp();
             GirdIDs[0].gameObject.SetActive(true);
         }
     }
@@ -215,6 +218,10 @@ public class EnemyManager : MonoBehaviour
         {
             GirdIDs[1].gameObject.SetActive(false);
         }
+        if (GirdIDs[2].gameObject.activeSelf)
+        {
+            GirdIDs[2].gameObject.SetActive(false);
+        }
     }
     
     public Vector2 CreatSpawnPosition(int Ran)
@@ -246,6 +253,30 @@ public class EnemyManager : MonoBehaviour
             {
                 new Rect(-6f, 13f, 12f, 3f),
                 new Rect(-6f, 19f, 12f, 3f),
+            };
+
+            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+
+            // Rect 영역 내부의 랜덤 위치 계산
+            Vector2 randomPosition = new Vector2(
+                Random.Range(randomArea.xMin, randomArea.xMax),
+                Random.Range(randomArea.yMin, randomArea.yMax)
+            );
+
+            return randomPosition;
+
+        }
+        else if (Ran == 2)
+        {
+            spawnAreas.RemoveAll(x => x == x);
+            spawnAreas = new List<Rect>
+            {
+                new Rect(13f,-1f,2f,8f),
+                new Rect(24f,-1f,2f,8f),
+                new Rect(8f,8.5f,2f,1f),
+                new Rect(8f,-3.5f,2f,1f),
+                new Rect(18.5f,-3.5f,2f,1f),
+                new Rect(18.5f,8.5f,2f,1f)
             };
 
             Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
