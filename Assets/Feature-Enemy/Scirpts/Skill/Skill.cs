@@ -41,7 +41,6 @@ public class Skill : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(transform.childCount + " child count");
         for (int i = 0; i < transform.childCount; i++)
         {
             Buttons.Add(transform.GetChild(i).GetComponent<Button>());
@@ -54,7 +53,6 @@ public class Skill : MonoBehaviour
 
         WeaponPivot = player.GetChild(1);
                
-        Debug.Log( WeaponPivot.name + "WeaponPivot.name");
         for (int i = 0;i < WeaponPivot.childCount;i++)
         {
             handlers.Add(WeaponPivot.GetChild(i).GetComponent<WeaponHandler>());
