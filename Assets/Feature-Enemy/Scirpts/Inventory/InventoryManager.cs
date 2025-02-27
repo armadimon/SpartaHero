@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class InventoryManager : MonoBehaviour
+{
+    public GameObject itemPrefab;
+    public Transform content;
+    public PlayerController player;
+    private static InventoryManager instance;
+    public static InventoryManager Instance { get { return instance; } }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        
+    }
+
+    private void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+        if (player == null)
+        {
+            Debug.LogError("Player object not found!");
+        }
+    }
+
+    public void AddItem(ItemSet itemData)
+    {
+        GameObject newItem = Instantiate(itemPrefab, content); // 아이템 추가
+
+        // UI 업데이트 (아이콘 & 이름)
+        newItem.transform.GetComponentInChildren<Image>().sprite = itemData.Image;
+        newItem.transform.GetComponentInChildren<Text>().text = itemData.name;
+        if (itemData.type == ItemType.Weapon)
+        {
+            itemData.OnClick = () => player.SwapWeapon(itemData.name);
+        }
+
+        // 버튼 클릭 이벤트 추가
+        Button button = newItem.GetComponentInChildren<Button>();
+        button.onClick.AddListener(() => itemData.OnClick?.Invoke());
+    }
+}

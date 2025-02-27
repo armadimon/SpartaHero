@@ -12,14 +12,14 @@ public class ItemSet : MonoBehaviour
     public Sprite Image;
 
     public Action Action;
+    public Action OnClick;
 
-    public ItemSet(ItemType type, string name, string description, int price, Sprite image, Action action = null)
+    public ItemSet(ItemType type, string name, string description, int price, Sprite image)
     {
         this.type = type;
         this.name = name;
         this.price = price;
         this.description = description;
         Image = image;
-        Action = action;
     }
 }

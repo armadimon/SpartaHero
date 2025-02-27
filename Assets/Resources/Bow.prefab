@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 8698162510936379719}
   - component: {fileID: 3717791299586459588}
   m_Layer: 0
-  m_Name: P_Bow_EquipWeapon 1
+  m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

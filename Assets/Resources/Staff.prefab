@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1384770901226826243}
   - component: {fileID: 8463407280969346757}
   m_Layer: 0
-  m_Name: P_Staff_EquipWeapon 1
+  m_Name: Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

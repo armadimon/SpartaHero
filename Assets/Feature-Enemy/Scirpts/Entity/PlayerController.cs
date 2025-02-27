@@ -95,68 +95,24 @@ public class PlayerController : BaseController
         _gameManager.GameOver();
     }
     
-    public void SwapWeapon(GameObject btn)
+    public void SwapWeapon(string weaponName)
     {
         bool isSwapped = false;
         GameObject tmp = null;
         if (weaponHandler != null)
              tmp = weaponHandler.gameObject;
-        if (btn.tag == "BowBtn")
+        WeaponPrefab = Resources.Load<WeaponHandler>(weaponName);
+        if (WeaponPrefab != null)
         {
-            // if (GameDataManager.Instance.Inventory.Contains("Bow"))
-            // {
-                WeaponPrefab = Resources.Load<WeaponHandler>("P_Bow_EquipWeapon 1");
-                weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-                isSwapped = true;
-            // }
-            // else
-            //     Debug.Log("You have to buy it to use it!");
-        }
-        else if (btn.tag == "SwordBtn")
-        {
-            // if (GameDataManager.Instance.Inventory.Contains("Sword"))
-            // {
-                WeaponPrefab = Resources.Load<WeaponHandler>("P_Sword_EquipWeapon 1");
-                weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-                isSwapped = true;
-            // }
-            // else
-            // {
-            //     Debug.Log("You have to buy it to use it!");
-            // }
-        }
-        else if (btn.tag == "SpearBtn")
-        {
-            // if (GameDataManager.Instance.Inventory.Contains("Spear"))
-            // {
-                WeaponPrefab = Resources.Load<WeaponHandler>("P_Spear_EquipWeapon 1");
-                weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-                isSwapped = true;
-            // }
-            // else
-            // {
-            //     Debug.Log("You have to buy it to use it!");
-            // }
-        }
-        else if (btn.tag == "StaffBtn")
-        {
-            // if (GameDataManager.Instance.Inventory.Contains("Staff"))
-            // {
-                WeaponPrefab = Resources.Load<WeaponHandler>("P_Staff_EquipWeapon 1");
-                weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
-                isSwapped = true;
-            // }
-            // else
-            // {
-            //     Debug.Log("You have to buy it to use it!");
-            // }
+            weaponHandler = Instantiate(WeaponPrefab, weaponPivot);
+            isSwapped = true;
         }
         if (tmp != null && isSwapped)
         {
             Destroy(tmp.gameObject);
         }
-        
-        else return;
+        else
+            return;
     }
 
 }

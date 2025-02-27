@@ -79,7 +79,7 @@ public class ShopManager : MonoBehaviour
                 int index = (itemIndex * 3) + i;
                 if (index <= Items.Count - 1)
                 {
-                    Buttons[i].onClick.AddListener(() => Items[itemIndex].Action());
+                    Buttons[i].onClick.AddListener(() => Items[index].Action());
                     Images[i].sprite = Items[index].Image;
                     ItemName[i].text = Items[index].name;
                     ItemDesc[i].text = Items[index].description;
@@ -89,36 +89,43 @@ public class ShopManager : MonoBehaviour
 
     private void ItemCreate()
     {
-        Items.Add(new ItemSet(ItemType.Weapon,"Bow", "가격 : 50\n활입니다.", 50, images[0], () => GetItem("Bow", 50)));
-        Items.Add(new ItemSet(ItemType.Weapon,"Sword", "가격 : 50\n칼입니다.", 50, images[1], () => GetItem("Sword", 50)));
-        Items.Add(new ItemSet(ItemType.Weapon,"Spear", "가격 : 50\n창입니다.", 50, images[2], () => GetItem("Spear", 50)));
-        Items.Add(new ItemSet(ItemType.Weapon,"Staff", "가격 : 50\n지팡이입니다.", 50, images[3], () => GetItem("Staff", 50)));
-        Items.Add(new ItemSet(ItemType.Cosmetic,"Dwarf", "가격 : 500\n드워프가됩니다.", 500, images[4], () => GetItem("Dwarf", 500)));
-        Items.Add(new ItemSet(ItemType.Cosmetic,"Default", "empty", 500, images[4], () => GetItem()));
+        Items.Add(CreateItemSet(ItemType.Weapon,"Bow", "Price : 50\nBow.", 50, images[0]));
+        Items.Add(CreateItemSet(ItemType.Weapon,"Sword", "Price : 50\nSword.", 50, images[1]));
+        Items.Add(CreateItemSet(ItemType.Weapon,"Spear", "Price : 50\nSpear.", 50, images[2]));
+        Items.Add(CreateItemSet(ItemType.Weapon,"Staff", "Price : 50\nStaff.", 50, images[3]));
+        Items.Add(CreateItemSet(ItemType.Cosmetic,"Dwarf", "Price : 500\nDwarf.", 500, images[4]));
+        Items.Add(CreateItemSet(ItemType.Cosmetic,"Default", "empty", 500, images[4]));
+    }
+
+    private ItemSet CreateItemSet(ItemType type, string name, string description, int price, Sprite image)
+    {
+        ItemSet set = new ItemSet(type, name, description, price, image);
+        set.Action = () => GetItem(set);
+        return set;
     }
     private void GetItem()
     {
     }
     
-    private void GetItem(string itemName, int Gold)
+    private void GetItem(ItemSet item)
     {
-        if (Gold > GameDataManager.Instance.GetGold())
+        Debug.Log(item.name);
+        if (item.price > GameDataManager.Instance.GetGold())
         {
             UIManager.Instance.ShowToast("ToastMsg", "GOLD가 부족합니다!", 3);
             return;
         }
-        if (GameDataManager.Instance.Inventory.Contains(itemName))
+        if (GameDataManager.Instance.Inventory.Contains(item.name))
         {
             UIManager.Instance.ShowToast("ToastMsg", "You already have it!", 3);
         }
         else
         {
-            GameDataManager.Instance.AddItemToInventory(itemName);
-            GameDataManager.Instance.TakeGold(Gold);
+            GameDataManager.Instance.AddItemToInventory(item.name);
+            InventoryManager.Instance.AddItem(item);
+            GameDataManager.Instance.TakeGold(item.price);
         }
     }
-    
-
 }
 
 
