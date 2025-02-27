@@ -2568,7 +2568,6 @@ GameObject:
   - component: {fileID: 1182001110}
   - component: {fileID: 1182001109}
   - component: {fileID: 1182001108}
-  - component: {fileID: 1182001112}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2663,22 +2662,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1182001112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182001107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d01426d7e7e8f4491ab8a95d218ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startButton: {fileID: 432516253}
-  exitButton: {fileID: 526674054}
-  settingButton: {fileID: 2000913686}
-  settingPanel: {fileID: 1944184503}
 --- !u!1 &1192535239
 GameObject:
   m_ObjectHideFlags: 0
@@ -2748,8 +2731,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffectVolume: 0.286
   soundEffectPitchVariance: 0.214
-  musicVolume: 0.295
-  musicClip: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
+  musicVolume: 0.1
+  titleBGM: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
   soundSourcePrefab: {fileID: 8780219435899078381, guid: a93670e0280fd3547abbe4bf35ab691c, type: 3}
 --- !u!4 &1396270875
 Transform:
@@ -2970,7 +2953,7 @@ GameObject:
   - component: {fileID: 1626106457}
   - component: {fileID: 1626106456}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3337,6 +3320,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1856515716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1856515717}
+  - component: {fileID: 1856515718}
+  m_Layer: 0
+  m_Name: MoveSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1856515717
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856515716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1856515718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856515716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a905814bcca8896439e52523d2b1f894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startButton: {fileID: 432516253}
+  exitButton: {fileID: 526674054}
+  settingButton: {fileID: 2000913686}
+  titleText: {fileID: 1626106454}
+  settingPanel: {fileID: 1944184503}
+  lobbyBGM: {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
+  stageBGM: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
 --- !u!1 &1882784866
 GameObject:
   m_ObjectHideFlags: 0
@@ -4067,3 +4101,4 @@ SceneRoots:
   - {fileID: 837359477}
   - {fileID: 914815180}
   - {fileID: 1396270875}
+  - {fileID: 1856515717}

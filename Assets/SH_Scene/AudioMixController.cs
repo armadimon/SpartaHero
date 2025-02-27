@@ -50,7 +50,7 @@ public class AudioMixController : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("SFX", SFXSlider.value);
+        PlayerPrefs.SetFloat("SFXVolume", SFXSlider.value);
     }
 
 }

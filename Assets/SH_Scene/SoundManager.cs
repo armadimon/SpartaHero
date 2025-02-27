@@ -9,9 +9,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField][Range(0f, 1f)] private float musicVolume;
 
     private AudioSource musicAudioSource;
-    public AudioClip musicClip;
+    public AudioClip titleBGM;
 
     public SoundSource soundSourcePrefab;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -30,8 +32,9 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeBackGroundMusic(musicClip);
+        ChangeBackGroundMusic(titleBGM);
     }
+
 
     public void ChangeBackGroundMusic(AudioClip clip)
     {

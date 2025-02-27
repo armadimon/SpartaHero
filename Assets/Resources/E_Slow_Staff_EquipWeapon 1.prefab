@@ -194,6 +194,7 @@ MonoBehaviour:
   isOnKnockBack: 1
   knockBackPower: 3
   knockBackTime: 0.5
+  attackSoundClip: {fileID: 8300000, guid: e56990c5c0d634a45976113d8088d999, type: 3}
   projectileSpawnPosition: {fileID: 4556039448765610959}
   bulletIndex: 1
   bulletSize: 1
@@ -201,4 +202,7 @@ MonoBehaviour:
   spread: 1
   numberOfProjectilesPerShot: 1
   multipleProjectilesAngle: 1
+  BoundCount: 100
+  penetration: 1
   projectileColor: {r: 0.427451, g: 0.9529412, b: 0.45638785, a: 1}
+  Debuffe: 
