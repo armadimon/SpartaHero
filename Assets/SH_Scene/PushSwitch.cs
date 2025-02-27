@@ -22,9 +22,9 @@ public class PushSwitch : MonoBehaviour
         if (player != null && collision.CompareTag("Player"))
         {
             player.SwapWeapon(this.gameObject);
+            StartCoroutine("OperateButton");
         }
         
-        StartCoroutine("OperateButton");
     }
 
 

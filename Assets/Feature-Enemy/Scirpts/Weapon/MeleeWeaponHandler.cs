@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class MeleeWeaponHandler : WeaponHandler
 {
-        [Header("Melee Attack Data")]
-    
+    [Header("Melee Attack Data")]
     public Vector2 collideBoxSize = Vector2.one;
 
     protected void Start()
@@ -56,16 +55,15 @@ public class MeleeWeaponHandler : WeaponHandler
         }
     }
 
-    private Coroutine parryCoroutine = null; // 현재 코루틴 상태 저장
-
+    private Coroutine parryCoroutine = null;
     public void StartParryCoroutine()
     {
-        if (!ActiveSkills.ContainsKey(ActiveSkill.Parrying)) 
+        if (!ActiveSkills.ContainsKey(ActiveSkill.Parrying))
         {
-            ActiveSkills[ActiveSkill.Parrying] = true; // 패링 추가
+            ActiveSkills[ActiveSkill.Parrying] = true;
         }
 
-        if (parryCoroutine == null) // 중복 실행 방지
+        if (parryCoroutine == null)
         {
             parryCoroutine = StartCoroutine(ParryCycleCoroutine());
         }
