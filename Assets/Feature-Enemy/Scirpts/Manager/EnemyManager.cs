@@ -166,6 +166,7 @@ public class EnemyManager : MonoBehaviour
         ResourceController playerResource = player.GetComponent<ResourceController>();
         
         playerResource.GetExp(enemyStat.Exp);
+        gameManager.stageManager.CurrentGold += enemyStat.Gold;
         GameDataManager.Instance.AddGold(enemyStat.Gold);
         if (enemySpawnComplete &&  activeEnemies.Count == 0)
             gameManager.EndOfWave();

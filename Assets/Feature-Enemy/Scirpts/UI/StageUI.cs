@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class StageUI : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject skillSelectPanel;
+    public GameObject stageResultPanel;
     private void Start()
     {
-        UIManager.Instance.RegisterPanel("SkillSelectActive", panel);
+        UIManager.Instance.RegisterPanel("SkillSelectActive", skillSelectPanel);
+        UIManager.Instance.RegisterPanel("StageClear", stageResultPanel);
     }
 }

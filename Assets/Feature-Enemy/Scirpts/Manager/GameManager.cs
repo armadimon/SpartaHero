@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private static int currentWaveIndex = 0;
 
     private EnemyManager enemyManager;
-    private StageManager stageManager;
+    public StageManager stageManager;
     public UIManager uiManager;
     private GameDataManager gameDataManager;
 
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     public void EndOfWave()
     {
         stageManager.StageClear(Difficulty);
-        //StartNextWave();
+        uiManager.ShowPanel("StageClear");
     }
 
     public void GameOver()

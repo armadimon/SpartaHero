@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
     public PlayerController player { get; private set; }
 
     private bool isClear = false;       // temp?
+    public int CurrentGold { get; set; }
 
     List<Stage> stages = new List<Stage>() {    // �������� ����Ʈ ���� (1 ~ 10)
         new Stage(1, 100, 100, 1, 3),
@@ -31,6 +32,7 @@ public class StageManager : MonoBehaviour
     {
         doorController = FindObjectOfType<DoorController>();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        CurrentGold = 0;
     }
 
 
