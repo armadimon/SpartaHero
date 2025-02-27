@@ -30,7 +30,7 @@ public class EnterDungeon : MonoBehaviour
 
     void OnClickStartButton()
     {
-        SceneManager.LoadScene("MainLobbyScene");
+        SceneManager.LoadScene("TestScene");
     }
 
     void OnclickExitButton()
