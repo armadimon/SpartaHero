@@ -32,6 +32,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float timeBetweenWaves = 1f;
 
     GameManager gameManager;
+    PlayerController player;
     ItemController ItemController;
 
     private void Start()
