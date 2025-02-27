@@ -222,6 +222,10 @@ public class EnemyManager : MonoBehaviour
         {
             GirdIDs[2].gameObject.SetActive(false);
         }
+        if (GirdIDs[3].gameObject.activeSelf)
+        {
+            GirdIDs[3].gameObject.SetActive(false);
+        }
     }
     
     public Vector2 CreatSpawnPosition(int Ran)
@@ -277,6 +281,27 @@ public class EnemyManager : MonoBehaviour
                 new Rect(8f,-3.5f,2f,1f),
                 new Rect(18.5f,-3.5f,2f,1f),
                 new Rect(18.5f,8.5f,2f,1f)
+            };
+
+            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+
+            // Rect 영역 내부의 랜덤 위치 계산
+            Vector2 randomPosition = new Vector2(
+                Random.Range(randomArea.xMin, randomArea.xMax),
+                Random.Range(randomArea.yMin, randomArea.yMax)
+            );
+
+            return randomPosition;
+
+        }
+        else if (Ran == 3)
+        {
+            spawnAreas.RemoveAll(x => x == x);
+            spawnAreas = new List<Rect>
+            {
+                new Rect(-10f,13f,21f,1f),
+                new Rect(-10f,14f,21f,1f),
+
             };
 
             Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];

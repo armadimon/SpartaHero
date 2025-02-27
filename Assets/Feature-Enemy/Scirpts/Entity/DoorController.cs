@@ -40,6 +40,10 @@ public class DoorController : MonoBehaviour
         {
             transform.position = new Vector3(27f, 10.94f, 0f);
         }
+        else if (enemyManager.WhatMap == 3)
+        {
+            transform.position = new Vector3(0f, 17f, 0f);
+        }
     }
 
 
