@@ -68,7 +68,7 @@ public class Skill : MonoBehaviour
         //player = FindAnyObjectByType<Player>();
 
         SkipBut.onClick.AddListener(Skip);
-        //¼öÁ¤µÇ¾î¾ß ÇÔ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ ï¿½ï¿½
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
     }
 
@@ -96,14 +96,14 @@ public class Skill : MonoBehaviour
         List<int> lists = new List<int>();
 
 
-        //¼öÁ¤ÀÌ ÇÊ¿äÇÔ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½
         bool IsRange = WeaponPivot.GetChild(0).GetComponent<RangeWeaponHandler>() != null;
         bool IsMelee = WeaponPivot.GetChild(0).GetComponent<MeleeWeaponHandler>() != null;
 
 
         foreach (SkillSet skill in Skills)
         {
-            //³»ºÎ¿¡¼­ ÆÄ¾Ç
+            //ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½Ä¾ï¿½
             if (skill.type == SkillType.Melee && !IsMelee)
                 continue;
             if (skill.type == SkillType.Range && !IsRange)
@@ -157,17 +157,21 @@ public class Skill : MonoBehaviour
 
     private void SkillCreate()
     {
-        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "healthup healthup", images[0], () => HealthUp(50)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "AttackUp", images[0], () => AttackUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "SpeedUp", images[0], () => SpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeedUp", images[0], () => AttackSpeedUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRangeUp", images[0], () => AttackRangeUp(3)));
-        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelayDown", images[0], () => AttackDelayDown(3)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCountUp", images[0], () => AttackCountUp(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSizeup", images[0], () => BulletSizeup(5)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Boundup", images[0], () => Boundup(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration", images[0], () => Penetration(1)));
-        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Slow", images[0], Slow));
+
+        
+        Skills.Add(new SkillSet(SkillType.Default, 0, "healthup", "HP 50 UP", images[0], () => HealthUp(50)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackUp", "Attack Power \n3 UP", images[1], () => AttackUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "SpeedUp", "Speed \n3 UP", images[2], () => SpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackSpeedUp", "AttackSpeed \n3 UP", images[3], () => AttackSpeedUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackRangeUp", "AttackRange \n3 UP", images[4], () => AttackRangeUp(3)));
+        Skills.Add(new SkillSet(SkillType.Default, 0, "AttackDelayDown", "AttackDelay  \n0.2 Down", images[5], () => AttackDelayDown(0.2f)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "AttackCountUp", "AttackCount \n1 UP", images[6], () => AttackCountUp(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "BulletSizeup", "BulletSize \n1 UP", images[7], () => BulletSizeup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Boundup", "Bound Count \n1 UP", images[8], () => Boundup(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Penetration", "Penetration \n1 UP", images[9], () => Penetration(1)));
+        Skills.Add(new SkillSet(SkillType.Range, 0, "Slow", "Shoot a \nslowing arrow", images[10], Slow));
+        Skills.Add(new SkillSet(SkillType.Melee, 0, "Parrying", "Parrying", images[11], () => Parrying()));
+
 
     }
 
@@ -194,6 +198,7 @@ public class Skill : MonoBehaviour
     {
         //handlers.Add(FindAnyObjectByType<WeaponHandler>());
         player.GetComponent<StatHandler>().Health += value;
+        player.GetComponent<ResourceController>().CurrentHealth += value;
         Time.timeScale = 1f;
         Parent.gameObject.SetActive(false);
     }
