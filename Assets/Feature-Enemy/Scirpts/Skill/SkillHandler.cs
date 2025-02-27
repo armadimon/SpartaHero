@@ -14,7 +14,6 @@ public class SkillHandler : MonoBehaviour
     {
         if (boundcount > 0 && !isFirst)
         {
-            rigidbody.velocity = -rigidbody.velocity;
             spriteRenderer.flipY = !spriteRenderer.flipY;
         }
     }
@@ -43,7 +42,8 @@ public class SkillHandler : MonoBehaviour
 
 
             statHandler.Speed = 3f;
-            sprite.gameObject.SetActive(false);
+            if (sprite != null)
+                sprite.gameObject.SetActive(false);
             Debug.Log("Coloron");
 
         }

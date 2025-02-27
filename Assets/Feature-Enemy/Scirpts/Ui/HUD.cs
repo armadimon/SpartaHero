@@ -29,18 +29,23 @@ public class HUD : MonoBehaviour
             case Uitype.BossHealthBar:
                 float MaxHp = 0f;
                 float curret = 0f;
-                GameObject Orc = FindAnyObjectByType<BossController>().gameObject;
+                GameObject Orc = FindAnyObjectByType<BossController>()?.gameObject;
+                if (Orc == null) return;
+                else
+                {
 
-                if(Orc.GetComponent<StatHandler>() != null)
-                {
-                    MaxHp = Orc.GetComponent<StatHandler>().Health;
+                    if (Orc.GetComponent<StatHandler>() != null)
+                    {
+                        MaxHp = Orc.GetComponent<StatHandler>().Health;
+                    }
+                    if (Orc.GetComponent<ResourceController>() != null)
+                    {
+                        curret = Orc.GetComponent<ResourceController>().CurrentHealth;
+                    }
+                    Slider.value = curret / MaxHp;
+                    Slider.fillRect.gameObject.SetActive(Slider.value > 0);
                 }
-                if(Orc.GetComponent<ResourceController>() != null)
-                {
-                    curret = Orc.GetComponent<ResourceController>().CurrentHealth;
-                }
-                Slider.value = curret / MaxHp;
-                Slider.fillRect.gameObject.SetActive(Slider.value > 0);
+  
 
                 break;
             case Uitype.HealthBar:

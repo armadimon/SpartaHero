@@ -58,7 +58,6 @@ public class ProjectileController : MonoBehaviour
         if (skillHandler.isFirst)
             rigidbody.velocity = direction * rangeWeaponHandler.Speed;
 
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,6 +69,13 @@ public class ProjectileController : MonoBehaviour
      
                 //if Arrow hit the wall then Bounce
                 skillHandler.isFirst = false;
+                Vector2 closestPoint = collision.ClosestPoint(transform.position);
+                Vector2 normalVector = (Vector2)transform.position - closestPoint;
+                normalVector.Normalize();
+                direction = Vector2.Reflect(direction, normalVector);
+                rigidbody.velocity = direction * rangeWeaponHandler.Speed;
+                float rotZ = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
                 skillHandler.Bounding(rigidbody,spriteRenderer);
                 skillHandler.boundcount--;
             }
@@ -83,10 +89,7 @@ public class ProjectileController : MonoBehaviour
             ResourceController resourceController = collision.GetComponent<ResourceController>();
             if (rangeWeaponHandler.Debuff[0])
                 skillHandler.StartSlow(collision);
-
-        
-
-
+            
             if (resourceController != null)
             {
                 resourceController.ChangeHealth(-rangeWeaponHandler.Power);
