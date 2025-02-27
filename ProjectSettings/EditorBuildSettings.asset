@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainLobbyScene.unity
     guid: 105bee650fd93a140a44c22b4259d67b
+  - enabled: 1
+    path: Assets/Tutirial/Tutorial.unity
+    guid: beaa6f4270b489440a3a78d2611f074f
+  - enabled: 1
+    path: Assets/Tutirial/TutorialSilhum.unity
+    guid: 64609ff1188e33c4b8d774f09f4e54dc
   m_configObjects: {}
