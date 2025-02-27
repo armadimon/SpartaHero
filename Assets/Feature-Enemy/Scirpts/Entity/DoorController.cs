@@ -14,6 +14,8 @@ public class DoorController : MonoBehaviour
     public GameObject openedDoor;
     public GameObject closedDoor;
 
+    public AudioClip openClip;
+
 
     public void Init(StageManager stageManager)
     {
@@ -30,6 +32,7 @@ public class DoorController : MonoBehaviour
     public void OpenDoor()    // �� Ȱ��ȭ
     {
         closedDoor.SetActive(false);
+        SoundManager.PlayClip(openClip);
         openedDoor.SetActive(true);
     }
 

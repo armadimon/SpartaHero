@@ -15,6 +15,9 @@ public class ResourceController_clone : MonoBehaviour
     public float CurrentHealth { get; private set; }
     public float MaxHealth => _statHandler.Health;
 
+    public AudioClip damageClip;        // 추가
+
+
     private void Awake()
     {
         _baseController = GetComponent<BaseController>();
@@ -53,6 +56,9 @@ public class ResourceController_clone : MonoBehaviour
         if (change < 0)
         {
             _animationHandler.Damage();
+
+            if (damageClip != null)                         // 추가
+                SoundManager.PlayClip(damageClip);          // 추가
         }
 
         if (CurrentHealth <= 0f)
