@@ -65,6 +65,7 @@ public class DoorController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)     // ���� ��������. ���� �� Collider + �θ� ������ Rigidbody
     {
+        
         if (stageManager == null)
             Debug.Log("stageManager null");
         stageManager.NextStage();

@@ -19,6 +19,7 @@ public class BossController : BaseController
     
     [SerializeField] private float followRange = 30f;
 
+
     protected float DistanceToTarget()
     {
         return Vector3.Distance(transform.position, target.position);
@@ -43,7 +44,6 @@ public class BossController : BaseController
         attackRangeRenderer = attackRangeIndicator.GetComponent<SpriteRenderer>();
         initialColor = attackRangeRenderer.color; // 초기 색상 저장
         attackRangeIndicator.transform.localScale = Vector3.zero; // 초기에는 숨김
-
     }
     
     protected override void HandleAction()
