@@ -26,6 +26,7 @@ public class PlayerController : BaseController
             follow = transform.GetChild(3).transform.GetChild(i).GetComponent<Follow>();
             follow.SetTarget(transform);
         }
+        ChangeCharacter(GameDataManager.Instance.LoadGameData("Character", "Player"));
     }
     
     protected override void HandleAction()
@@ -112,6 +113,7 @@ public class PlayerController : BaseController
         if (overrideController != null)
         {
             animator.runtimeAnimatorController = overrideController;
+            GameDataManager.Instance.SaveGameData("Character", name);
         }
         else
         {

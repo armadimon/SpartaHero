@@ -42,6 +42,7 @@ public class GameDataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        AddItemToInventory("Player");
     }
 
     public void SaveGameData<T>(string key, T value)
@@ -55,7 +56,6 @@ public class GameDataManager : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(key))
         {
-            Debug.Log(PlayerPrefs.GetString(key));
             string json = PlayerPrefs.GetString(key);
             return JsonConvert.DeserializeObject<T>(json);
         }
@@ -93,6 +93,11 @@ public class GameDataManager : MonoBehaviour
         if (Inventory.Contains(ItemName))
             return;
         Inventory.Add(ItemName);
+        SaveInventory();
+    }
+
+    public void SaveInventory()
+    {
         SaveGameData("Inventory", Inventory);
     }
 

@@ -27,19 +27,13 @@ public class ItemDatabase : MonoBehaviour
     private void LoadItems()
     {
         string path = Path.Combine(Application.streamingAssetsPath, "items.json");
-        // path = path.Replace("/", "\\");
-        Debug.Log("Loading items...");
-        Debug.Log(path);
         if (File.Exists(path))
         {
-            Debug.Log("exist");
             string json = File.ReadAllText(path);
-            Debug.Log(json);
             List<ItemData> itemList = JsonConvert.DeserializeObject<List<ItemData>>(json);
 
             foreach (var item in itemList)
             {
-                Debug.Log(item.name);
                 items[item.name] = new ItemSet(item.type, item.name, item.description, item.price, images[item.imageIndex]);
             }
         }

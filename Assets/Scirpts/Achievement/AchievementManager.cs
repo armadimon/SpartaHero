@@ -56,12 +56,10 @@ public class AchievementManager : MonoBehaviour
     void LoadAchievements()
     {
         var savedAchievements = GameDataManager.Instance.GetAchievements();
-        Debug.Log(savedAchievements);
         if (savedAchievements == null)
             return;
         foreach (var achievement in allAchievements)
         {
-            Debug.Log(achievement.Name);
             achievement.IsUnlocked = savedAchievements.Contains(achievement.Name);
         }
     }

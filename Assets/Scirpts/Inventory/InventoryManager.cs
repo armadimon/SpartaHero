@@ -35,19 +35,13 @@ public class InventoryManager : MonoBehaviour
         }
         List<string> inventory = GameDataManager.Instance.Inventory;
         List<ItemSet> Items = ItemDatabase.Instance.GetAllItems();
-        
         Debug.Log($"인벤토리에 확인 : {inventory}");
         foreach (var itemName in inventory)
         {
             ItemSet item = Items.Find(i => i.name == itemName);
-            if (item.type == ItemType.Default)
-            {
-                InventoryManager.Instance.AddItem(item);
-                Items.Remove(item);
-            }
             if (item != null)
-            {
-                InventoryManager.Instance.AddItem(item);
+            { 
+                AddItem(item);
                 Debug.Log($"인벤토리에 추가됨: {item.name}");
             }
             else
@@ -55,6 +49,7 @@ public class InventoryManager : MonoBehaviour
                 Debug.LogWarning($"아이템을 찾을 수 없음: {itemName}");
             }
         }
+        GameDataManager.Instance.SaveInventory();
     }
 
     public void AddItem(ItemSet itemData)
