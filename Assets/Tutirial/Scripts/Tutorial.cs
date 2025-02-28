@@ -20,6 +20,7 @@ public class Tutorial : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AchievementManager.Instance.UnlockAchievement("TutorialMaster");
         obObject.SetActive(false);
         StartCoroutine("OperateButton");
     }

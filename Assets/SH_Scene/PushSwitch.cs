@@ -21,12 +21,12 @@ public class PushSwitch : MonoBehaviour
         PlayerController player = collision.GetComponent<PlayerController>();
         if (player != null && collision.CompareTag("Player"))
         {
-            player.SwapWeapon(this.gameObject);
+            if (gameObject.tag == "BowBtn")
+                player.SwapWeapon("Bow");
             StartCoroutine("OperateButton");
         }
         
     }
-
 
     private IEnumerator OperateButton()     // 2�� �� ���� ���·�
     {

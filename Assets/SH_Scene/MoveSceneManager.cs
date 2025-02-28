@@ -56,7 +56,12 @@ public class MoveSceneManager : MonoBehaviour
 
     void OnClickStartButton()
     {
-        SceneManager.LoadScene("Tutorial");
+        if (AchievementManager.Instance.IsAchievementUnlocked("TutorialMaster"))
+        {
+            SceneManager.LoadScene("MainLobbyScene");
+        }
+        else
+            SceneManager.LoadScene("Tutorial");
         SoundManager.instance.ChangeBackGroundMusic(lobbyBGM);
     }
 
