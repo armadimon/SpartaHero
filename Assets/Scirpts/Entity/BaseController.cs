@@ -144,7 +144,7 @@ public class BaseController : MonoBehaviour
             component.enabled = false;
         }
         
-        Destroy(gameObject, 2f);
+        //Destroy(gameObject, 2f);
     }
 }
 
