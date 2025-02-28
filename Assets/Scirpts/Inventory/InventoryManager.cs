@@ -33,7 +33,28 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogError("Player object not found!");
         }
+        List<string> inventory = GameDataManager.Instance.Inventory;
+        List<ItemSet> Items = ItemDatabase.Instance.GetAllItems();
         
+        Debug.Log($"인벤토리에 확인 : {inventory}");
+        foreach (var itemName in inventory)
+        {
+            ItemSet item = Items.Find(i => i.name == itemName);
+            if (item.type == ItemType.Default)
+            {
+                InventoryManager.Instance.AddItem(item);
+                Items.Remove(item);
+            }
+            if (item != null)
+            {
+                InventoryManager.Instance.AddItem(item);
+                Debug.Log($"인벤토리에 추가됨: {item.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"아이템을 찾을 수 없음: {itemName}");
+            }
+        }
     }
 
     public void AddItem(ItemSet itemData)
@@ -49,6 +70,12 @@ public class InventoryManager : MonoBehaviour
         }
 
         if (itemData.type == ItemType.Cosmetic)
+        {
+            
+            itemData.OnClick = () => player.ChangeCharacter(itemData.name);
+        }
+        
+        if (itemData.type == ItemType.Default)
         {
             
             itemData.OnClick = () => player.ChangeCharacter(itemData.name);
