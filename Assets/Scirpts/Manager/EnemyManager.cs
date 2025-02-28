@@ -216,119 +216,56 @@ public class EnemyManager : MonoBehaviour
 
     public void StopToMAp()
     {
-        if (GirdIDs[0].gameObject.activeSelf)
+        foreach (var grid in GirdIDs)
         {
-            GirdIDs[0].gameObject.SetActive(false);
-        }
-
-        if (GirdIDs[1].gameObject.activeSelf)
-        {
-            GirdIDs[1].gameObject.SetActive(false);
-        }
-        if (GirdIDs[2].gameObject.activeSelf)
-        {
-            GirdIDs[2].gameObject.SetActive(false);
-        }
-        if (GirdIDs[3].gameObject.activeSelf)
-        {
-            GirdIDs[3].gameObject.SetActive(false);
+            grid.gameObject.SetActive(false);
         }
     }
-    
+
     public Vector2 CreatSpawnPosition(int Ran)
     {
-        if( Ran == 0)
+        switch (Ran)
         {
-            spawnAreas.RemoveAll(x => x == x);
-            spawnAreas = new List<Rect>
+            case 0:
+                spawnAreas = new List<Rect>
             {
                 new Rect(-7.5f, -4.5f, 4f, 8f),
                 new Rect(3.5f, -4.5f, 4f, 8f)
             };
-            // 랜덤한 영역 선택
-            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-            // Rect 영역 내부의 랜덤 위치 계산
-            Vector2 randomPosition = new Vector2(
-                Random.Range(randomArea.xMin, randomArea.xMax),
-                Random.Range(randomArea.yMin, randomArea.yMax)
-            );
-
-            return randomPosition;
-
-        }
-        else if( Ran == 1)
-        {
-            spawnAreas.RemoveAll(x => x == x);
-            spawnAreas = new List<Rect>
+                break;
+            case 1:
+                spawnAreas = new List<Rect>
             {
                 new Rect(-6f, 13f, 12f, 3f),
-                new Rect(-6f, 19f, 12f, 3f),
+                new Rect(-6f, 19f, 12f, 3f)
             };
-
-            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-            // Rect 영역 내부의 랜덤 위치 계산
-            Vector2 randomPosition = new Vector2(
-                Random.Range(randomArea.xMin, randomArea.xMax),
-                Random.Range(randomArea.yMin, randomArea.yMax)
-            );
-
-            return randomPosition;
-
-        }
-        else if (Ran == 2)
-        {
-            spawnAreas.RemoveAll(x => x == x);
-            spawnAreas = new List<Rect>
+                break;
+            case 2:
+                spawnAreas = new List<Rect>
             {
-                new Rect(13f,-1f,2f,8f),
-                new Rect(24f,-1f,2f,8f),
-                new Rect(8f,8.5f,2f,1f),
-                new Rect(8f,-3.5f,2f,1f),
-                new Rect(18.5f,-3.5f,2f,1f),
-                new Rect(18.5f,8.5f,2f,1f)
+                new Rect(13f, -1f, 2f, 8f),
+                new Rect(24f, -1f, 2f, 8f),
+                new Rect(8f, 8.5f, 2f, 1f),
+                new Rect(8f, -3.5f, 2f, 1f),
+                new Rect(18.5f, -3.5f, 2f, 1f),
+                new Rect(18.5f, 8.5f, 2f, 1f)
             };
-
-            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-            // Rect 영역 내부의 랜덤 위치 계산
-            Vector2 randomPosition = new Vector2(
-                Random.Range(randomArea.xMin, randomArea.xMax),
-                Random.Range(randomArea.yMin, randomArea.yMax)
-            );
-
-            return randomPosition;
-
-        }
-        else if (Ran == 3)
-        {
-            spawnAreas.RemoveAll(x => x == x);
-            spawnAreas = new List<Rect>
+                break;
+            case 3:
+                spawnAreas = new List<Rect>
             {
-                new Rect(-10f,13f,21f,1f),
-                new Rect(-10f,14f,21f,1f),
-
+                new Rect(-10f, 13f, 21f, 1f),
+                new Rect(-10f, 14f, 21f, 1f)
             };
-
-            Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
-
-            // Rect 영역 내부의 랜덤 위치 계산
-            Vector2 randomPosition = new Vector2(
-                Random.Range(randomArea.xMin, randomArea.xMax),
-                Random.Range(randomArea.yMin, randomArea.yMax)
-            );
-
-            return randomPosition;
-
+                break;
+            default:
+                return new Vector2(1, 2);
         }
-        else
-        {
-            return new Vector2(1, 2);
-        }
-        
-        
-  
 
+        Rect randomArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+        return new Vector2(
+            Random.Range(randomArea.xMin, randomArea.xMax),
+            Random.Range(randomArea.yMin, randomArea.yMax)
+        );
     }
 }
