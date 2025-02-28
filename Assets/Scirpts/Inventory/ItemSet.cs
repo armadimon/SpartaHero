@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSet : MonoBehaviour
+public class ItemSet
 {
     public ItemType type;
     public string name;

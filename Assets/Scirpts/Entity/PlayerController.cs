@@ -13,22 +13,6 @@ public class PlayerController : BaseController
     public LayerMask targetLayer;
     private Follow follow;
     private Animator animator;
-    // private static PlayerController instance;
-    //
-    // void Awake()
-    // {
-    //     base.Awake();
-    //     
-    //     if (instance == null)
-    //     {
-    //         instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     else
-    //     {
-    //         Destroy(gameObject);
-    //     }
-    // }
     
     public void Init(GameManager gameManager)
     {

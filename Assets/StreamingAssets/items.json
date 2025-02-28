@@ -1,0 +1,8 @@
+[
+    { "type": "Weapon", "name": "Bow", "description": "Price : 50\nBow.", "price": 50, "imageIndex": 0 },
+    { "type": "Weapon", "name": "Sword", "description": "Price : 50\nSword.", "price": 50, "imageIndex": 1 },
+    { "type": "Weapon", "name": "Spear", "description": "Price : 50\nSpear.", "price": 50, "imageIndex": 2 },
+    { "type": "Weapon", "name": "Staff", "description": "Price : 50\nSpear.", "price": 50, "imageIndex": 3 },
+    { "type": "Cosmetic", "name": "Dwarf", "description": "Price : 500\nDwarf.", "price": 500, "imageIndex": 4 },
+    { "type": "Default", "name": "Player", "description": "Price : 500\nPlayer.", "price": 0, "imageIndex": 5 }
+]

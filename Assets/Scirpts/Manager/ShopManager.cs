@@ -9,12 +9,12 @@ using UnityEngine.UI;
 public enum ItemType
 {
     Weapon,
-    Cosmetic
+    Cosmetic,
+    Default
 }
 
 public class ShopManager : MonoBehaviour
 {
-        // Start is called before the first frame update
 
 
     [SerializeField] private Sprite[] images;
@@ -41,34 +41,10 @@ public class ShopManager : MonoBehaviour
             ItemName.Add(Buttons[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>());
             ItemDesc.Add(Buttons[i].transform.GetChild(2).GetComponent<TextMeshProUGUI>());
         }
-        
-        ItemCreate();
+
+        Items = ItemDatabase.Instance.GetAllItems();
         closeBtn.onClick.AddListener(Close);
         nextBtn.onClick.AddListener(NextList);
-        gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        List<string> inventory = GameDataManager.Instance.Inventory; // 저장된 인벤토리 아이템 이름 리스트 가져옴
-
-        Debug.Log($"인벤토리에 확인 : {inventory}");
-        foreach (var itemName in inventory)
-        {
-            // Items 리스트에서 이름이 일치하는 아이템 찾기
-            ItemSet item = Items.Find(i => i.name == itemName);
-
-            if (item != null)
-            {
-                // InventoryManager에 아이템 추가
-                InventoryManager.Instance.AddItem(item);
-                Debug.Log($"인벤토리에 추가됨: {item.name}");
-            }
-            else
-            {
-                Debug.LogWarning($"아이템을 찾을 수 없음: {itemName}");
-            }
-        }
     }
 
     private void OnEnable()
@@ -78,31 +54,25 @@ public class ShopManager : MonoBehaviour
     public void NextList()
     {
         itemIndex++;
-
-        // 페이지가 초과되면 처음으로 돌아감
         if (itemIndex >= Mathf.CeilToInt(Items.Count / 3f))
         {
             itemIndex = 0;
         }
-
         ShowItem();
     }
 
     public void Close()
     {
         Parent.SetActive(false);
-        Time.timeScale = 1f;
     }
 
+    // 현재 페이지에 맞게 보여준다. 아이템은 최대 3개.
     private void ShowItem()
     {
-        Debug.Log($"현재 페이지: {itemIndex}");
-
         foreach (var btn in Buttons)
         {
             btn.onClick.RemoveAllListeners();
         }
-
         for (int i = 0; i < 3; i++)
         {
             int index = (itemIndex * 3) + i;
@@ -110,7 +80,9 @@ public class ShopManager : MonoBehaviour
             if (index < Items.Count)
             {
                 Buttons[i].gameObject.SetActive(true);
-                Buttons[i].onClick.AddListener(() => Items[index].Action());
+                int itemIndexCopy = index;
+                Buttons[i].onClick.AddListener(() => GetItem(Items[itemIndexCopy]));
+
                 Images[i].sprite = Items[index].Image;
                 ItemName[i].text = Items[index].name;
                 ItemDesc[i].text = Items[index].description;
@@ -121,23 +93,7 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-
-    private void ItemCreate()
-    {
-        Items.Add(CreateItemSet(ItemType.Weapon,"Bow", "Price : 50\nBow.", 50, images[0]));
-        Items.Add(CreateItemSet(ItemType.Weapon,"Sword", "Price : 50\nSword.", 50, images[1]));
-        Items.Add(CreateItemSet(ItemType.Weapon,"Spear", "Price : 50\nSpear.", 50, images[2]));
-        Items.Add(CreateItemSet(ItemType.Weapon,"Staff", "Price : 50\nStaff.", 50, images[3]));
-        Items.Add(CreateItemSet(ItemType.Cosmetic,"Dwarf", "Price : 500\nDwarf.", 500, images[4]));
-        Items.Add(CreateItemSet(ItemType.Cosmetic,"Default", "empty", 500, images[4]));
-    }
-
-    private ItemSet CreateItemSet(ItemType type, string name, string description, int price, Sprite image)
-    {
-        ItemSet set = new ItemSet(type, name, description, price, image);
-        set.Action = () => GetItem(set);
-        return set;
-    }
+    
     private void GetItem()
     {
     }
