@@ -43,7 +43,7 @@ public class ItemController : MonoBehaviour
                 break;
                 case "PowerUpPotion(Clone)":
                     Debug.Log("���ݷ� ����");
-                    player.GetComponentInChildren<WeaponHandler>().Speed += 3f;
+                    player.GetComponentInChildren<WeaponHandler>().Power += 3f;
                     Invoke("PowerUpPotion", 3); // 3�� �� ����
 
                 break;
@@ -61,14 +61,14 @@ public class ItemController : MonoBehaviour
     private void HealingPotion()
     {
         Debug.Log("ü�� ȸ��");
-        player.GetComponent<StatHandler>().Health += 30;
+        player.GetComponent<ResourceController>().CurrentHealth += 30;
         Destroy(gameObject);
     }
 
     private void PowerUpPotion()
     {
         Debug.Log("���ݷ� ����");
-        player.GetComponentInChildren<WeaponHandler>().Speed -= 3f;
+        player.GetComponentInChildren<WeaponHandler>().Power -= 3f;
         Destroy(gameObject);
     }
     private void SpeedPotion()
