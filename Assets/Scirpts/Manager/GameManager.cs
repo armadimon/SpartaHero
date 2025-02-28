@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        enemyManager.StopWave();
+        //enemyManager.StopWave();
     }
 
     public void SkillSelectActive()
