@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     
     private Dictionary<string, GameObject> uiPanels = new Dictionary<string, GameObject>();
     public GameObject itemPrefab;
+
+    public GameObject GameOverUI;
     
     // Start is called before the first frame update
 
@@ -43,14 +45,8 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public void ShowPanel(string name)
     {
-        // foreach (var panel in uiPanels.Values)
-        // {
-        //     panel.SetActive(false);
-        // }
-
         if (uiPanels.ContainsKey(name))
         {
             uiPanels[name].SetActive(true);
@@ -165,6 +161,7 @@ public class UIManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         uiPanels.Clear();
+        GameOverUI.SetActive(false);
     }
 
     public void BossUIActive()

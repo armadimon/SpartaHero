@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,9 +16,6 @@ public class PlayerController : BaseController
     public LayerMask targetLayer;
     private Follow follow;
     private Animator animator;
-    public GameObject gameOverPanel;
-    public Button retryButton;
-    public Button mainLobbyButton;
 
 
     public void Init(GameManager gameManager)
@@ -27,7 +25,7 @@ public class PlayerController : BaseController
         animator = GetComponentInChildren<Animator>();
         
         DontDestroyOnLoad(gameObject);
-        for (int i = 0; i < transform.GetChild(3).transform.childCount-1; i++)
+        for (int i = 0; i < transform.GetChild(3).transform.childCount; i++)
         {
             follow = transform.GetChild(3).transform.GetChild(i).GetComponent<Follow>();
             follow.SetTarget(transform);
@@ -84,19 +82,13 @@ public class PlayerController : BaseController
 
     public override void Death()
     {
-        _gameManager.GameOver();
-        
         base.Death();
+        _gameManager.GameOver();
     }
 
     private void OnDestroy()
     {
-        gameOverPanel.SetActive(true);
-        if (gameOverPanel)
-        {
-            retryButton.onClick.AddListener(OnClickRetryButton);
-            mainLobbyButton.onClick.AddListener(OnClickLobbyButton);
-        }
+        UIManager.Instance.GameOverUI.SetActive(true);
     }
 
     public void SwapWeapon(string weaponName)
@@ -143,13 +135,11 @@ public class PlayerController : BaseController
     void OnClickRetryButton()
     {
         SceneManager.LoadScene("StageScene");
-        gameOverPanel.SetActive(false);
     }
 
     void OnClickLobbyButton()
     {
         SceneManager.LoadScene("MainLobbyScene");
-        gameOverPanel.SetActive(false);
     }
 
 }
